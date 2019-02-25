@@ -16,14 +16,12 @@ class Userpage extends Component {
         
           <div className="PageSwitcher">
           <div class="center">
-              <NavLink to="/sign-in" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign In</NavLink>
-              <NavLink  exact to="/sign-up" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
+              <NavLink  to='/sign-in'activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign In</NavLink>
+              <NavLink  exact to='/sign-up' activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
             </div>
             </div>
 
-            
-
-            
+          
             <Route   path="/sign-up" component={SignUpForm}>
             </Route>
             <Route path="/sign-in" component={SignInForm}>

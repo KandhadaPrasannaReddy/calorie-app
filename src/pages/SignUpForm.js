@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import {Route,Router} from "react-router-dom";
+import { createBrowserHistory as createHistory } from "history";
 import '../App.css';
-//import Goal from '../goal/goal';
+import SignInForm from './SignInForm';
 
+var body;
 class SignUpForm extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
           form: {
@@ -18,6 +20,7 @@ class SignUpForm extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+   
     }
     
       
@@ -28,8 +31,16 @@ class SignUpForm extends Component {
       store.form[e.target.name] = e.target.value;
       this.setState(store);
     }
-
+    history = createHistory(this.props);
     handleSubmit(e) {
+
+      e.preventDefault();
+      body = {
+        name: this.state.form.name,
+        email: this.state.form. email,
+        password: this.state.form.password
+      }
+      console.log(body)
       const url = "http://10.10.200.25:9000/users"; 
       let headers = new Headers();
   
@@ -39,74 +50,60 @@ class SignUpForm extends Component {
       headers.append('Access-Control-Allow-Origin', url);
       headers.append('Access-Control-Allow-Credentials', 'true');
   
-      headers.append('GET', 'POST');
+      headers.append('POST','GET');
       
-      e.preventDefault();
+     
       fetch(url, {
           headers: headers,
           method: 'POST',
-          body: JSON.stringify(this.state.form) 
+          body: JSON.stringify(body) 
       })
- .then(console.log(this.state.form))
- .catch(() => console.log("Can’t access " + url + " response. "))
- //this.props.history.push(`/Goal`)
+     
+
+      .then(response => response.json())
+      .then(contents => {console.log(contents);
+      
+            localStorage.setItem("AccessToken",contents.token);
+            this.props.history.push(`/goal/`);
+                        
+  })
+     
+     
+      
+      .catch(() => console.log("Can’t access " +this.state.errors + " response. "))
+     
+
     }
     
-   
-   
+
+    
+
     render() {
         return (
-        <div className="FormCenter">
+         <div className="cardapp">
+      <div class="card"><br/>
             <form onSubmit={this.handleSubmit} className="FormFields">
               <div className="FormField">
-                <label className="FormField__Label" htmlFor="name">Full Name</label>
+                <label className="FormField__Label" htmlFor="name"><font color="black">Full Name</font></label>
                 <input type="text" id="name" className="FormField__Input" placeholder="Enter your full name" name="name" value={this.state.name} onChange={this.handleChange} />
               </div>
              
               <div className="FormField">
-                <label className="FormField__Label" htmlFor="email">E-Mail Address</label>
+                <label className="FormField__Label" htmlFor="email"><font color="black">E-Mail Address</font></label>
                 <input type="email" id="email" className="FormField__Input" placeholder="Enter your email" name="email" value={this.state.email} onChange={this.handleChange} />
               </div>
 
               <div className="FormField">
-                <label className="FormField__Label" htmlFor="password">Password</label>
+                <label className="FormField__Label" htmlFor="password"><font color="black">Password</font></label>
                 <input type="password" id="password" className="FormField__Input" placeholder="Enter your password" name="password" value={this.state.password} onChange={this.handleChange} />
               </div>
 
-            
-          {/*
               <div className="FormField">
-                <label className="FormField__Label" htmlFor="dateofbirth">Date of Birth</label>
-                <input type="date" id="dateofbirth" className="FormField__Input" placeholder="Enter your  date of birth" name="dateofbirth" value={this.state.dateofbirth} onChange={this.handleChange} />
-              </div>
-              
-              <div className="FormField">
-                <label className="FormField__Label" htmlFor="gender">Gender</label><br/>
-                <label>  <input type="radio"    name="gender"   value="male" checked={this.state.gender === "male" } onChange={this.handleChange} /><font color="white">Male</font></label>
-                <label><input type="radio"  name="gender"   value="female" checked={this.state.gender === "female" } onChange={this.handleChange} /><font color="white">Female</font></label><br/>
-              </div>
-
-              <div className="FormField">
-                <label className="FormField__Label" htmlFor="height">Height</label>
-                <input type="number" name="height" step="0.01" min="4.00" max="12.99" value={this.state.height} onChange={this.handleChange}/>
-              </div>
-
-              <div className="FormField">
-                <label className="FormField__Label" htmlFor="weight">Weight</label>
-                <input type="number" name="weight" step="1" min="10" max="150" value={this.state.weight} onChange={this.handleChange}/>
-              </div>
-                 
-              <div className="FormField">
-                <label className="FormField__CheckboxLabel">
-                    <input className="FormField__Checkbox" type="checkbox" name="hasAgreed" value={this.state.hasAgreed} onChange={this.handleChange} /> I agree all statements in <a href="" className="FormField__TermsLink">terms of service</a>
-                </label>
-              </div>*/}
-
-              <div className="FormField">
-                  <button className="FormField__Button mr-20" onClick={this.onrouteChange}>Sign Up</button> <Link to="/sign-in" className="FormField__Link">I'm already member</Link>
+                  <button className="FormField__Button mr-20" onClick={this.handleSubmit}>Sign Up</button> 
               </div>
             </form>
-          </div>
+            </div> </div>
+          
         );
     }
 }

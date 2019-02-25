@@ -6,30 +6,40 @@ import { createBrowserHistory as createHistory } from "history";
 class Firstpage extends Component {
     constructor(props){
         super(props)
-        this.onrouteChange= this.onrouteChange.bind(this)     
+        this.onLoginChange= this.onLoginChange.bind(this)   
+        this.onSignUpChange= this.onSignUpChange.bind(this)    
         }
     
     history = createHistory(this.props);
-    onrouteChange(event){
+    onLoginChange(event){
         event.preventDefault();
-        this.props.history.push(`/userpage/`);
+        this.props.history.push(`/sign-in/`);
 
     }
+    onSignUpChange(event){
+      event.preventDefault();
+      this.props.history.push(`/sign-up/`);
+
+  }
 
   render() {
     return (
       
       <div className="App">
-
+ 
           <header className="App-header">
+         
           <img src={logo} className="App-logo" alt="logo" /><br/><br/> 
-           
+      
 
           <div>
             <p> <i><font color="black">A Whole New Way to Take Your Vitamins..</font></i> </p>
           </div> <br/><br/>  
 
-          <button class="button button1"  onClick={this.onrouteChange}> Get Started</ button> 
+            <div class="wrapper">
+             <button class="button button1" align="left" onClick={this.onLoginChange}> Login</ button>  
+             <button class="button button1" align="right"  onClick={this.onSignUpChange}> SignUp</ button> 
+             </div> 
           </header> 
 
         
