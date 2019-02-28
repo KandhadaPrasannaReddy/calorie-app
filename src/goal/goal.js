@@ -1,10 +1,10 @@
-
 import React, { Component } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Navbar from '../navbar';
 import '../App.css';
 
-import { Table } from 'react-bootstrap';
+
 
 
 
@@ -33,7 +33,7 @@ calculateBmi(){
     return document.getElementById(id)
   }
 
-  var age = find("age").value
+  var age1 = find("age").value
   var height = find("height").value
   var weight = find("weight").value 
 
@@ -64,6 +64,7 @@ calculateBmi(){
       alert("Please Fill in everything correctly")
       }
 }
+
 handleChange() {
    
   this.setState({selectDialogOpen: true})
@@ -71,22 +72,27 @@ handleChange() {
       return document.getElementById(id)
     }
 
-    var age = find("age").value
-    var height = find("height").value
-    var weight = find("weight").value 
+    var age1 = find("age").value
+    var gender1 = find("group1").value
+    var height1 = find("height").value
+    var weight1 = find("weight").value 
     var Calculated_Goal = 0;
 
     if (find("mbutton").checked) {
-      Calculated_Goal = (10 * weight)+ (6.25 * height) - (5 * age )+ 5;
+      Calculated_Goal = (10 * weight1)+ (6.25 * height1) - (5 * age1 )+ 5;
     }
 
    else  if (find("fbutton").checked) {
-      Calculated_Goal = (10 * weight)+ (6.25 * height) - (5 *age ) -161; 
+      Calculated_Goal = (10 * weight1)+ (6.25 * height1) - (5 *age1 ) -161; 
     }
    
     this.setState (
       {
-       goal: Calculated_Goal
+       goal: Calculated_Goal,
+       age: age1,
+       height:height1,
+       weight:weight1,
+       gender:gender1
       }
     );
 
@@ -111,6 +117,7 @@ handleSubmit(e) {
        
      return(
       <div className="cardapp">
+      <div>
       <div class="card">
       <form  name = "bmiForm" onSubmit={this.handleSubmit} className="FormFields"> 
       <br/>
@@ -121,8 +128,10 @@ handleSubmit(e) {
         
         <div className="FormField1">
           <label htmlFor="gender">Gender: </label>
-          <label> <input type="radio"    name="gender"  id="mbutton"    /><font color="black">Male</font></label>
-          <label><input type="radio"  name="gender"   id="fbutton"   /><font color="black">Female</font></label><br/>
+            <fieldset id="group1"><label>
+              <input type="radio"    name="gender"  id="mbutton"    /><font color="black">Male</font>
+              <input type="radio"  name="gender"   id="fbutton"   /><font color="black">Female</font> 
+            </label></fieldset><br/>
         </div>
 
         <div className="FormField1">
@@ -172,27 +181,32 @@ handleSubmit(e) {
                
                         <tr >
                             <td>Maintain Weight</td>
-                            <td>{this.state.goal * 90/100}</td>
+                            <td>{this.state.goal * 100/100}</td>
+                          
                         </tr>
                         <tr >
                             <td>Mild Weight Loss</td>
-                            <td>{this.state.goal}</td>
+                            <td>{this.state.goal * 90/100}</td>
+                            
                         </tr>
 
                         <tr>
                             <td> Weight Loss</td>
-                            <td>{this.state.goal}</td>
+                            <td>{this.state.goal * 80/100}</td>
+                           
                         </tr>
 
                         <tr>
                             <td>Extreme Weight Loss</td>
-                            <td>{this.state.goal}</td>
+                            <td>{this.state.goal * 61/100}</td>  
                         </tr>
 
                         </tbody>
                         </table>
                 
             </Dialog>
+            <Navbar/>
+            </div>
   </div>
      );
    }
@@ -227,4 +241,3 @@ handleSubmit(e) {
       cursor: 'initial',
     },
   });
-  

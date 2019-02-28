@@ -216,8 +216,56 @@
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 60%;
-  height: 70%;
+  width: 80%;
+  height: 90%;
+  display: inline-block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #E1E7E7;
+    
+}
+.lcard {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 80%;
+  height: 60%;
+  display: inline-block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #E1E7E7;
+    
+}
+.scard {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 80%;
+  height: 75%;
+  display: inline-block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #E1E7E7;
+    
+}
+.gcard {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 80%;
+  height: 80%;
   display: inline-block;
     position: fixed;
     top: 0;
@@ -269,4 +317,236 @@
 .wrapper {
   margin-top: 18px;
   overflow: hidden;
+}
+
+.fab {
+  margin: 0px;
+  top: auto;
+  right: 820px;
+  bottom: 20px;
+  left: auto;
+  position: fixed;
+};
+
+ 
+  
+.fab {
+  margin: 0px;
+  top: auto;
+  right: 820px;
+  bottom: 20px;
+  left: auto;
+  position: fixed;
+};
+
+  
+  .active {
+    background-color: #4CAF50;
+  }
+
+  .blue-bg {
+    background: linear-gradient(to right, rgba(33, 143, 187, 0.6), rgba(33, 143, 187, 0.5));
+}
+
+.light-blue-bg {
+    background: linear-gradient(to right, rgba(77, 172, 209, 0.6), rgba(144, 199, 221, 0.5));
+}
+
+.pink-bg {
+    background: linear-gradient(to right, rgba(194, 25, 109, 0.6), rgba(187, 33, 148, 0.5));
+}
+
+.green-bg {
+    background: linear-gradient(to right, rgba(16, 114, 24, 0.6), rgba(61, 170, 46, 0.5));
+}
+
+.red-bg {
+    background: linear-gradient(to right, rgba(199, 70, 11, 0.6), rgba(233, 83, 64, 0.5));
+}
+
+
+.dark-orange-bg {
+    background: linear-gradient(to right, rgba(194, 116, 14, 0.6), rgba(211, 134, 62, 0.5));
+}
+
+
+.orange-bg {
+    background: linear-gradient(to right, rgba(228, 150, 7, 0.6), rgba(207, 143, 48, 0.5));
+}
+
+
+.yellow-bg {
+    background: linear-gradient(to right, rgba(219, 198, 11, 0.6), rgba(219, 216, 40, 0.5));
+}
+
+.purple-bg {
+    background: linear-gradient(to right, rgba(161, 32, 144, 0.6), rgba(228, 49, 213, 0.5));
+}
+
+.App {
+  height: 100vh;
+  display: flex;
+  color: white;
+}
+
+.App__Aside {
+  width: 50%;
+  background-color: #66DAC7;
+ /* background-color: #FFC0CB;*/
+}
+
+.App__Form {
+  width: 50%;
+  background-color: #2E4158;
+  padding: 25px 40px;
+  overflow: auto;
+}
+
+.PageSwitcher {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10%;
+}
+
+.PageSwitcher__Item {
+  background-color: #4C5D72;
+  color: #9DA6B1;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-size: .9em;
+  border: none;
+  outline: none;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.PageSwitcher__Item--Active {
+  background-color: #5ED0C0;
+  color: white;
+}
+
+.PageSwitcher__Item:first-child {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+.PageSwitcher__Item:last-child {
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.FormCenter {
+  margin-bottom: 100px;
+}
+
+.FormTitle {
+  color: #707C8B;
+  font-weight: 300;
+  margin-bottom: 50px;
+}
+
+.FormTitle__Link {
+  color: #707C8B;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.7em;
+  margin: 0 10px;
+  padding-bottom: 5px;
+}
+
+.FormTitle__Link:first-child {
+  margin-left: 0;
+}
+
+.FormTitle__Link--Active {
+  color: white;
+  border-bottom: 1px solid #199087;
+}
+
+.FormField {
+  margin-bottom: 40px;
+}
+
+.FormField__Label {
+  display: block;
+  text-transform: uppercase;
+  font-size: .9em;
+  color: white;
+}
+.FormField__Input {
+  width: 85%;
+  background-color: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  border-bottom: 1px solid #445366;
+  font-size: 1em;
+  font-weight: 300;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+
+.FormField__Input::placeholder {
+  color: #616E7F;
+}
+
+.FormField__Button {
+  background-color: #52C4B9;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 25px;
+  padding: 15px 70px;
+  font-size: .8em;
+  font-weight: 500;
+}
+
+.FormField__Link {
+  color: #66707D;
+  text-decoration: none;
+  display: inline-block;
+  border-bottom: 1.5px solid #225E62;
+  padding-bottom: 5px;
+}
+
+.FormField__CheckboxLabel {
+  color: #646F7D;
+  font-size: .9em;
+}
+
+.FormField__Checkbox {
+  position: relative;
+  top: 1.5px;
+}
+
+.FormField__TermsLink {
+  color: white;
+  border-bottom: 1px solid #199087;
+  text-decoration: none;
+  display: inline-block;
+  padding-bottom: 2px;
+  margin-left: 5px;
+}
+
+img {
+  border-radius: 8px;
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto }
+
+  @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.mr-20 {
+  margin-right: 20px !important;
 }

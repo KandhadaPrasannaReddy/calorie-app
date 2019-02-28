@@ -4,7 +4,7 @@ import '../App.css';
 
 var body;
 let resStatus = 0
-let token="";
+//let token= " ";
 
 
 class SignInForm extends Component {
@@ -14,6 +14,7 @@ class SignInForm extends Component {
         this.state = {
           form:{  name: '',
             password: ''
+          
         }
         };
 
@@ -33,7 +34,7 @@ class SignInForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
         body = {
-         email: this.state.form. email,
+         email: this.state.form.email,
           password: this.state.form.password
         }
         console.log(body)
@@ -59,7 +60,7 @@ class SignInForm extends Component {
       .then(contents => {console.log(contents);
         resStatus = contents.status
             localStorage.setItem("AccessToken",contents.token);
-            this.props.history.push(`/goal/`);
+            this.props.history.push(`/meal/`);
                         
   })
   .then(response => {
@@ -96,7 +97,7 @@ class SignInForm extends Component {
         const { form } = this.state;
         return (
             <div className="cardapp">
-            <div class="card"><br/>
+            <div class="lcard"><br/>
         <div className="FormCenter">
             
             <form onSubmit={this.onSubmit} className="FormFields" onSubmit={this.handleSubmit}>

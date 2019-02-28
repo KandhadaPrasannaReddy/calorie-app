@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {Route,Router} from "react-router-dom";
 import { createBrowserHistory as createHistory } from "history";
 import '../App.css';
-import SignInForm from './SignInForm';
+
 
 var body;
 class SignUpForm extends Component {
@@ -37,7 +36,7 @@ class SignUpForm extends Component {
       e.preventDefault();
       body = {
         name: this.state.form.name,
-        email: this.state.form. email,
+        email: this.state.form.email,
         password: this.state.form.password
       }
       console.log(body)
@@ -64,7 +63,7 @@ class SignUpForm extends Component {
       .then(contents => {console.log(contents);
       
             localStorage.setItem("AccessToken",contents.token);
-            this.props.history.push(`/goal/`);
+            this.props.history.push(`/meal/`);
                         
   })
      
@@ -81,7 +80,7 @@ class SignUpForm extends Component {
     render() {
         return (
          <div className="cardapp">
-      <div class="card"><br/>
+      <div class="scard"><br/>
             <form onSubmit={this.handleSubmit} className="FormFields">
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="name"><font color="black">Full Name</font></label>
