@@ -3,7 +3,7 @@ import { createBrowserHistory as createHistory } from "history";
 import '../App.css';
 
 var body;
-let resStatus = 0
+
 //let token= " ";
 
 
@@ -34,7 +34,7 @@ class SignInForm extends Component {
     handleSubmit(e) {
         e.preventDefault();
         body = {
-         email: this.state.form.email,
+         name: this.state.form.name,
           password: this.state.form.password
         }
         console.log(body)
@@ -58,32 +58,32 @@ class SignInForm extends Component {
 
         .then(response => response.json())
       .then(contents => {console.log(contents);
-        resStatus = contents.status
+        
             localStorage.setItem("AccessToken",contents.token);
             this.props.history.push(`/meal/`);
                         
   })
-  .then(response => {
-    switch (resStatus) {
-      case 201:
-        console.log('success')
-        break
-      case 400:
-        if (response.code === 'ValidationFailed') {
-          // My custom error messages from the API.
-          console.log(response.fieldMessages)
-        } else {
-          console.log('this is a client (probably invalid JSON) error, but also might be a server error (bad JSON parsing/validation)')
-        }
-        break
-      case 500:
-        alert('server error, try again')
-        break
-      default:
-        console.log('unhandled')
-        break
-    }
-  })
+  // .then(response => {
+  //   switch (resStatus) {
+  //     case 201:
+  //       console.log('success')
+  //       break
+  //     case 400:
+  //       if (response.code === 'ValidationFailed') {
+  //         // My custom error messages from the API.
+  //         console.log(response.fieldMessages)
+  //       } else {
+  //         console.log('this is a client (probably invalid JSON) error, but also might be a server error (bad JSON parsing/validation)')
+  //       }
+  //       break
+  //     case 500:
+  //       alert('server error, try again')
+  //       break
+  //     default:
+  //       console.log('unhandled')
+  //       break
+  //   }
+  // })
   
   .catch(() => alert("please enter correct details"))
           
@@ -102,8 +102,8 @@ class SignInForm extends Component {
             
             <form onSubmit={this.onSubmit} className="FormFields" onSubmit={this.handleSubmit}>
             <div className="FormField">
-                <label className="FormField__Label" htmlFor="email" ><font color="black">E-Mail Address</font></label>
-                <input type="email" id="email" className="FormField__Input" placeholder="Enter your email" name="email" value={this.state.email} onChange={this.handleChange} />
+                <label className="FormField__Label" htmlFor="name" ><font color="black">Name</font></label>
+                <input type="name" id="name" className="FormField__Input" placeholder="Enter your name" name="name" value={this.state.name} onChange={this.handleChange} />
               </div>
 
               <div className="FormField">

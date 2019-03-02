@@ -2,17 +2,16 @@ import React, { Component } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Navbar from '../navbar';
+import { createBrowserHistory as createHistory } from "history";
 import '../App.css';
-
-
-
-
+ var body;
 
 class Goal extends Component {
   constructor() {
     super();
   
     this.state = {
+      form: {
         age: '',
         gender: '',
         height: '',
@@ -20,20 +19,31 @@ class Goal extends Component {
         goal:0,
         hasAgreed: false,
         selectDialogOpen: false
+      }
     };
     
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.calculateBmi = this.calculateBmi.bind(this);
+    this.onSelect = this.onSelect.bind(this);
 }
 
+onSelect = (event) => {
+  const row = event.currentTarget;
+  console.log(row);
+ // console.log(event);
+//  this.props.history.push({
+//   pathname: '/goaltab'
+  
+//});
+}
 
 calculateBmi(){
   function find(id){
     return document.getElementById(id)
   }
 
-  var age1 = find("age").value
+  // var age1 = find("age").value
   var height = find("height").value
   var weight = find("weight").value 
 
@@ -65,6 +75,7 @@ calculateBmi(){
       }
 }
 
+
 handleChange() {
    
   this.setState({selectDialogOpen: true})
@@ -73,12 +84,13 @@ handleChange() {
     }
 
     var age1 = find("age").value
-    var gender1 = find("group1").value
+    var gender1 =document.getElementById.value;
     var height1 = find("height").value
     var weight1 = find("weight").value 
     var Calculated_Goal = 0;
 
     if (find("mbutton").checked) {
+      
       Calculated_Goal = (10 * weight1)+ (6.25 * height1) - (5 * age1 )+ 5;
     }
 
@@ -87,15 +99,16 @@ handleChange() {
     }
    
     this.setState (
-      {
+      {form:{
        goal: Calculated_Goal,
        age: age1,
        height:height1,
        weight:weight1,
        gender:gender1
       }
+    }
     );
-
+  
 }
 
 
@@ -103,16 +116,47 @@ handleClose = () => {
  this.setState({selectDialogOpen: false})
 }
 
+
+history = createHistory(this.props);
 handleSubmit(e) {
-    e.preventDefault();
-
-    console.log('The form was submitted with the following data:');
-    console.log(this.state);
-}
-   
-
-
+  e.preventDefault();
  
+  body =
+  { age: this.state.form.age,
+   height: this.state.form.height,
+   weight: this.state.form.weight
+  }
+  
+  console.log(body)
+  const url = "http://10.10.200.25:9000/profile"; 
+  let headers = new Headers();
+
+  let token =  localStorage.getItem('AccessToken');
+  const AuthStr = 'Bearer '.concat(token);
+  
+  headers.append('Content-Type', 'application/json');
+  headers.append('Accept', 'application/json');
+  headers.append('Authorization',AuthStr);
+  headers.append('Access-Control-Allow-Origin', url);
+  headers.append('Access-Control-Allow-Credentials', 'true');
+
+  headers.append('POST','PUT');
+  
+ 
+  fetch(url, {
+      headers: headers,
+      method: 'POST',
+      body: JSON.stringify(body) 
+  })
+ 
+
+  .then(response => response.json())
+  .then(contents => {console.log(contents);
+})
+
+  .catch(() => console.log("Can’t access " +this.state.errors + " response. "))
+}
+
 
    render()
    {
@@ -130,10 +174,10 @@ handleSubmit(e) {
         
         <div className="FormField1">
           <label htmlFor="gender">Gender: </label>
-            <fieldset id="group1"><label>
+           
               <input type="radio"    name="gender"  id="mbutton"    /><font color="black">Male</font>
               <input type="radio"  name="gender"   id="fbutton"   /><font color="black">Female</font> 
-            </label></fieldset><br/>
+           <br/>
         </div>
 
         <div className="FormField1">
@@ -180,39 +224,42 @@ handleSubmit(e) {
                     <th>Calories</th> 
                   </tr>
                 </thead>
-                <tbody>
-               
-                        <tr >
+                <tbody> 
+            
+                 
+                        <tr   onClick={this.onSelect}>
                             <td>Maintain Weight</td>
                             <td>{this.state.goal * 100/100}</td>
                           
                         </tr>
-                        <tr >
+                        <tr   onClick={this.onSelect}>
                             <td>Mild Weight Loss</td>
                             <td>{this.state.goal * 90/100}</td>
                             
                         </tr>
 
-                        <tr>
+                        <tr   onClick={this.onSelect}>
                             <td> Weight Loss</td>
                             <td>{this.state.goal * 80/100}</td>
                            
                         </tr>
 
-                        <tr>
+                        <tr   onClick={this.onSelect}> 
                             <td>Extreme Weight Loss</td>
                             <td>{this.state.goal * 61/100}</td>  
                         </tr>
 
+                    
                         </tbody>
                         </table>
 
 
-                        
+            
                 
             </Dialog>
             <Navbar/>
             </div>
+            
   </div>
      );
    }
@@ -223,27 +270,27 @@ handleSubmit(e) {
 
 
 
-  const styles = theme => ({
-    table: {
-      fontFamily: theme.typography.fontFamily,
-    },
-    flexContainer: {
-      display: 'flex',
-      alignItems: 'center',
-      boxSizing: 'border-box',
-    },
-    tableRow: {
-      cursor: 'pointer',
-    },
-    tableRowHover: {
-      '&:hover': {
-        backgroundColor: theme.palette.grey[200],
-      },
-    },
-    tableCell: {
-      flex: 1,
-    },
-    noClick: {
-      cursor: 'initial',
-    },
-  });
+  // const styles = theme => ({
+  //   table: {
+  //     fontFamily: theme.typography.fontFamily,
+  //   },
+  //   flexContainer: {
+  //     display: 'flex',
+  //     alignItems: 'center',
+  //     boxSizing: 'border-box',
+  //   },
+  //   tableRow: {
+  //     cursor: 'pointer',
+  //   },
+  //   tableRowHover: {
+  //     '&:hover': {
+  //       backgroundColor: theme.palette.grey[200],
+  //     },
+  //   },
+  //   tableCell: {
+  //     flex: 1,
+  //   },
+  //   noClick: {
+  //     cursor: 'initial',
+  //   },
+  // });

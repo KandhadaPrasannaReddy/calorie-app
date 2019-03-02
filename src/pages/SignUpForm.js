@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createBrowserHistory as createHistory } from "history";
-import { isEmail, isEmpty, isLength, isContainWhiteSpace } from '../shared/validator';
+
 import '../App.css';
 
 
@@ -15,40 +15,15 @@ class SignUpForm extends Component {
             password: '',
             name: '',
             hasAgreed: false
-          },
-          errors: {}
-        };
+          }
+        }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
    
     }
     
-    validateLoginForm = (e) => {
-        
-      let errors = {};
-      const { form } = this.state;
-
-      if (isEmpty(form.email)) {
-          errors.email = "Email can't be blank";
-      } else if (!isEmail(form.email)) {
-          errors.email = "Please enter a valid email";
-      }
-
-      if (isEmpty(form.password)) {
-          errors.password = "Password can't be blank";
-      }  else if (isContainWhiteSpace(form.password)) {
-          errors.password = "Password should not contain white spaces";
-      } else if (!isLength(form.password, { gte: 6, lte: 16, trim: true })) {
-          errors.password = "Password's length must between 6 to 16";
-      }
-
-      if (isEmpty(errors)) {
-          return true;
-      } else {
-          return errors;
-      }    
-  }
+   
     
     handleChange(e) {
       e.persist();
@@ -61,7 +36,7 @@ class SignUpForm extends Component {
 
     handleSubmit(e) {
       e.preventDefault();
-      let errors = this.validateLoginForm();
+     
       body = {
         name: this.state.form.name,
         email: this.state.form.email,
@@ -91,7 +66,7 @@ class SignUpForm extends Component {
       .then(contents => {console.log(contents);
       
             localStorage.setItem("AccessToken",contents.token);
-            this.props.history.push(`/meal/`);
+            this.props.history.push(`/goal/`);
                         
   })
      

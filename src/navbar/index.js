@@ -12,6 +12,7 @@ class Navbar extends React.Component{
         <li><a href="/meal">My Day</a></li>
         <li><a href="#news">Log</a></li>
         <li><a href="/recipes">Recipes</a></li>
+        <li><a href="/logout">Logout</a></li>
         </ul>
         </div>
         )
