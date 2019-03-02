@@ -110,6 +110,8 @@ handleSubmit(e) {
     console.log(this.state);
 }
    
+
+
  
 
    render()
@@ -165,12 +167,13 @@ handleSubmit(e) {
 
       </form>
     </div>
-
+     
+ 
     <Dialog open={this.state.selectDialogOpen} onClose={this.handleClose} aria-labelledby="simple-dialog-title">
                 <DialogTitle id="simple-dialog-title">Choose Goal</DialogTitle>
                 
-              
-                <table id="goal_table">
+     
+                <table id="goal_table"  >
                  <thead>
                   <tr>
                     <th>Plan</th>
@@ -203,6 +206,9 @@ handleSubmit(e) {
 
                         </tbody>
                         </table>
+
+
+                        
                 
             </Dialog>
             <Navbar/>

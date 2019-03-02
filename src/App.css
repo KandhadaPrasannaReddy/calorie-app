@@ -232,7 +232,7 @@
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 80%;
+  width: 50%;
   height: 60%;
   display: inline-block;
     position: fixed;
@@ -248,7 +248,7 @@
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 80%;
+  width: 50%;
   height: 75%;
   display: inline-block;
     position: fixed;
@@ -330,14 +330,7 @@
 
  
   
-.fab {
-  margin: 0px;
-  top: auto;
-  right: 820px;
-  bottom: 20px;
-  left: auto;
-  position: fixed;
-};
+
 
   
   .active {

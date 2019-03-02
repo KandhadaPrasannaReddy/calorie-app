@@ -14,7 +14,7 @@ class SignInForm extends Component {
         this.state = {
           form:{  name: '',
             password: ''
-          
+ 
         }
         };
 
