@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../logo.jpeg';
+import {NavbarBrand} from 'reactstrap';
 import '../App.css';
 import { createBrowserHistory as createHistory } from "history";
 
@@ -24,9 +25,14 @@ class Firstpage extends Component {
 
   render() {
     return (
-      
+    
+      <div className="App-nav" >
+     
+      <NavbarBrand href="/firstpage" style={{color: '#ffffff'}} align="center">Weigh-To-Go</NavbarBrand>
+     
+    
       <div className="App">
- 
+
           <header className="App-header">
          
           <img src={logo} className="App-logo" alt="logo" /><br/><br/> 
@@ -42,9 +48,9 @@ class Firstpage extends Component {
              </div> 
           </header> 
 
-        
+          
       </div>
-     
+      </div> 
     );
   }
 }

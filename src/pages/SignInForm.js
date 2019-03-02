@@ -4,7 +4,7 @@ import '../App.css';
 
 var body;
 
-//let token= " ";
+
 
 
 class SignInForm extends Component {
@@ -86,9 +86,7 @@ class SignInForm extends Component {
   // })
   
   .catch(() => alert("please enter correct details"))
-          
-
-        
+            
     }
 
 
@@ -97,9 +95,9 @@ class SignInForm extends Component {
         const { form } = this.state;
         return (
             <div className="cardapp">
+            <div>
             <div class="lcard"><br/>
         <div className="FormCenter">
-            
             <form onSubmit={this.onSubmit} className="FormFields" onSubmit={this.handleSubmit}>
             <div className="FormField">
                 <label className="FormField__Label" htmlFor="name" ><font color="black">Name</font></label>
@@ -117,6 +115,8 @@ class SignInForm extends Component {
               </div>
             </form>
             </div> </div>
+
+            </div>
           </div>
         );
     }
