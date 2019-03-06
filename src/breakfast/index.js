@@ -103,7 +103,7 @@ class Breakfast extends React.Component{
 
             <Wrapper>
                 <Title>
-                    {this.props.name}                
+                    Breakfast               
                       <Fab size="medium" className="fab" style={style} color="secondary" aria-label="Add"  onClick={this.handleDialogOpen}>
                         <AddIcon />
                       </Fab>
@@ -149,7 +149,7 @@ class Breakfast extends React.Component{
                 
             }
             <Button_OK onClick={this.onSaveClick} > Save items </Button_OK>  
-          
+        
         </div>
     );
     }

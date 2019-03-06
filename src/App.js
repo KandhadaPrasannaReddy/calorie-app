@@ -9,6 +9,7 @@ import Recipes from './recipes';
 import SignUpForm from './pages/SignUpForm';
 import SignInForm from './pages/SignInForm';
 import Goaltab from './goaltab/index';
+import Log from './log/index';
 
 import './App.css';
 
@@ -31,7 +32,7 @@ class App extends Component {
               <Route  exact path="/foodmenu" component={Foodmenu}/> 
               <Route exact path="/recipes" component={Recipes}/> 
               <Route exact path="/goaltab" component={Goaltab}/> 
-           
+              <Route exact path="/log" component={Log}/> 
 
              <Redirect to = "/firstpage" component={Firstpage}/>
 
