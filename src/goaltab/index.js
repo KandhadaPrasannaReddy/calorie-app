@@ -3,13 +3,14 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import CircularProgressbar from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-
+import ProgressBar from 'react-bootstrap/ProgressBar'
+import Alert from 'react-bootstrap/Alert'
 
 export default class Goaltab extends React.Component{
 
     state = {
-        goal: 2000,
-        total_meal_calories: 1500,
+        goal: 2000, //get values from db
+        total_meal_calories: 1500, //after backend calculation
         remaining_calories: 0, 
         percentage : 0
     }
@@ -41,11 +42,31 @@ export default class Goaltab extends React.Component{
     render(){
         return(
             <div>
-                <Paper elevation={1}>
+                <ProgressBar animated="true" striped variant="warning"  now={this.state.percentage} label={`${this.state.percentage}%`} />
+            
+                <Alert variant="success">
+                <Alert.Heading>Hey, nice to see you again! 👋 </Alert.Heading>
+                <hr />
+                <p>
+                    <pre>Your goal: {this.state.goal}</pre>
+                    <pre>Total calories consumed today: {this.state.total_meal_calories}</pre>
+                    <pre>Remaining calories left: {this.state.remaining_calories} </pre>          
+                </p>
+                </Alert>
+            </div>
+        )
+    }
+}
+// <ProgressBar animated="true" striped variant="success"  now={this.state.percentage} label={`${this.state.percentage}%`} />
+
+{/* <Paper elevation={1}>
+                        { 
                         <Typography variant="h5" component="h3">
                         <div style={{ width: '100px' }}>
-                            
-                          <CircularProgressbar
+
+                        <ProgressBar animated="true" striped variant="success"  now={this.state.percentage} label={`${this.state.percentage}%`} />
+
+                          {/* <CircularProgressbar
                           percentage={this.state.percentage}
                             text={`${this.state.goal}`}
                             styles={{
@@ -54,17 +75,10 @@ export default class Goaltab extends React.Component{
                             }}
                             
                             />
-                            - {this.state.total_meal_calories} = {this.state.remaining_calories}
+                            - {this.state.total_meal_calories} = {this.state.remaining_calories} }
 
                         </div>
-                        </Typography>
-                </Paper>
-                
-                {/* <div style={{ width: '100px' }}>
-                <CircularProgressbar percentage={percentage1} text={`${this.state.goal} calories`} /> 
-                - {this.state.total_meal_calories} = {this.state.remaining_calories}
-                </div> */}
-            </div>
-        )
-    }
-}
+                        </Typography> }
+                       
+
+                </Paper> */}

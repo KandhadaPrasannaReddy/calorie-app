@@ -50,7 +50,7 @@ class Navbar extends React.Component{
         <ul style={{color: '#fffa8b',borderStyle:'groove'}}>
         <li><a href="/goal">My Profile</a></li>
         <li><a href="/meal">My Day</a></li>
-        <li><a href="#news">Log</a></li>
+        <li><a href="/log">Log</a></li>
         <li><a href="/recipes" >Recipes</a></li>
         <li className="li1"><a href="signout"  onClick={this.Logout}>Logout</a></li>
         </ul>

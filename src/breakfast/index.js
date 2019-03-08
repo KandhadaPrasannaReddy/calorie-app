@@ -28,7 +28,17 @@ class Breakfast extends React.Component{
   state = {
     selectedItems: [],
     selectDialogOpen: false,
-    Total_Calories : ''
+    Total_Calories : '',
+
+    
+        user_ID: '',
+        date: '',
+        mealType: '',
+        food_quantity: '',
+        food_ID: '',
+        username: '',
+  
+      
   }
 
     constructor(props){
@@ -57,10 +67,51 @@ class Breakfast extends React.Component{
           console.log({_items});
           return {selectedItems: _items, selectDialogOpen:false};
       })
-
-      //save items to database
-  
     }
+
+
+    // addToFoodIntakeTable = (e) => {
+      
+    //     e.preventDefault();
+       
+    //     body = {
+    //       id: getUserByID(),
+    //       date: new Date().setDate(15),
+    //       mealType: '0',
+    //       quantity: this.state.selectedItems.quantity,
+    //       food_id: this.state.selectedItems.id,
+    //       username: ''
+    //     }
+    //     console.log(body)
+    //     const url = "http://10.10.200.25:9000/users"; 
+    //     let headers = new Headers();
+    
+    //     headers.append('Content-Type', 'application/json');
+    //     headers.append('Accept', 'application/json');
+    
+    //     headers.append('Access-Control-Allow-Origin', url);
+    //     headers.append('Access-Control-Allow-Credentials', 'true');
+    
+    //     headers.append('POST','GET');
+        
+       
+    //     fetch(url, {
+    //         headers: headers,
+    //         method: 'POST',
+    //         body: JSON.stringify(body) 
+    //     })
+       
+  
+    //     .then(response => response.json())
+    //     .then(contents => {console.log(contents);
+        
+    //           //localStorage.setItem("AccessToken",contents.token);
+    //           //this.props.history.push(`/goal/`);
+                          
+    // })
+
+    // }
+
 
     handleOnChange = (value, index) => {
       //console.log("In handleOnChange", e, index)
@@ -87,14 +138,35 @@ class Breakfast extends React.Component{
 
     }
 
-    notifyTotalCalories = () => {
-      console.log('Total cal' , this.state.Total_Calories);
-    }
-
     onSaveClick = () => {
       this.calculateMealCalories();
-      this.notifyTotalCalories();
+      //this.addToFoodIntakeTable();
     }
+
+    // getUserByID = () => {
+    //   const url = "http://10.10.200.12:9000/users"; //route
+    //   let headers = new Headers();
+  
+    //   headers.append('Content-Type', 'application/json');
+    //   headers.append('Accept', 'application/json');
+  
+    //   headers.append('Access-Control-Allow-Origin', url);
+    //   headers.append('Access-Control-Allow-Credentials', 'true');
+  
+    //   headers.append('GET', 'POST');
+  
+    //   fetch(url, {
+    //       headers: headers,
+    //       method: 'POST'
+    //   })
+    //   .then(response => response.json())
+    //   .then(contents => {console.log("in fetch: "+ contents);
+    //                       this.setState ({
+    //                        user_ID: contents}) 
+    //                     })
+    //   .catch(() => console.log("Can’t access " + url + " response. "))
+
+    // }
 
     render(){
       console.log(this.state.selectedItems)
