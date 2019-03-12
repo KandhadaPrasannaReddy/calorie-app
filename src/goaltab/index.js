@@ -8,6 +8,10 @@ import Alert from 'react-bootstrap/Alert'
 
 export default class Goaltab extends React.Component{
 
+    constructor(props){
+        super(props);
+    } 
+
     state = {
         goal: 2000, //get values from db
         total_meal_calories: 1500, //after backend calculation
@@ -15,18 +19,19 @@ export default class Goaltab extends React.Component{
         percentage : 0
     }
 
-    constructor(props){
-        super(props);
-    }
-
     componentDidMount(){
+        if (this.props.buttonselect) {
+            debugger //eslint-disable-line
+            console.log('okayyyy')
+          }
+
         this.calculateRemainingCalories()
         this.calculatePercentage()
     }
 
     calculatePercentage = () => {
         var percentage_value = this.state.total_meal_calories / this.state.goal  * 100;
-        console.log(this.state.total_meal_calories + "total"+ this.state.goal+ "goal" + percentage_value+ "perc val" );
+        console.log(this.state.total_meal_calories + "total    "+ this.state.goal+ "goal    " + percentage_value+ " perc val" );
         this.setState({
             percentage: percentage_value
         })
@@ -37,6 +42,8 @@ export default class Goaltab extends React.Component{
             remaining_calories : remaining_value
         });
         return remaining_value;
+
+    
     }
 
     render(){

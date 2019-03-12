@@ -4,11 +4,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Navbar from '../navbar';
 import { createBrowserHistory as createHistory } from "history";
 import '../App.css';
- var body;
-
+ var body, gender1;
+ var rowCal=0;
 class Goal extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   
     this.state = {
       form: {
@@ -19,24 +19,61 @@ class Goal extends Component {
         goal:0,
         hasAgreed: false,
         selectDialogOpen: false
-      }
+      } ,
+      goalCal: ''
     };
     
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.calculateBmi = this.calculateBmi.bind(this);
     this.onSelect = this.onSelect.bind(this);
-}
+ }
 
-onSelect = (event) => {
-  const row = event.currentTarget;
-  console.log(row);
- // console.log(event);
-//  this.props.history.push({
-//   pathname: '/goaltab'
+ onSelect = (event) => { 
+    //rowCal = event.currentTarget.innerText;
+    //console.log(rowCal);
+
+    this.props.history.push({
+    pathname: '/meal'
+    });
+
+
+  body =
+    { age: this.state.form.age,
+      height: this.state.form.height,
+      weight: this.state.form.weight,
+      goalCal: event.currentTarget.innerText,
+      gender: this.state.form.gender
+    }
+
+  console.log(body)
+  const url = "http://10.10.200.25:9000/profile"; 
+  let headers = new Headers();
+ 
+  let token =  localStorage.getItem('AccessToken');
+  const AuthStr = 'Bearer '.concat(token);
   
-//});
-}
+  headers.append('Content-Type', 'application/json');
+  headers.append('Accept', 'application/json');
+  headers.append('Authorization',AuthStr);
+  headers.append('Access-Control-Allow-Origin', url);
+  headers.append('Access-Control-Allow-Credentials', 'true');
+
+  headers.append('POST','PUT');
+  
+ 
+  fetch(url, {
+      headers: headers,
+      method: 'POST',
+      body: JSON.stringify(body) 
+  })
+  .then(response => response.json())
+  .then(contents => {console.log(contents);
+})
+
+  .catch(() => console.log("Can’t access " +this.state.errors + " response. "))
+ } 
+
 
 calculateBmi(){
   function find(id){
@@ -75,16 +112,21 @@ calculateBmi(){
       }
 }
 
+setGender = (e) => {
+  gender1 = e.target.value;
+}
 
 handleChange() {
    
   this.setState({selectDialogOpen: true})
+
     function find(id){
       return document.getElementById(id)
     }
 
+
+   
     var age1 = find("age").value
-    var gender1 =document.getElementById.value;
     var height1 = find("height").value
     var weight1 = find("weight").value 
     var Calculated_Goal = 0;
@@ -99,13 +141,15 @@ handleChange() {
     }
    
     this.setState (
-      {form:{
-       goal: Calculated_Goal,
-       age: age1,
-       height:height1,
-       weight:weight1,
-       gender:gender1
-      }
+      {
+        form:{
+              goal: Calculated_Goal,
+              age: age1,
+              height:height1,
+              weight:weight1,
+              gender:gender1,
+              goalplan:rowCal
+            }
     }
     );
   
@@ -121,40 +165,7 @@ history = createHistory(this.props);
 handleSubmit(e) {
   e.preventDefault();
  
-  body =
-  { age: this.state.form.age,
-   height: this.state.form.height,
-   weight: this.state.form.weight
-  }
   
-  console.log(body)
-  const url = "http://10.10.200.25:9000/profile"; 
-  let headers = new Headers();
-
-  let token =  localStorage.getItem('AccessToken');
-  const AuthStr = 'Bearer '.concat(token);
-  
-  headers.append('Content-Type', 'application/json');
-  headers.append('Accept', 'application/json');
-  headers.append('Authorization',AuthStr);
-  headers.append('Access-Control-Allow-Origin', url);
-  headers.append('Access-Control-Allow-Credentials', 'true');
-
-  headers.append('POST','PUT');
-  
- 
-  fetch(url, {
-      headers: headers,
-      method: 'POST',
-      body: JSON.stringify(body) 
-  })
- 
-
-  .then(response => response.json())
-  .then(contents => {console.log(contents);
-})
-
-  .catch(() => console.log("Can’t access " +this.state.errors + " response. "))
 }
 
 
@@ -172,11 +183,11 @@ handleSubmit(e) {
           <label> <input id="age" type="number"   placeholder="Enter your  age" name="age"  /></label>
         </div>
         
-        <div className="FormField1">
+        <div className="FormField1" onChange={this.setGender}>
           <label htmlFor="gender">Gender: </label>
            
-              <input type="radio"    name="gender"  id="mbutton"    /><font color="black">Male</font>
-              <input type="radio"  name="gender"   id="fbutton"   /><font color="black">Female</font> 
+              <input type="radio"    name="gender"  id="mbutton" value= "0"   /><font color="black">Male</font>
+              <input type="radio"  name="gender"   id="fbutton"  value= "1"   /><font color="black">Female</font> 
            <br/>
         </div>
 
@@ -227,32 +238,32 @@ handleSubmit(e) {
                 <tbody> 
             
                  
-                        <tr   onClick={this.onSelect}>
-                            <td>Maintain Weight</td>
-                            <td>{this.state.goal * 100/100}</td>
-                          
-                        </tr>
-                        <tr   onClick={this.onSelect}>
-                            <td>Mild Weight Loss</td>
-                            <td>{this.state.goal * 90/100}</td>
-                            
-                        </tr>
+            <tr >
+                <td>Maintain Weight</td>
+                <td   onClick={this.onSelect}>{this.state.form.goal * 100/100}</td>
+              
+            </tr> 
+            <tr   >
+                <td>Mild Weight Loss</td>
+                <td   onClick={this.onSelect}>{this.state.form.goal * 90/100} </td>
+                
+            </tr>
 
-                        <tr   onClick={this.onSelect}>
-                            <td> Weight Loss</td>
-                            <td>{this.state.goal * 80/100}</td>
-                           
-                        </tr>
+            <tr>
+                <td> Weight Loss</td>
+                <td   onClick={this.onSelect}>{this.state.form.goal * 80/100}</td>
+               
+            </tr>
 
-                        <tr   onClick={this.onSelect}> 
-                            <td>Extreme Weight Loss</td>
-                            <td>{this.state.goal * 61/100}</td>  
-                        </tr>
+            <tr> 
+                <td>Extreme Weight Loss</td>
+                <td  onClick={this.onSelect} >{this.state.form.goal * 61/100}</td>  
+            </tr>
 
-                    
-                        </tbody>
+        
+            </tbody>
                         </table>
-
+                   
 
             
                 

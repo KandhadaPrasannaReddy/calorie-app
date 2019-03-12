@@ -11,7 +11,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+
+var body;
 
 
 const style = {
@@ -38,7 +39,6 @@ class Breakfast extends React.Component{
         food_ID: '',
         username: '',
   
-      
   }
 
     constructor(props){
@@ -62,7 +62,9 @@ class Breakfast extends React.Component{
           const {selectedItems} = state;
           const _items = [...selectedItems, {
             ...foodItem,
-            quantity: value
+            quantity: value,
+            mealType: '0'
+
           }];
           console.log({_items});
           return {selectedItems: _items, selectDialogOpen:false};
@@ -70,51 +72,28 @@ class Breakfast extends React.Component{
     }
 
 
-    // addToFoodIntakeTable = (e) => {
-      
-    //     e.preventDefault();
-       
-    //     body = {
-    //       id: getUserByID(),
-    //       date: new Date().setDate(15),
-    //       mealType: '0',
-    //       quantity: this.state.selectedItems.quantity,
-    //       food_id: this.state.selectedItems.id,
-    //       username: ''
-    //     }
-    //     console.log(body)
-    //     const url = "http://10.10.200.25:9000/users"; 
-    //     let headers = new Headers();
-    
-    //     headers.append('Content-Type', 'application/json');
-    //     headers.append('Accept', 'application/json');
-    
-    //     headers.append('Access-Control-Allow-Origin', url);
-    //     headers.append('Access-Control-Allow-Credentials', 'true');
-    
-    //     headers.append('POST','GET');
-        
-       
-    //     fetch(url, {
-    //         headers: headers,
-    //         method: 'POST',
-    //         body: JSON.stringify(body) 
-    //     })
-       
-  
-    //     .then(response => response.json())
-    //     .then(contents => {console.log(contents);
-        
-    //           //localStorage.setItem("AccessToken",contents.token);
-    //           //this.props.history.push(`/goal/`);
-                          
-    // })
+    addToFoodIntakeTable = () => {
 
-    // }
+      // this.state.selectedItems.map(item =>  
+      //   body = [{
+      //     mealType: '0',
+      //     quantity: this.state.selectedItems[item].quantity,
+      //     food_id: this.state.selectedItems[item].Id
+          
+      //   }]
+      // )
+        body = [{
+          //date: new Date().setDate(15),
+          mealType: '0',
+          quantity: this.state.selectedItems[0].quantity,
+          food_id: this.state.selectedItems[0].Id
+          //username: ''
+        }]
+        console.log("body is", body)
+  }
 
 
     handleOnChange = (value, index) => {
-      //console.log("In handleOnChange", e, index)
       this.setState({
         selectedItems: this.state.selectedItems.map((obj, i)=> {
             return {
@@ -135,12 +114,12 @@ class Breakfast extends React.Component{
      this.setState({
         Total_Calories : total_calories_count
       });
-
     }
 
     onSaveClick = () => {
       this.calculateMealCalories();
-      //this.addToFoodIntakeTable();
+      this.props.ParentCallBack(this.state.Total_Calories)
+      this.addToFoodIntakeTable();
     }
 
     // getUserByID = () => {
@@ -170,6 +149,35 @@ class Breakfast extends React.Component{
 
     render(){
       console.log(this.state.selectedItems)
+
+      const url = "http://10.10.200.25:9000/foodIntake"; 
+      let headers = new Headers();
+    
+      let token =  localStorage.getItem('AccessToken');
+      const AuthStr = 'Bearer '.concat(token);
+      
+      headers.append('Content-Type', 'application/json');
+      headers.append('Accept', 'application/json');
+      headers.append('Authorization',AuthStr);
+      headers.append('Access-Control-Allow-Origin', url);
+      headers.append('Access-Control-Allow-Credentials', 'true');
+    
+      headers.append('POST','PUT');
+      
+     
+      fetch(url, {
+          headers: headers,
+          method: 'POST',
+          body: JSON.stringify(this.state.selectedItems) 
+      })
+     
+    
+      .then(response => response.json())
+      .then(contents => {console.log(contents);
+    })
+    
+      .catch(() => console.log("Can’t access " +this.state.errors + " response. "));
+ 
       return (
         <div>
 
