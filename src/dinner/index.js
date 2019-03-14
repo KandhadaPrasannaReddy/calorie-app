@@ -19,12 +19,15 @@ const style = {
   margin: 0,
   top: 'auto',
   right: 20,
-  bottom: 1010,
+  bottom: 10,
   left: 'auto',
   position: 'fixed',
+  fab: {
+    margin: 50,
+  },
 };
 
-class Breakfast extends React.Component{
+class Dinner extends React.Component{
   
   state = {
     selectedItems: [],
@@ -59,7 +62,7 @@ class Breakfast extends React.Component{
           const _items = [...selectedItems, {
             ...foodItem,
             quantity: value,
-            mealType: '0'
+            mealType: '2'
 
           }];
           console.log({_items});
@@ -69,18 +72,9 @@ class Breakfast extends React.Component{
 
 
     addToFoodIntakeTable = () => {
-
-      // this.state.selectedItems.map(item =>  
-      //   body = [{
-      //     mealType: '0',
-      //     quantity: this.state.selectedItems[item].quantity,
-      //     food_id: this.state.selectedItems[item].Id
-          
-      //   }]
-      // )
       this.state.selectedItems.map(function(item) {
             body = [...body, {  
-                    mealType: '0',
+                    mealType: '2',
                     quantity: item.quantity,
                     foodId: item.Id
                   }]
@@ -155,10 +149,13 @@ class Breakfast extends React.Component{
 
             <Wrapper>
                 <Title>
-                    Breakfast               
-                      <Fab size="medium" className="fab" style={style} color="secondary" aria-label="Add"  onClick={this.handleDialogOpen}>
+                    Lunch               
+                      {/* <Fab size="medium" style={style} color="secondary" aria-label="Add"  onClick={this.handleDialogOpen}>
                         <AddIcon />
-                      </Fab>
+                      </Fab> */}
+                        <Button_OK onClick={this.handleDialogOpen}>
+                            Add
+                       </Button_OK>
                 </Title>
             </Wrapper>
 
@@ -279,4 +276,4 @@ const Button_Cancel = styled.button`
 `;
 
 
-export default Breakfast;
+export default Dinner;

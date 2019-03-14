@@ -31,10 +31,11 @@ class SignInForm extends Component {
     }
 
     history = createHistory(this.props);
+    
     handleSubmit(e) {
         e.preventDefault();
         body = {
-         name: this.state.form.name,
+          name: this.state.form.name,
           password: this.state.form.password
         }
         console.log(body)
