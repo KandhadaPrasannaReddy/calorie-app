@@ -1,7 +1,46 @@
 import React from "react";
 import './index.css';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 var body;
+// const styles = {
+//     root: {
+//       width: 500,
+//     },
+//   };
+
+  
+// class Navbar extends React.Component{
+//     state = {
+//         value: 0,
+//       };
+    
+//     handleChange = (event, value) => {
+//         this.setState({ value });
+//     };
+//     render() {
+//         const { classes } = this.props;
+//         const { value } = this.state;
+    
+//         return (
+//           <BottomNavigation
+//             value={value}
+//             onChange={this.handleChange}
+//             showLabels
+//           >
+//             <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+//             <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+//             <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+//           </BottomNavigation>
+//         );
+//       }
+//     }
+
+//     export default Navbar;
 class Navbar extends React.Component{
    
     constructor(props) {
@@ -47,7 +86,7 @@ class Navbar extends React.Component{
 
         return(
         <div>
-        <ul style={{color: '#fffa8b',borderStyle:'groove'}}>
+        <ul style={{color: '#fffa8b'}}>
         <li><a href="/goal">My Profile</a></li>
         <li><a href="/meal">My Day</a></li>
         <li><a href="/log">Log</a></li>
@@ -58,7 +97,6 @@ class Navbar extends React.Component{
         )
     }
 }
-
 
 
 export default Navbar;

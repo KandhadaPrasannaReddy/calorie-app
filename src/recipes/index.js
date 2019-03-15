@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from "../navbar/index";
 import Card from 'react-bootstrap/Card';
 import CardColumns from 'react-bootstrap/CardColumns';
 import spaghetti_img from '../images/loaded_spaghetti.jpg';
@@ -351,7 +352,7 @@ class Recipes extends React.Component{
             </Card.Body>
             </Card>
         </CardColumns>;
-                    
+        <Navbar/>              
     </div>
     );
     }

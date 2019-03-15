@@ -16,6 +16,36 @@ export default class Meal extends React.Component{
             goal: 2500 //retreive from db
         }}
 
+        componentDidMount(){
+
+            const url = "http://10.10.200.25:9000/profile"; 
+            //const url = "http://localhost:9000/profile"; 
+            let headers = new Headers();
+ 
+            let token =  localStorage.getItem('AccessToken');
+            const AuthStr = 'Bearer '.concat(token);
+            
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');
+            headers.append('Authorization',AuthStr);
+            headers.append('Access-Control-Allow-Origin', url);
+            headers.append('Access-Control-Allow-Credentials', 'true');
+          
+            headers.append('GET','POST');
+        
+            fetch(url, {
+                headers: headers,
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(contents => {console.log("in fetch: "+ contents);
+                                this.setState ({
+                                goal: contents}) 
+                              })
+            .catch(() => console.log("Can’t access " + url + " response. "))
+           
+          }
+
     handleBreakfastCallback = (data) => {
         this.setState({
             breakfast_consumed_calories: data
@@ -24,7 +54,6 @@ export default class Meal extends React.Component{
     }
         
     handleLunchCallback = (data) => {
-        //console.log('In lunch parent', data)
         this.setState({
             lunch_consumed_calories: data
           }, 
@@ -32,7 +61,6 @@ export default class Meal extends React.Component{
     }
 
     handleDinnerCallback = (data) => {
-        //console.log('In lunch parent', data)
         this.setState({
             dinner_consumed_calories: data
           }, 
@@ -50,8 +78,8 @@ export default class Meal extends React.Component{
                 Goal = {this.state.goal}
                 Remaining_Calories={this.state.goal - (this.state.breakfast_consumed_calories + this.state.lunch_consumed_calories + this.state.dinner_consumed_calories)}/>
 
-            <Breakfast ParentCallBack={this.handleBreakfastCallback}/>  
-            <Lunch ParentCallBack={this.handleLunchCallback}/>  
+            <Breakfast ParentCallBack={this.handleBreakfastCallback}/>   <br/>
+            <Lunch ParentCallBack={this.handleLunchCallback}/>  <br/>
             <Dinner ParentCallBack={this.handleDinnerCallback}/>
             <Navbar/>
             </div>

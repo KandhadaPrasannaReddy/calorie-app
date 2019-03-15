@@ -312,11 +312,11 @@
 }
 
 .fab {
-  margin: 0px;
+ 
   top: auto;
   right: 820px;
   bottom: 20px;
-  left: auto;
+  margin-left: 6px;
   position: fixed;
 };
 

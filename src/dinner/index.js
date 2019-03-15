@@ -11,9 +11,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import './dinner.css';
+
 
 var body=[];
-
 
 const style = {
   margin: 0,
@@ -149,13 +150,13 @@ class Dinner extends React.Component{
 
             <Wrapper>
                 <Title>
-                    Lunch               
-                      {/* <Fab size="medium" style={style} color="secondary" aria-label="Add"  onClick={this.handleDialogOpen}>
+                 Dinner   <button class="button5" onClick={this.handleDialogOpen}> + </button>   {/* <Fab size="medium" style={style} color="secondary" aria-label="Add"  onClick={this.handleDialogOpen}>
                         <AddIcon />
                       </Fab> */}
-                        <Button_OK onClick={this.handleDialogOpen}>
+                       {/* { <Button_OK onClick={this.handleDialogOpen}>
                             Add
-                       </Button_OK>
+                       </Button_OK>} */}
+                      
                 </Title>
             </Wrapper>
 

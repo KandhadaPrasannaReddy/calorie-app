@@ -5,7 +5,7 @@ import Navbar from '../navbar';
 import { createBrowserHistory as createHistory } from "history";
 import '../App.css';
  var body, gender1;
- var rowCal=0;
+ 
 class Goal extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +20,7 @@ class Goal extends Component {
         hasAgreed: false,
         selectDialogOpen: false
       } ,
-      goalCal: ''
+      goalPlan: ''
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -30,9 +30,6 @@ class Goal extends Component {
  }
 
  onSelect = (event) => { 
-    //rowCal = event.currentTarget.innerText;
-    //console.log(rowCal);
-
     this.props.history.push({
     pathname: '/meal'
     });
@@ -42,7 +39,7 @@ class Goal extends Component {
     { age: this.state.form.age,
       height: this.state.form.height,
       weight: this.state.form.weight,
-      goalCal: event.currentTarget.innerText,
+      goalPlan: event.currentTarget.innerText,
       gender: this.state.form.gender
     }
 
@@ -124,8 +121,6 @@ handleChange() {
       return document.getElementById(id)
     }
 
-
-   
     var age1 = find("age").value
     var height1 = find("height").value
     var weight1 = find("weight").value 
@@ -148,7 +143,7 @@ handleChange() {
               height:height1,
               weight:weight1,
               gender:gender1,
-              goalplan:rowCal
+            
             }
     }
     );
@@ -268,9 +263,9 @@ handleSubmit(e) {
             
                 
             </Dialog>
-            <Navbar/>
+           
             </div>
-            
+            <Navbar/>    
   </div>
      );
    }

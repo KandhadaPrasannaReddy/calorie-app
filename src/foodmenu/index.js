@@ -24,7 +24,7 @@ class Foodmenu extends React.Component {
 
     headers.append('Access-Control-Allow-Origin', url);
     headers.append('Access-Control-Allow-Credentials', 'true');
-
+ 
     headers.append('GET', 'POST');
 
     fetch(url, {

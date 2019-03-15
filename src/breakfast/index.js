@@ -11,6 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import '../App.css';
 
 var body=[];
 
@@ -23,6 +24,7 @@ const style = {
   left: 'auto',
   position: 'fixed',
 };
+
 
 class Breakfast extends React.Component{
   
@@ -82,7 +84,7 @@ class Breakfast extends React.Component{
             body = [...body, {  
                     mealType: '0',
                     quantity: item.quantity,
-                    foodId: item.Id
+                    food_Id: item.Id
                   }]
             console.log("iterating over items id:", item.Id)
         })
@@ -155,10 +157,10 @@ class Breakfast extends React.Component{
 
             <Wrapper>
                 <Title>
-                    Breakfast               
-                      <Fab size="medium" className="fab" style={style} color="secondary" aria-label="Add"  onClick={this.handleDialogOpen}>
+                    Breakfast         <button class="button5" onClick={this.handleDialogOpen}> + </button>      
+                      {/* <Fab size="medium" className="fab" style={style} color="secondary" aria-label="Add"  onClick={this.handleDialogOpen}>
                         <AddIcon />
-                      </Fab>
+                      </Fab> */}
                 </Title>
             </Wrapper>
 
