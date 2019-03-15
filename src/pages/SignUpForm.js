@@ -84,6 +84,11 @@ class SignUpForm extends Component {
         return (
          <div className="cardapp">
       <div class="scard"><br/>
+      <div className="text-center">
+                <h3 className="dark-grey-text mb-5">
+               <font color= "grey">   <strong>Sign Up</strong></font>
+                </h3>
+       </div>
             <form onSubmit={this.handleSubmit} className="FormFields">
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="name"><font color="black">Full Name</font></label>

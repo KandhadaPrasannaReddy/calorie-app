@@ -40,7 +40,7 @@ export default class Meal extends React.Component{
             .then(response => response.json())
             .then(contents => {console.log("in fetch: "+ contents);
                                 this.setState ({
-                                goal: contents}) 
+                                data: contents}) 
                               })
             .catch(() => console.log("Can’t access " + url + " response. "))
            

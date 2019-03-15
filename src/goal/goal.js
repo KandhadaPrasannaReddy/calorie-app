@@ -171,6 +171,12 @@ handleSubmit(e) {
       <div className="cardapp">
       <div>
       <div class="card">
+     
+      <div className="text-center">
+                <h3 className="dark-grey-text mb-5">
+               <font color= "pink">   <strong>Enter your details</strong></font>
+                </h3>
+       </div>
       <form  name = "bmiForm" onSubmit={this.handleSubmit} className="FormFields"> 
       <br/>
       <div className="FormField1">

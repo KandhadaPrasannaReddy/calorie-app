@@ -98,6 +98,11 @@ class SignInForm extends Component {
             <div className="cardapp">
             <div>
             <div class="lcard"><br/>
+            <div className="text-center">
+                <h3 className="dark-grey-text mb-5">
+               <font color= "grey">   <strong>Sign In</strong></font>
+                </h3>
+       </div>
         <div className="FormCenter">
             <form onSubmit={this.onSubmit} className="FormFields" onSubmit={this.handleSubmit}>
             <div className="FormField">

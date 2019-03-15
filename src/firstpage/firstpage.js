@@ -28,7 +28,7 @@ class Firstpage extends Component {
     
       <div className="App-nav" >
      
-      <NavbarBrand href="/firstpage" style={{color: '#ffffff'}} align="center">Weigh-To-Go</NavbarBrand>
+      <NavbarBrand href="/firstpage" style={{color: '#ffffff'}} align="center"><i><font color="white" size="5px">Weigh-To-Go</font></i></NavbarBrand>
      
     
       <div className="App">
