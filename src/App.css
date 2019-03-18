@@ -9,23 +9,58 @@
   font-size:40px;
 }
 
-.App-logo {
-
-  animation: App-logo-spin infinite 20s linear;
-  height: 35vmin;
-  pointer-events: none;
+.swing {
+  animation: swing ease-in-out 1s infinite alternate;
+  transform-origin: center -20px;
+  float:left;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
 }
+.swing img {
+  border: 5px solid #f8f8f8;
+  display: block;
+  height:200px;
+  width:200px;
+}
+.swing:after{
+  content: '';
+  position: absolute;  
+  width: 20px; height: 20px;  
+  border: 1px solid #999;
+  top: -10px; left: 50%;
+  z-index: 0;
+  border-bottom: none;
+  border-right: none;
+  transform: rotate(45deg);
+}
+/* nail */
+.swing:before{
+  content: '';
+  position: absolute;
+  width: 5px; height: 5px;
+  top: -14px;left: 54%;
+  z-index: 5;
+  border-radius: 50% 50%;
+  background: #000;
+}
+
+@keyframes swing {
+  0% { transform: rotate(3deg); }
+  100% { transform: rotate(-3deg); }
+}
+
 
 .App-header {
   background-color: #ffffff;
-  min-height: 40vh;
-  min-width: 120vh;
+  height: 60vh;
+  width: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  position :center;
+  padding-left: "25px";
 }
 
 .App-link {
@@ -167,9 +202,9 @@
 }
 .FormField__Input {
   width: 50%;
-  /* background-color: transparent; */
+  background-color: transparent; 
   border: none;
-   color: rgb(17, 28, 41);
+  color: rgb(17, 28, 41);
   outline: none;
   border-bottom: 1px solid #010a14;
   font-size: 1em;
@@ -250,7 +285,7 @@
     left: 0;
     right: 0;
     margin: auto;
-    background-color: #E1E7E7;
+    background-color: rgb(0, 0, 0);
     
 }
 .scard {
@@ -277,13 +312,25 @@
 
 .cardapp {
   height: 100vh;
-
   padding: 45px 40px;
- 
-  background:powderblue;
   overflow: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
+.myimg {
+  background-image: url("../src/images/chalkboard_food.jpg");
+}
+
+
+.homeimg {
+  background-image: url("../src/images/homeimg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 #goal_table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;

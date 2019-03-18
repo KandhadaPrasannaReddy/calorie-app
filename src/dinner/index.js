@@ -104,10 +104,27 @@ class Dinner extends React.Component{
         total_calories_count = total_calories_count + (item.calories * item.quantity) 
       )
      console.log(total_calories_count);
+
+     if( total_calories_count < this.calculateMinimumDinnerCalorieLimit()){
+      alert('Calorie limit is less than maximum dinner calorie. Bon apetit! 🥘')
+    }
+
+     if( total_calories_count > this.calculateMaximumDinnerCalorieLimit()){
+       alert('Oops! Calorie limit is more than maximum dinner calorie.🥘')
+     }
+
      this.setState({
         Total_Calories : total_calories_count
       });
       this.props.ParentCallBack(total_calories_count)
+    }
+
+    calculateMinimumDinnerCalorieLimit = () => {
+      return (this.props.Goal * 25) / 100;
+    }
+
+    calculateMaximumDinnerCalorieLimit = () => {
+      return (this.props.Goal * 35) / 100;
     }
 
     onSaveClick = () => {
@@ -158,6 +175,7 @@ class Dinner extends React.Component{
                        </Button_OK>} */}
                       
                 </Title>
+                (min:{this.calculateMinimumDinnerCalorieLimit()} kcal, max: {this.calculateMaximumDinnerCalorieLimit()} kcal)
             </Wrapper>
 
 

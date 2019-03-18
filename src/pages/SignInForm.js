@@ -3,9 +3,11 @@ import { createBrowserHistory as createHistory } from "history";
 import '../App.css';
 
 var body;
-
-
-
+const style =
+`
+input {
+    color: red;
+    }`
 
 class SignInForm extends Component {
     constructor(props) {
@@ -95,23 +97,24 @@ class SignInForm extends Component {
     render() {
         const { form } = this.state;
         return (
+            <div className="myimg">
             <div className="cardapp">
             <div>
             <div class="lcard"><br/>
             <div className="text-center">
                 <h3 className="dark-grey-text mb-5">
-               <font color= "grey">   <strong>Sign In</strong></font>
+               <font color= "white">   <strong>Sign In</strong></font>
                 </h3>
        </div>
         <div className="FormCenter">
             <form onSubmit={this.onSubmit} className="FormFields" onSubmit={this.handleSubmit}>
             <div className="FormField">
-                <label className="FormField__Label" htmlFor="name" ><font color="black">Name</font></label>
-                <input type="name" id="name" className="FormField__Input" placeholder="Enter your name" name="name" value={this.state.name} onChange={this.handleChange} />
+                <label className="FormField__Label" htmlFor="name" ><font color="white">Name</font></label>
+                <input type="name"   id="name" className="FormField__Input" placeholder="Enter your name" name="name" value={this.state.name} onChange={this.handleChange} />
               </div>
 
               <div className="FormField">
-                <label className="FormField__Label" htmlFor="password"><font color="black">Password</font></label>
+                <label className="FormField__Label" htmlFor="password"><font color="white">Password</font></label>
                 <input type="password" id="password" className="FormField__Input" placeholder="Enter your password" name="password" value={this.state.password} onChange={this.handleChange} />
               </div>
 
@@ -120,7 +123,7 @@ class SignInForm extends Component {
 
               </div>
             </form>
-            </div> </div>
+            </div> </div></div>
 
             </div>
           </div>

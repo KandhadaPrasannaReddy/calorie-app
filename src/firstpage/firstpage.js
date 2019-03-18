@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../logo.jpeg';
+import scales_img from '../images/scales.png';
 import {NavbarBrand} from 'reactstrap';
 import '../App.css';
 import { createBrowserHistory as createHistory } from "history";
@@ -24,34 +25,39 @@ class Firstpage extends Component {
   }
 
   render() {
-    return (
-    
-      <div className="App-nav" >
-     
-      <NavbarBrand href="/firstpage" style={{color: '#ffffff'}} align="center"><i><font color="white" size="5px">Weigh-To-Go</font></i></NavbarBrand>
-     
-    
-      <div className="App">
+  
 
-          <header className="App-header">
-         
-          <img src={logo} className="App-logo" alt="logo" /><br/><br/> 
+      return (
+    
       
-
-          <div>
-            <p> <i><font color="black">A Whole New Way to Take Your Vitamins..</font></i> </p>
-          </div> <br/><br/>  
-
-            <div class="wrapper">
-             <button class="button button1" align="left" onClick={this.onLoginChange}> Login</ button>  
-             <button class="button button1" align="right"  onClick={this.onSignUpChange}> SignUp</ button> 
-             </div> 
-          </header> 
-
+       
+        <div className="homeimg">
+            <div className="cardapp">
+        
+  
+            <header className="App-header">
+            <figure class="swing">
+               <img src={scales_img} alt="logo" /><br/><br/> 
+          </figure>
+           
           
-      </div>
-      </div> 
-    );
+        
+  
+            <div>
+              <p> <i><font color="black">A Whole New Way to Take Your Vitamins..</font></i> </p>
+            </div> <br/><br/>  
+  
+              <div class="wrapper">
+               <button class="button button1" align="left" onClick={this.onLoginChange}> Login</ button>  
+               <button class="button button1" align="right"  onClick={this.onSignUpChange}> SignUp</ button> 
+               </div> 
+            </header> 
+  
+            
+        </div>
+        </div> 
+      );
+   
   }
 }
 

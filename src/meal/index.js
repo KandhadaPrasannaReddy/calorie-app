@@ -10,6 +10,7 @@ export default class Meal extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            data:[],
             breakfast_consumed_calories: 0,
             lunch_consumed_calories: 0,
             dinner_consumed_calories: 0,
@@ -40,11 +41,29 @@ export default class Meal extends React.Component{
             .then(response => response.json())
             .then(contents => {console.log("in fetch: "+ contents);
                                 this.setState ({
-                                data: contents}) 
+                                data: contents})
+                                this.getUserGoal() 
                               })
             .catch(() => console.log("Can’t access " + url + " response. "))
            
-          }
+
+            // if(this.state.data){
+            //     this.getUserGoal()
+            // }
+            // else{
+            //     console.log("User not found!")
+            // }
+        }
+
+    getUserGoal = () => {
+        this.state.data.map((item, index) => {
+            console.log(item.goalplan)
+            return(
+                this.setState({goal: item.goalplan})
+            )
+        })  
+    } 
+
 
     handleBreakfastCallback = (data) => {
         this.setState({
@@ -78,9 +97,9 @@ export default class Meal extends React.Component{
                 Goal = {this.state.goal}
                 Remaining_Calories={this.state.goal - (this.state.breakfast_consumed_calories + this.state.lunch_consumed_calories + this.state.dinner_consumed_calories)}/>
 
-            <Breakfast ParentCallBack={this.handleBreakfastCallback}/>   <br/>
-            <Lunch ParentCallBack={this.handleLunchCallback}/>  <br/>
-            <Dinner ParentCallBack={this.handleDinnerCallback}/>
+            <Breakfast ParentCallBack={this.handleBreakfastCallback} Goal={this.state.goal}/>   
+            <Lunch ParentCallBack={this.handleLunchCallback} Goal={this.state.goal}/> 
+            <Dinner ParentCallBack={this.handleDinnerCallback} Goal={this.state.goal}/>
             <Navbar/>
             </div>
         )
