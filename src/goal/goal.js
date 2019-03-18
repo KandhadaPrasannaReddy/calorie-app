@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Navbar from '../navbar';
+
 import { createBrowserHistory as createHistory } from "history";
 import '../App.css';
  var body, gender1;
@@ -271,7 +271,7 @@ handleSubmit(e) {
             </Dialog>
            
             </div>
-            <Navbar/>    
+            
   </div>
      );
    }

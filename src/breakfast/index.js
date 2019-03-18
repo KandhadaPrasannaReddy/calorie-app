@@ -72,14 +72,6 @@ class Breakfast extends React.Component{
 
     addToFoodIntakeTable = () => {
 
-      // this.state.selectedItems.map(item =>  
-      //   body = [{
-      //     mealType: '0',
-      //     quantity: this.state.selectedItems[item].quantity,
-      //     food_id: this.state.selectedItems[item].Id
-          
-      //   }]
-      // )
       this.state.selectedItems.map(function(item) {
             body = [...body, {  
                     mealType: '0',
@@ -161,6 +153,7 @@ class Breakfast extends React.Component{
                       {/* <Fab size="medium" className="fab" style={style} color="secondary" aria-label="Add"  onClick={this.handleDialogOpen}>
                         <AddIcon />
                       </Fab> */}
+                      
                 </Title>
             </Wrapper>
 

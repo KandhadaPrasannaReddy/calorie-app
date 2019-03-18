@@ -5,8 +5,6 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
 var body;
 // const styles = {
@@ -50,8 +48,6 @@ class Navbar extends React.Component{
     
         this.Logout = this.Logout.bind(this);
        
- 
-
         this.state = {
           isOpen: false,
           data: []
@@ -85,22 +81,19 @@ class Navbar extends React.Component{
               .then(contents => {     })
                .catch(() => console.log("Can’t access " + url + " response. "))          
       }
-
-
     
     render(){
 
         return(
         <div>
         <ul style={{color: '#fffa8b'}}>
-       
+        <li><a href="/goal">My Profile</a></li>
         <li><a href="/meal">My Day</a></li>
         <li><a href="/log">Trends</a></li>
         <li><a href="/recipes" >Recipes</a></li>
-        <li><a href="#" onClick={this.Viewprofile}>View Profile</a></li>
         <li className="li1"><a href="signout"  onClick={this.Logout}>Logout</a></li>
         </ul>
-            </div>
+        </div>
         )
     }
 }
