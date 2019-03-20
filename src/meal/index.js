@@ -4,6 +4,7 @@ import Lunch from '../lunch/index';
 import Dinner from '../dinner/index';
 import Navbar from "../navbar/index";
 import Goaltab from "../goaltab/index";
+import Viewprofile from '../viewprofile';
 
 export default class Meal extends React.Component{
 
@@ -99,6 +100,7 @@ export default class Meal extends React.Component{
             <Breakfast ParentCallBack={this.handleBreakfastCallback} Goal={this.state.goal}/>   
             <Lunch ParentCallBack={this.handleLunchCallback} Goal={this.state.goal}/> 
             <Dinner ParentCallBack={this.handleDinnerCallback} Goal={this.state.goal}/>
+            {/* <Viewprofile Name = {this.state.username}/> */}
           
             </div>
         )
