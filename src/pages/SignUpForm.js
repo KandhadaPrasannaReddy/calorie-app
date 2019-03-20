@@ -82,6 +82,7 @@ class SignUpForm extends Component {
 
     render() {
         return (
+          <div className="myimg">
          <div className="cardapp">
       <div class="scard"><br/>
       <div className="text-center">
@@ -109,7 +110,7 @@ class SignUpForm extends Component {
                   <button className="FormField__Button mr-20" onClick={this.handleSubmit}>Sign Up</button> 
               </div>
             </form>
-            </div> </div>
+            </div> </div></div>
           
         );
     }

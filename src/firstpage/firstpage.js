@@ -28,20 +28,20 @@ class Firstpage extends Component {
   
 
       return (
-    
-      
+        <div className="App-nav" >
+     
+        <NavbarBrand href="/firstpage" style={{color: '#ffffff'}} align="center">Weigh-To-Go</NavbarBrand>
        
-        <div className="homeimg">
-            <div className="cardapp">
-        
+      
+        <div className="App">
   
             <header className="App-header">
+           
+            {/* <img src={logo} className="App-logo" alt="logo" /><br/><br/>  */}
+        
             <figure class="swing">
                <img src={scales_img} alt="logo" /><br/><br/> 
-          </figure>
-           
-          
-        
+          </figure> 
   
             <div>
               <p> <i><font color="black">A Whole New Way to Take Your Vitamins..</font></i> </p>

@@ -14,12 +14,13 @@ export default class Meal extends React.Component{
             breakfast_consumed_calories: 0,
             lunch_consumed_calories: 0,
             dinner_consumed_calories: 0,
-            goal: 2500 //retreive from db
+            goal: '',
+            username: ''
         }}
 
         componentDidMount(){
 
-            const url = "http://10.10.200.25:9000/profile"; 
+            const url = "http://10.10.200.25:9000/profile/me"; 
             //const url = "http://localhost:9000/profile"; 
             let headers = new Headers();
  
@@ -43,25 +44,21 @@ export default class Meal extends React.Component{
                                 this.setState ({
                                 data: contents})
                                 this.getUserGoal() 
+                                this.getUserName()
                               })
             .catch(() => console.log("Can’t access " + url + " response. "))
            
 
-            // if(this.state.data){
-            //     this.getUserGoal()
-            // }
-            // else{
-            //     console.log("User not found!")
-            // }
         }
 
     getUserGoal = () => {
-        this.state.data.map((item, index) => {
-            console.log(item.goalplan)
-            return(
-                this.setState({goal: item.goalplan})
-            )
-        })  
+        console.log("Inside",this.state.data.goalPlan)
+        this.setState({goal: this.state.data.goalPlan})
+    } 
+
+    getUserName = () => {
+        console.log("Username", this.state.data.user)
+        this.setState({username: this.state.data.user})
     } 
 
 
@@ -89,18 +86,20 @@ export default class Meal extends React.Component{
     render(){
         return(
             <div>
+            <Navbar/>
             <Goaltab  
                 breakfast_cals={this.state.breakfast_consumed_calories} 
                 lunch_cals={this.state.lunch_consumed_calories} 
                 dinner_cals={this.state.dinner_consumed_calories}
                 Total_Meal_Calories={this.state.breakfast_consumed_calories + this.state.lunch_consumed_calories + this.state.dinner_consumed_calories}
                 Goal = {this.state.goal}
-                Remaining_Calories={this.state.goal - (this.state.breakfast_consumed_calories + this.state.lunch_consumed_calories + this.state.dinner_consumed_calories)}/>
+                Remaining_Calories={this.state.goal - (this.state.breakfast_consumed_calories + this.state.lunch_consumed_calories + this.state.dinner_consumed_calories)}
+                Name = {this.state.username}/>
 
             <Breakfast ParentCallBack={this.handleBreakfastCallback} Goal={this.state.goal}/>   
             <Lunch ParentCallBack={this.handleLunchCallback} Goal={this.state.goal}/> 
             <Dinner ParentCallBack={this.handleDinnerCallback} Goal={this.state.goal}/>
-            <Navbar/>
+          
             </div>
         )
     }

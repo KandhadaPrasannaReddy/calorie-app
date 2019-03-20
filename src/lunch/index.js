@@ -122,11 +122,11 @@ class Lunch extends React.Component{
     }
 
     calculateMinimumLunchCalorieLimit = () => {
-      return (this.props.Goal * 35) / 100;
+      return ((this.props.Goal * 35) / 100).toFixed(2);
     }
 
     calculateMaximumLunchCalorieLimit = () => {
-      return (this.props.Goal * 40) / 100;
+      return ((this.props.Goal * 40) / 100).toFixed(2);
     }
 
     onSaveClick = () => {

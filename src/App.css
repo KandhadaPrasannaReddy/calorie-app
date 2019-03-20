@@ -1,11 +1,15 @@
 .App {
   text-align: center;
+  background-image: url("../src/images/homeimg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .App-nav {
   text-align: center;
   min-height: 20vh;
   min-width: 10vh;
-  background-color: #2E4158;
+  /* background-color: #2E4158; */
+  
   font-size:40px;
 }
 
@@ -60,7 +64,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
   position :center;
-  padding-left: "25px";
+ 
 }
 
 .App-link {
@@ -202,7 +206,7 @@
 }
 .FormField__Input {
   width: 50%;
-  background-color: transparent; 
+  /* background-color: transparent;  */
   border: none;
   color: rgb(17, 28, 41);
   outline: none;

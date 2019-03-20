@@ -120,11 +120,11 @@ class Dinner extends React.Component{
     }
 
     calculateMinimumDinnerCalorieLimit = () => {
-      return (this.props.Goal * 25) / 100;
+      return ((this.props.Goal * 25) / 100).toFixed(2);
     }
 
     calculateMaximumDinnerCalorieLimit = () => {
-      return (this.props.Goal * 35) / 100;
+      return ((this.props.Goal * 35) / 100).toFixed(2);
     }
 
     onSaveClick = () => {

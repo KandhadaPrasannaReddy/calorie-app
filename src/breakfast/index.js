@@ -120,11 +120,11 @@ class Breakfast extends React.Component{
     }
 
     calculateMinimumBreakfastCalorieLimit = () => {
-      return (this.props.Goal * 30) / 100;
+      return ((this.props.Goal * 30) / 100).toFixed(2);
     }
 
     calculateMaximumBreakfastCalorieLimit = () => {
-      return (this.props.Goal * 35) / 100;
+      return ((this.props.Goal * 35) / 100).toFixed(2);
     }
 
     onSaveClick = () => {

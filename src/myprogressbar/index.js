@@ -30,8 +30,8 @@ export default class MyProgressBar extends React.Component{
             return(
                 <div>
                     <ProgressBar animated="true" striped variant="warning"  
-                        now={this.props.meal_calories} 
-                        label={`${this.props.meal_calories}%`} />
+                        now={(this.props.meal_calories).toFixed(2)} 
+                        label={`${(this.props.meal_calories).toFixed(2)}%`} />
                 </div>
             )}
         else{

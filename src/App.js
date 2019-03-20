@@ -5,12 +5,13 @@ import Firstpage  from './firstpage/firstpage';
 import Goal  from './goal/goal';
 import Meal from "./meal/index";
 import Foodmenu from "./foodmenu/index";
+import Viewfood from "./viewfood/index";
 import Recipes from './recipes';
 import SignUpForm from './pages/SignUpForm';
 import SignInForm from './pages/SignInForm';
 import Goaltab from './goaltab/index';
 import Log from './log/index';
-import Viewprofile from './viewprofile/index';
+
 
 import './App.css';
 
@@ -31,10 +32,11 @@ class App extends Component {
 
               <Route exact path="/meal" component={Meal}/>
               <Route  exact path="/foodmenu" component={Foodmenu}/> 
+              <Route  exact path="/viewfood" component={Viewfood}/> 
               <Route exact path="/recipes" component={Recipes}/> 
               <Route exact path="/goaltab" component={Goaltab}/> 
               <Route exact path="/log" component={Log}/> 
-              <Route exact path="/viewProfile" component={Viewprofile}/> 
+            
             
 
              <Redirect to = "/firstpage" component={Firstpage}/>
