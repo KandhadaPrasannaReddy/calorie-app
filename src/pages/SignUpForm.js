@@ -117,3 +117,135 @@ class SignUpForm extends Component {
 }
 
 export default SignUpForm;
+
+// import React from "react";
+// import '../App.css';
+// import {  MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBModalFooter } from 'mdbreact';
+// import { createBrowserHistory as createHistory } from "history";
+
+// var body;
+// export default class SignUpPage extends React.Component {
+//   constructor(props) {
+//             super(props);
+    
+//             this.state = {
+//               form: {
+//                 email: '',
+//                 password: '',
+//                 name: '',
+//                 hasAgreed: false
+//               }
+//             }
+    
+//             this.handleChange = this.handleChange.bind(this);
+//             this.handleSubmit = this.handleSubmit.bind(this);
+       
+//         }
+//         handleChange(e) {
+//                 e.persist();
+//                 let store = this.state;
+//                 store.form[e.target.name] = e.target.value;
+//                 this.setState(store);
+//               }
+          
+//               history = createHistory(this.props);
+          
+//               handleSubmit(e) {
+//                 e.preventDefault();
+               
+//                 body = {
+//                   name: this.state.form.name,
+//                   email: this.state.form.email,
+//                   password: this.state.form.password
+//                 }
+//                 console.log(body)
+//                 const url = "http://10.10.200.25:9000/users"; 
+//                 let headers = new Headers();
+            
+//                 headers.append('Content-Type', 'application/json');
+//                 headers.append('Accept', 'application/json');
+            
+//                 headers.append('Access-Control-Allow-Origin', url);
+//                 headers.append('Access-Control-Allow-Credentials', 'true');
+            
+//                 headers.append('POST','GET');
+                
+               
+//                 fetch(url, {
+//                     headers: headers,
+//                     method: 'POST',
+//                     body: JSON.stringify(body) 
+//                 })
+               
+          
+//                 .then(response => response.json())
+//                 .then(contents => {console.log(contents);
+                
+//                       localStorage.setItem("AccessToken",contents.token);
+//                       this.props.history.push(`/goal/`);
+                                  
+//             })
+               
+               
+                
+//                 .catch(() => console.log("Can’t access " +this.state.errors + " response. "))
+               
+          
+//               }
+                        
+
+//   render(){
+   
+//   return (
+//     <div  className="myimg">
+//     <div className="mydivs">
+//           <MDBCard>
+//           <form  onSubmit={this.handleSubmit}>
+//             <MDBCardBody className="mx-4">
+//               <div className="text-center">
+//                 <h3 className="dark-grey-text mb-5">
+//                   <strong>Sign Up</strong>
+//                 </h3>
+//               </div>
+//               <MDBInput
+//                 label="Your username"
+//                 group
+//                 name="name" value={this.state.name} onChange={this.handleChange} type="text"
+//               />
+//               <MDBInput
+//                 label="Your email"
+//                 group
+//                 name="email" value={this.state.email} onChange={this.handleChange} type="email"
+//               />
+//               <MDBInput
+//                 label="Your password"
+//                 group
+//                 name="password" value={this.state.password} onChange={this.handleChange} type="password"
+//               />
+//               <div className="text-center mb-3">
+//                 <MDBBtn
+//                   type="submit"
+//                   gradient="blue"
+//                   rounded
+//                   className="btn-block z-depth-1a"
+//                   name="submit" value="submit"
+//                 >
+//                   Sign Up
+//                 </MDBBtn>
+//              </div>
+//             </MDBCardBody>
+//             </form>
+//             <MDBModalFooter className="mx-5 pt-3 mb-1">
+//               <p className="font-small grey-text d-flex justify-content-end">
+//                 Have an account?
+//                 <a href="/sign-in" className="blue-text ml-1">
+//                  Login
+//                 </a>
+//               </p>
+//             </MDBModalFooter>
+//           </MDBCard>
+//     </div>
+//     </div>
+//   );
+//   }
+// };

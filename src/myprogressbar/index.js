@@ -1,58 +1,33 @@
 import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import Snackbar from '@material-ui/core/Snackbar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //update snackbar style to warning
+
 export default class MyProgressBar extends React.Component{
 
-    constructor(props){
-        super(props);
-    }
-
-    state = {
-        open: false,
-    }
-
-    handleClick = () => {
-        this.setState({ open: true });
-      };
+    notify = () => toast.error("Uh oh! Your calorie intake is more than required!", {
+        position: toast.POSITION.TOP_RIGHT
+      });
     
-    handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-    
-        this.setState({ open: false });
-    }
-
     render(){
-        if(this.props.meal_calories < 100){
+        console.log('meal cals', this.props.Total_Meal_Calories)
+        console.log('Goal cals', this.props.Goal)
+        if(this.props.Total_Meal_Calories  <= this.props.Goal){
             return(
                 <div>
                     <ProgressBar animated="true" striped variant="warning"  
-                        now={(this.props.meal_calories).toFixed(2)} 
-                        label={`${(this.props.meal_calories).toFixed(2)}%`} />
+                        now={(this.props.meal_calories_percentage).toFixed(2)} 
+                        label={`${(this.props.meal_calories_percentage).toFixed(2)}%`} />
                 </div>
             )}
-        else{
+        else {
+            this.notify()
             return(
                 <div>
-                        <Snackbar
-                        anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                        }}
-                        open={true}
-                        autoHideDuration={6000}
-                        onClose={this.handleClose}
-                        ContentProps={{
-                            'aria-describedby': 'message-id',
-                        }}
-                        
-                        variant="warning"
-                        message={<span id="message-id">Uh oh! Your calorie intake is more than required!</span>}
-                       
-        />
+                     <ToastContainer />
+         
                 </div>
             )}
     }

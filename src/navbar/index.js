@@ -1,10 +1,6 @@
 import React from "react";
 import './index.css';
-
-
 var body;
-
-
 
 class Navbar extends React.Component{
    
@@ -12,11 +8,13 @@ class Navbar extends React.Component{
         super(props);
     
         this.Logout = this.Logout.bind(this);
+   
       
        
         this.state = {
-          data: [],
-          open: false,
+          
+            details:[],
+            user:[]
         };
       }
 
@@ -50,7 +48,6 @@ class Navbar extends React.Component{
       }
 
 
-    
     render(){
 
         return(
@@ -60,12 +57,88 @@ class Navbar extends React.Component{
         <li><a href="/meal">My Day</a></li>
         <li><a href="/log">Trends</a></li>
         <li><a href="/recipes" >Recipes</a></li>
-        <li><a href="signout"  onClick={this.Logout}></a></li>
+     
+        <li className="li1" ><a href="signout"  onClick={this.Logout}>Logout</a></li>
+       
         </ul>
-            </div>
+        </div>
+    //     <Nav variant="pills" >
+    //     <Nav.Item>
+    //     <Nav.Link href="/meal">My Day</Nav.Link>
+    //     </Nav.Item>
+    //     <Nav.Item>
+    //       <Nav.Link href="/log" eventKey="link-1">Trends</Nav.Link>
+    //    </Nav.Item>
+    //     <Nav.Item>
+    //         <Nav.Link href="/recipes" eventKey="link-2">
+    //         Recipes
+    //         </Nav.Link>
+    //     </Nav.Item>
+    //     <Nav.Item>
+    //         <Nav.Link href="/viewprofile" >
+    //         View profile
+    //         </Nav.Link>
+    //     </Nav.Item>
+
+    //     <Nav.Item>
+    //         <Nav.Link href="signout" onClick={this.Logout} >
+    //         Logout
+    //         </Nav.Link>
+    //     </Nav.Item>
+    //     </Nav>
+
+
+
         )
     }
 }
 
 
 export default Navbar;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from "react";
+//  import { Navbar, Nav} from 'react-bootstrap';
+
+//  export default class  Navbar extends React.Component{
+//      render(){
+//          return(
+//              <div>
+// <Navbar  collapseOnSelect className="Navbar"  expand="xl" >
+// <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+//   <Navbar.Collapse id="responsive-navbar-nav">
+//     <Nav className="mr-auto">
+//     <Nav.Link href="/meal">My Day</Nav.Link>
+//       <Nav.Link href="/log">Trends</Nav.Link> 
+//     </Nav>
+//     <Nav>
+//       <Nav.Link href="#deets">Logout</Nav.Link>
+//     </Nav>
+//     </Navbar.Collapse>
+//     </Navbar>; 
+//             </div>
+//         )
+
+//     }
+// }
+
+

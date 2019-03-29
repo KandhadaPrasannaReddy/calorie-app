@@ -8,6 +8,7 @@ ul {
     position: fixed;
     bottom: 0;
     width: 100%;
+    color: '#fffa8b'
   }
   
   li {
@@ -30,3 +31,7 @@ ul {
   li a:hover:not(.active) {
     background-color: #111;
   }
+  /* .Navbar {
+    background-color: rgb(216, 76, 94);
+    border-color: #E7E7E7;
+} */

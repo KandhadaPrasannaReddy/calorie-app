@@ -4,7 +4,6 @@ import Lunch from '../lunch/index';
 import Dinner from '../dinner/index';
 import Navbar from "../navbar/index";
 import Goaltab from "../goaltab/index";
-import Viewprofile from '../viewprofile';
 
 export default class Meal extends React.Component{
 
@@ -12,6 +11,7 @@ export default class Meal extends React.Component{
         super(props);
         this.state = {
             data:[],
+            details:[],
             breakfast_consumed_calories: 0,
             lunch_consumed_calories: 0,
             dinner_consumed_calories: 0,
@@ -43,7 +43,8 @@ export default class Meal extends React.Component{
             .then(response => response.json())
             .then(contents => {console.log("in fetch: "+ contents);
                                 this.setState ({
-                                data: contents})
+                                data: contents,
+                                details:contents.user})
                                 this.getUserGoal() 
                                 this.getUserName()
                               })
@@ -58,8 +59,8 @@ export default class Meal extends React.Component{
     } 
 
     getUserName = () => {
-        console.log("Username", this.state.data.user)
-        this.setState({username: this.state.data.user})
+        console.log("Username", this.state.details.name)
+        this.setState({username: this.state.details.name})
     } 
 
 
@@ -95,17 +96,14 @@ export default class Meal extends React.Component{
                 Total_Meal_Calories={this.state.breakfast_consumed_calories + this.state.lunch_consumed_calories + this.state.dinner_consumed_calories}
                 Goal = {this.state.goal}
                 Remaining_Calories={this.state.goal - (this.state.breakfast_consumed_calories + this.state.lunch_consumed_calories + this.state.dinner_consumed_calories)}
-                Name = {this.state.username}/>
-
-            <Breakfast ParentCallBack={this.handleBreakfastCallback} Goal={this.state.goal}/>   
-            <Lunch ParentCallBack={this.handleLunchCallback} Goal={this.state.goal}/> 
-            <Dinner ParentCallBack={this.handleDinnerCallback} Goal={this.state.goal}/>
-            {/* <Viewprofile Name = {this.state.username}/> */}
+              />
+       
+            <Breakfast ParentCallBack={this.handleBreakfastCallback} Goal={this.state.goal}/>  <br/> 
+            <Lunch ParentCallBack={this.handleLunchCallback} Goal={this.state.goal}/> <br/>
+            <Dinner ParentCallBack={this.handleDinnerCallback} Goal={this.state.goal}/><br/>
+          
           
             </div>
         )
     }
 }
-
-
-

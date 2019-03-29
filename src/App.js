@@ -6,7 +6,6 @@ import Goal  from './goal/goal';
 import Meal from "./meal/index";
 import Foodmenu from "./foodmenu/index";
 import Viewfood from "./viewfood/index";
-import Viewprofile from "./viewprofile/index";
 import Recipes from './recipes';
 import SignUpForm from './pages/SignUpForm';
 import SignInForm from './pages/SignInForm';
@@ -34,8 +33,7 @@ class App extends Component {
               <Route exact path="/meal" component={Meal}/>
               <Route  exact path="/foodmenu" component={Foodmenu}/> 
               <Route  exact path="/viewfood" component={Viewfood}/> 
-              <Route  exact path="/viewprofile" component={Viewprofile}/> 
-              <Route exact path="/recipes" component={Recipes}/> 
+             <Route exact path="/recipes" component={Recipes}/> 
               <Route exact path="/goaltab" component={Goaltab}/> 
               <Route exact path="/log" component={Log}/> 
             

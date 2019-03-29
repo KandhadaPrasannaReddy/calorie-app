@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Button } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 class Viewfood extends React.Component {
   constructor(props) {

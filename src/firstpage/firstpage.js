@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import logo from '../logo.jpeg';
 import scales_img from '../images/scales.png';
-import {NavbarBrand} from 'reactstrap';
 import '../App.css';
 import { createBrowserHistory as createHistory } from "history";
+//  import Sky from 'react-sky';
+// import juice from "../images/juice.jpg";
+// import burrito from "../images/burrito.png";
+// import cake from "../images/cake.png";
+// import watermelon from "../images/watermelon.png";
+// import taco from "../images/taco.jpg";
+// import pizza from "../images/pizza.png";
+
 
 class Firstpage extends Component {
     constructor(props){
@@ -28,9 +34,28 @@ class Firstpage extends Component {
   
 
       return (
+        // <div>
+        //     <Sky 
+        //   images={{
+        //     /* FORMAT AS FOLLOWS */
+        //     0: juice,
+        //     1: pizza,
+        //     2: watermelon,
+        //     3: burrito,
+        //     4: cake,
+        //     5: taco
+
+        
+        //   }}
+        //   how={130} /* You have to pass a number so Sky will render that amount of images chosen randomly from the object you passed in the previous step */
+        //   time={60} /* time of the animation. Dfaults at 20s */
+        //   size={'80px'} /* size of the rendered images. Defaults at 150px */
+        //   background={'palettedvioletred'} /* color of background. Defaults to none */
+        // />
+
         <div className="App-nav" >
      
-        <NavbarBrand href="/firstpage" style={{color: '#ffffff'}} align="center">Weigh-To-Go</NavbarBrand>
+        {/* <NavbarBrand href="/firstpage" style={{color: '#ffffff'}} align="center">Weigh-To-Go</NavbarBrand> */}
        
       
         <div className="App">
@@ -56,9 +81,38 @@ class Firstpage extends Component {
             
         </div>
         </div> 
+        //  </div> 
       );
    
   }
 }
 
 export default Firstpage;
+
+
+
+// import React, { Component } from 'react';
+// import "./homepagestyles.css";
+// import scales_img from '../images/scales.png';
+// import '../App.css';
+// export default class Firstpage extends Component {
+
+//     render() {
+//         return(
+//             <div>
+//             <div className="test">
+//             <figure class="swing">
+// //                <img src={scales_img} alt="logo" /><br/><br/> 
+// //           </figure> 
+//                 <p>
+//                     Weigh To Go!
+//                 </p>
+//                 <div className="mainButtonGroup">
+                    
+//                     <button>Sign Up</button>
+//                 </div>
+//             </div>
+//         </div>
+//         );
+// }
+// }

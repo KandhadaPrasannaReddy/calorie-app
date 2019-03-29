@@ -168,24 +168,27 @@ handleSubmit(e) {
    {
        
      return(
+      <div className ="homeimg">
       <div className="cardapp">
+      
       <div>
+      
       <div class="card">
      
       <div className="text-center">
                 <h3 className="dark-grey-text mb-5">
-               <font color= "pink">   <strong>Enter your details</strong></font>
+            <br/>   <font color= "black"> <b>  <strong>Enter your details</strong> </b></font>
                 </h3>
        </div>
       <form  name = "bmiForm" onSubmit={this.handleSubmit} className="FormFields"> 
       <br/>
       <div className="FormField1">
-          <label  htmlFor="Age">Age:</label> 
+          <label  htmlFor="Age">   <span> Age: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </span></label> 
           <label> <input id="age" type="number"   placeholder="Enter your  age" name="age"  /></label>
         </div>
         
         <div className="FormField1" onChange={this.setGender}>
-          <label htmlFor="gender">Gender: </label>
+          <label htmlFor="gender"> <span>Gender:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span></label>
            
               <input type="radio"    name="gender"  id="mbutton" value= "0"   /><font color="black">Male</font>
               <input type="radio"  name="gender"   id="fbutton"  value= "1"   /><font color="black">Female</font> 
@@ -193,24 +196,24 @@ handleSubmit(e) {
         </div>
 
         <div className="FormField1">
-          <label htmlFor="height">Height(cm):</label>
+          <label htmlFor="height"><span>Height(cm): &nbsp;&nbsp;</span></label>
           <input type="number" name="height"  id="height" size="10"   />
         </div>
 
         <div className="FormField1">
-          <label  htmlFor="weight">Weight(kg):</label>
+          <label  htmlFor="weight"><span>Weight(kg):&nbsp;&nbsp;&nbsp;&nbsp;</span></label>
           <input type="number" name="weight"  id="weight" step="1" min="10" max="150"  />
         </div>
            
         <div className="FormField1">
-        <input type="button" value="Calculate BMI" onClick={this.calculateBmi}/><br />
+        <input type="button" className="FormField__Button mr-20" value="Calculate BMI" onClick={this.calculateBmi}/><br />
         </div>
 
 
         <div className="FormField1">
 
-           Your BMI: <input type="text" name="bmi" size="10"/><br /><br />
-           This Means: <input type="text" name="meaning" size="25"/><br />
+           <span>Your BMI: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span><input type="text" name="bmi" size="10"/><br /><br />
+           <span> This Means: &nbsp;&nbsp;</span> <input type="text" name="meaning" size="25"/><br />
           <input type="reset" value="Reset" />
         </div>
 
@@ -222,6 +225,7 @@ handleSubmit(e) {
 
 
       </form>
+    </div>
     </div>
      
  

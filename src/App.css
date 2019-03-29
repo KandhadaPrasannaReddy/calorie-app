@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: url("../src/images/homeimg.jpg");
+  /* background-image: url("../src/images/homeimg.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -264,10 +264,10 @@
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 30%;
+  width: 40%;
   height: 100%;
   display: inline-block;
-    position: fixed;
+  position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -276,6 +276,8 @@
     background-color: #E1E7E7;
     
 }
+
+
 .lcard {
   /* Add shadows to create the "card" effect */
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -315,7 +317,7 @@
 
 
 .cardapp {
-  height: 100vh;
+  height: 120vh;
   padding: 45px 40px;
   overflow: auto;
     top: 0;
@@ -327,6 +329,8 @@
 
 .myimg {
   background-image: url("../src/images/chalkboard_food.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
@@ -584,3 +588,62 @@ body {
 .mr-20 {
   margin-right: 20px !important;
 }
+
+
+
+
+
+.mydivs{
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  /* margin-top: -18%; set to a negative number 1/2 of your height
+  margin-left: -12.5%; set to a negative number 1/2 of your width */
+  display: inline-block;
+    position: fixed;
+    height: 40vh;
+  padding: 45px 40px;
+  overflow: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  
+      }
+      
+      .blue-gradient {
+        background: linear-gradient(40deg, #2cb6e0, #2cb6e0) !important;
+      }
+
+      .logdivs{
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        /* margin-top: -18%; set to a negative number 1/2 of your height
+        margin-left: -12.5%; set to a negative number 1/2 of your width */
+        display: inline-block;
+          position: fixed;
+          height: 35vh;
+        padding: 45px 40px;
+        overflow: auto;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
+        
+            }
+            
+            .logcenter{
+              height: 10em;
+              position: relative }
+              div.container4 p {
+              margin: 0;
+              background: yellow;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              margin-right: -50%;
+              transform: translate(-50%, -50%)
+            }

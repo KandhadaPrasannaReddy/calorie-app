@@ -3,30 +3,19 @@ import styled from "styled-components";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Foodmenu from '../foodmenu/index';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Dinner from "../dinner";
+import { ToastContainer,toast } from 'react-toastify';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import green from '@material-ui/core/colors/green';
 
 var body=[];
 
-
-const style = {
-  margin: 0,
-  top: 'auto',
-  right: 20,
-  bottom: 10,
-  left: 'auto',
-  position: 'fixed',
-  fab: {
-    margin: 50,
-  },
-};
 
 class Lunch extends React.Component{
   
@@ -103,16 +92,23 @@ class Lunch extends React.Component{
       this.state.selectedItems.map(item =>
         total_calories_count = total_calories_count + (item.calories * item.quantity) 
       )
-     console.log(total_calories_count);
+     //console.log(total_calories_count);
      //check limit
-     
+    
      if( total_calories_count < this.calculateMinimumLunchCalorieLimit()){
-      alert('Calorie limit is less than maximum lunch calorie.  Bon apetit! 🍽')
+      toast.warn("Calorie limit is less than maximum lunch calorie.  Bon apetit! 🍽", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 10000 
+      });
     }
 
      if( total_calories_count > this.calculateMaximumLunchCalorieLimit()){
-       alert('Oops! Calorie limit is more than maximum lunch calorie. 🍽')
+       toast.warn("Oops! Calorie limit is more than maximum lunch calorie. 🍽", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 10000 
+      });
      }
+
 
      this.setState({
         Total_Calories : total_calories_count
@@ -218,12 +214,26 @@ class Lunch extends React.Component{
               </Paper>
                 
             }
-            <Button_OK onClick={this.onSaveClick} > Save items </Button_OK>  
-        
+            <MuiThemeProvider theme={theme}>
+            <Button variant="contained" color="primary" onClick={this.onSaveClick} >
+            Save items
+            </Button>
+          </MuiThemeProvider>
+           <ToastContainer/>
         </div>
     );
     }
 }
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
+  },
+  typography: {
+    useNextVariants: true,
+  },
+});
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -234,66 +244,6 @@ const Title = styled.h1`
 const Wrapper = styled.section`
   padding: 1em;
   background: papayawhip;
-`;
-
-const Coloumn = styled.div`
-  float : right;
-`;
-
-const Button = styled.button`
-  /* Adapt the colors based on primary prop */
-  background: ${props => props.primary ? "palevioletred" : "white"};
-  color: ${props => props.primary ? "white" : "palevioletred"};
-  //font-size: 1em;
-  font-size: 12px;
-  display: inline-block
-  display: block;
-  margin: 1em;
-  //padding: 5px;
-  width: 150px;
-  height: 40px;
-  padding: 0.50em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 5px;
-  :hover {      
-    color: red;
-  }
-  ::after {
-    content: '➕';
-  }
-`;
-
-
-
-
-const  Button_OK = styled.button`
-  float : center;
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 10px 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 8px;
-  margin: 2px 1px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-`;
-const Button_Cancel = styled.button`
-  background-color: #f44336;
-  border: none;
-  color: white;
-  padding: 10px 12px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 8px;
-  margin: 2px 1px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
 `;
 
 
