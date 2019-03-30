@@ -103,7 +103,7 @@ export default class Goaltab extends React.Component{
                     <pre>Total meal calories : {this.props.Total_Meal_Calories} kcal</pre>
                     <pre>Remaining calories left: {this.props.Remaining_Calories} kcal</pre>          
                 </p> 
-
+  
                <div class='_profile'  onClick={this.openNav}>
                     <div class='_head'  onClick={this.openNav}></div>
                     <div class='_body'  onClick={this.openNav}></div>

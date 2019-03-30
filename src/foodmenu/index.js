@@ -16,7 +16,8 @@ class Foodmenu extends React.Component {
   }
   componentDidMount(){
 
-    const url = "http://10.10.200.25:9000/foods"; 
+    //const url = "http://10.10.200.26:9000/foods"; 
+    const url = "http://10.10.200.25:9000/foods"; //sanjana
     //const url = "http://localhost:9000/foods"; 
     let headers = new Headers();
 
@@ -47,9 +48,11 @@ class Foodmenu extends React.Component {
         <Table striped bordered condensed hover>
         <thead>
           <tr>
+            <th> Food Image</th> 
             <th>Food Name</th>
             <th>Food Calorie</th>
             <th>Quantity</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -57,6 +60,7 @@ class Foodmenu extends React.Component {
             {this.state.data.map((foodItem, index) => {
              return (
                 <tr key={index} >
+                        <td><img src = {foodItem.imageUrl} width="50px" height="50px"/></td>
                         <td>{foodItem.name}</td>
                         <td>{foodItem.calories}</td>                        
                         <td>  <input type="text" name="quantity" autoFocus defaultValue = '1' onChange={this.setSelectedItem}/></td>
@@ -70,7 +74,6 @@ class Foodmenu extends React.Component {
     )
   }
 }
-//ReactDOM.render(<Foodmenu />, document.getElementById('root'));
 
 export default Foodmenu;
 

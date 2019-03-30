@@ -197,7 +197,7 @@ export default SignUpForm;
 //   render(){
    
 //   return (
-//     <div  className="myimg">
+//     <div>
 //     <div className="mydivs">
 //           <MDBCard>
 //           <form  onSubmit={this.handleSubmit}>
@@ -211,17 +211,17 @@ export default SignUpForm;
 //                 label="Your username"
 //                 group
 //                 name="name" value={this.state.name} onChange={this.handleChange} type="text"
-//               />
+//               />  <br/>
 //               <MDBInput
 //                 label="Your email"
 //                 group
 //                 name="email" value={this.state.email} onChange={this.handleChange} type="email"
-//               />
+//               />  <br/>
 //               <MDBInput
 //                 label="Your password"
 //                 group
 //                 name="password" value={this.state.password} onChange={this.handleChange} type="password"
-//               />
+//               />  <br/>
 //               <div className="text-center mb-3">
 //                 <MDBBtn
 //                   type="submit"
@@ -229,7 +229,7 @@ export default SignUpForm;
 //                   rounded
 //                   className="btn-block z-depth-1a"
 //                   name="submit" value="submit"
-//                 >
+//                 >  <br/>
 //                   Sign Up
 //                 </MDBBtn>
 //              </div>

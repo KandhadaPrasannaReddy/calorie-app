@@ -602,6 +602,7 @@ body {
   display: inline-block;
     position: fixed;
     height: 40vh;
+    width:10vh;
   padding: 45px 40px;
   overflow: auto;
     top: 0;
@@ -632,6 +633,7 @@ body {
           left: 0;
           right: 0;
           margin: auto;
+        
         
             }
             

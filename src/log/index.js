@@ -3,7 +3,7 @@ import Navbar from "../navbar/index";
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
-var UserGoal,info;
+var info;
 
 
 
@@ -23,66 +23,69 @@ var calInfo = daily_calories.map( function(daily_calories) {
 console.log(calInfo);
 
 
+const getOptions = (data) => {
+	const options = {
+		title: {
+			text: 'My calorie progress'
+		}, 
+		chart: {
+			//marginBottom: 40,
+			spacingRight: 100
+		},
 
-
-
-
-const options = {
-			title: {
-				text: 'My calorie progress'
-			}, 
-			chart: {
-				//marginBottom: 40,
-				spacingRight: 100
-			},
-
-		xAxis: {
-			categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-			labels: {
-					format: 'Day {value}',
-					style: {
-							color: 'black'
-					},
-					// formatter: function () { return ddd[this.value][0]; },
-			},
-			title: {
-				text: 'Daily Progress'
-			}
-	},
-		yAxis: {
-			labels: {
-					format: '{value} cals'
-			},
-			title: {
-				text: 'Daily calorie consumption '
+	xAxis: {
+		categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+		labels: {
+				format: 'Day {value}',
+				style: {
+						color: 'black'
+				},
+			
+		},
+		title: {
+			text: 'Daily Progress'
 		}
-	},
-		series: [
-			{
-				data: calInfo,
-				color: 'blue',
+},
+	yAxis: {
+		labels: {
+				format: '{value} cals'
+		},
+		title: {
+			text: 'Daily calorie consumption '
+	}
+},
+	series: [
+		{
+			data: calInfo,
+			color: 'blue',
 
-				//negativeColor: 'lightblue',
-				marker: {
-						enabled: false
-				},
-				name: "Progress"
+			//negativeColor: 'lightblue',
+			marker: {
+					enabled: false
 			},
-			{
-				data: [],
-				//data : [2500, 2500, 2500,2500],
-				color: 'green',
-				dashStyle: 'shortdot',
-				lineWidth: 3 ,
-				marker: {
-						enabled: false
-				},
-				name: "Target goal"
-			}
-	],
+			name: "Progress"
+		},
+		{
+			data: data,
+			color: 'green',
+			dashStyle: 'shortdot',
+			lineWidth: 4 ,
+			marker: {
+					enabled: false
+			},
+			name: "Target goal"
+		}
+],
 
 
 }
+
+	return options;
+}
+
+
+
+
 
 
 export default class Log extends React.Component {	
@@ -155,33 +158,26 @@ export default class Log extends React.Component {
 		.then(contents => {console.log("in fetch: "+ contents);
 												this.setState ({
 												user_goal: contents.goalPlan,
-											 
-
 												})
-												UserGoal= this.state.user_goal
-												console.log("state goal", UserGoal)	
+											
 											})
 		.catch(() => console.log("Can’t access " + url + " response. "))
 	}
 
-	// setToGlobalUserGoal= () => {
-	// 	UserGoal= this.state.user_goal
-	// 	console.log("global goal", UserGoal)
-		
-	// }
 	render() {
-		options.series[1].data = [this.state.user_goal,this.state.user_goal];
-		UserGoal = options.series[1].data;
-		console.log("option series 1 "+ UserGoal);
-		console.log("option series 0 "+ options.series[0].data);
+		const seriesData = [this.state.user_goal,this.state.user_goal,this.state.user_goal,this.state.user_goal,this.state.user_goal,this.state.user_goal,this.state.user_goal];
+	
+		
+	
 	
 		return (
 			<div className="logcenter">
+			<br/><br/><br/><br/><br/><br/>
 				
 		 	<HighchartsReact
 			 
     		highcharts={Highcharts}
-			options={options}
+			options={getOptions(seriesData)}
 			
   			/>
 			<Navbar/>

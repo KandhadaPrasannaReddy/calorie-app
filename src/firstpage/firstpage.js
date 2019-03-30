@@ -90,29 +90,27 @@ class Firstpage extends Component {
 export default Firstpage;
 
 
-
 // import React, { Component } from 'react';
-// import "./homepagestyles.css";
-// import scales_img from '../images/scales.png';
-// import '../App.css';
-// export default class Firstpage extends Component {
 
-//     render() {
-//         return(
-//             <div>
-//             <div className="test">
-//             <figure class="swing">
-// //                <img src={scales_img} alt="logo" /><br/><br/> 
-// //           </figure> 
-//                 <p>
-//                     Weigh To Go!
-//                 </p>
-//                 <div className="mainButtonGroup">
-                    
-//                     <button>Sign Up</button>
+// export default class Firstpage extends Component {
+//         render(){
+//             return(
+//                 <div>
+//                      <div id="circle-container">
+//                     <div id="cc">
+//                     <div class="circle" id="five"></div>
+//                     <div class="circle" id="four"></div>
+//                     <div class="circle" id="three"></div>
+//                     <div class="circle" id="two"></div>
+//                     <div class="circle" id="one"></div>
+//                     </div>
+//                 </div>  
+//                             <div class="span9 btn-block no-padding">
+//                     <button class="btn btn-large btn-block btn-primary full-width" type="button">Login</button>
+//                     <button class="btn btn-large btn-block btn-primary full-width" type="button">Sign Up</button>
 //                 </div>
-//             </div>
-//         </div>
-//         );
-// }
+//                 </div>
+//             )
+//         }
+
 // }

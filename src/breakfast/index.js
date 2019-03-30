@@ -3,17 +3,14 @@ import styled from "styled-components";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Foodmenu from '../foodmenu/index';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import { ToastContainer, toast } from 'react-toastify';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import green from '@material-ui/core/colors/green';
+import Foodtable from "../foodtable/index";
+
 import '../App.css';
+import { format } from "highcharts";
 
 var body = [], previousStoredData = [];
 
@@ -32,6 +29,12 @@ class Breakfast extends React.Component {
     previousFoodQuantity: '',
     previousFoodId: '',
 
+    previousSelectedItems: [{
+      Id: '',
+      name: '',
+      calories: '',
+      quantity:''
+    }],
     previousItems: [{}],
     previousFoodItems: []
   }
@@ -46,15 +49,37 @@ class Breakfast extends React.Component {
     if (window.performance) {
       if (performance.navigation.type === 1) {
         this.retrievePreviousData()
-        alert("This page is reloaded");
+        //alert("This page is reloaded");
       } else {
-        alert("This page is not reloaded");
+        //alert("This page is not reloaded");
       }
     }
   }
 
+  formatDate = () => {
+    var d = new Date(),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
   retrievePreviousData = () => {
-    const url = "http://10.10.200.25:9000/foodIntake/intake?startDate=2019-03-28&endDate=2019-03-28";
+
+    const todaysdate = this.formatDate()
+    console.log("Today's date ! ", todaysdate);
+
+    var url1 = "http://10.10.200.25:9000/foodIntake/intake?startDate=";
+
+    var url2 = "&endDate=";
+
+    //const url = "http://10.10.200.25:9000/foodIntake/intake?startDate=2019-03-28&endDate=2019-03-28";
+
+    const url = url1 + todaysdate + url2 + todaysdate;
+    //console.log(url, "Is url corect?")
     let headers = new Headers();
 
     let token = localStorage.getItem('AccessToken');
@@ -78,60 +103,21 @@ class Breakfast extends React.Component {
       .then(response => response.json())
       .then(contents => {
         console.log("Previous data contents", contents);
+        const breakfastData = contents.filter((item) => (item.mealType === 'BREAKFAST'));
         this.setState({
-          previousItems: contents
-        })
-
-        {
-          this.state.previousItems.map((food, index) => {
-            if (food.mealType === "BREAKFAST") {
-              console.log("breakfast item", food.food)
-              console.log("prev food item id", food.food.Id)
-              console.log("prev food item name", food.food.name)
-              console.log("prev food item cal", food.food.calories)
-              console.log("prev food item quantity", food.quantity)
-              return (
-                <Paper>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Fooditem (100g serving)</TableCell>
-                      <TableCell align="right">Calories</TableCell>
-                      <TableCell align="right">Quantity</TableCell>
-                      <TableCell align="right">Total Calories</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.previousItems.map((food, index) => (
-                    
-
-                      <TableRow index={food.food.Id}>
-                        <TableCell component="th" scope="row">
-                          {food.food.name}
-                        </TableCell>
-                        <TableCell align="right">{food.food.calories}</TableCell>
-                        <TableCell align="right">{food.quantity}</TableCell>
-                        <TableCell align="right">{food.food.calories * food.quantity}</TableCell>
-                      </TableRow>
-
-                    ))}
-                    <TableRow>
-                      <TableCell colSpan={3}>Total</TableCell>
-                      <TableCell align="right">{this.state.Total_Calories}</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-                </Paper>)
+          previousSelectedItems: breakfastData.map((item) => {
+            return {
+              ...item.food,
+              quantity: item.quantity
             }
-
           })
-        }
-
-
-
+        }, () => {
+          console.log(this.state.previousSelectedItems);
+        })
+      
       })
 
-      .catch(() => console.log("Can’t access previous data" + this.state.errors + " response. "));
+      .catch(() => console.log("Can’t access previous breakfast data" + this.state.errors + " response. "));
   }
 
 
@@ -145,7 +131,7 @@ class Breakfast extends React.Component {
   }
 
   onAddClick = (foodItem, value) => {
-    console.log('Quantity in breaky: ' + foodItem.quantity);
+    //console.log('Quantity in breaky: ' + foodItem.quantity);
 
     this.setState((state) => {
       const { selectedItems } = state;
@@ -155,7 +141,8 @@ class Breakfast extends React.Component {
         mealType: '0'
 
       }];
-      console.log({ _items });
+      
+      //console.log("Selected itemssss", { _items });
       return { selectedItems: _items, selectDialogOpen: false };
     })
   }
@@ -171,9 +158,6 @@ class Breakfast extends React.Component {
       }]
       console.log("iterating over items id:", item.Id)
     })
-
-    console.log("body is", body)
-    return 1;
   }
 
 
@@ -264,7 +248,6 @@ class Breakfast extends React.Component {
       })
 
       .catch(() => console.log("Can’t access " + this.state.errors + " response. "));
-
     return (
       <div>
 
@@ -286,39 +269,9 @@ class Breakfast extends React.Component {
         </Dialog>
         {
 
-          <Paper>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Fooditem (100g serving)</TableCell>
-                  <TableCell align="right">Calories</TableCell>
-                  <TableCell align="right">Quantity</TableCell>
-                  <TableCell align="right">Total Calories</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-               
-                {this.state.selectedItems.map(row => (
-                  <TableRow key={row.id}>
-                    <TableCell component="th" scope="row">
-                      {row.name}
-                    </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.quantity}</TableCell>
-                    <TableCell align="right">{row.calories * row.quantity}</TableCell>
-                  </TableRow>
-
-                ))}
-                <TableRow>
-                  <TableCell colSpan={3}>Total</TableCell>
-                  <TableCell align="right">{this.state.Total_Calories}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </Paper>
+          <Foodtable Items={this.state.selectedItems.concat(this.state.previousSelectedItems)}/>
 
         }
-        {/* <Button_OK onClick={this.onSaveClick} > Save items </Button_OK>   */}
         <MuiThemeProvider theme={theme}>
           <Button variant="contained" color="primary" onClick={this.onSaveClick} >
             Save items

@@ -3,21 +3,16 @@ import styled from "styled-components";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Foodmenu from '../foodmenu/index';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import { ToastContainer,toast } from 'react-toastify';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import green from '@material-ui/core/colors/green';
+import Foodtable from "../foodtable/index";
 
 import './dinner.css';
 
 
-var body=[];
+var body=[],previousStoredData = [];
 
 
 class Dinner extends React.Component{
@@ -30,6 +25,19 @@ class Dinner extends React.Component{
     mealType: '',
     food_quantity: '',
     food_ID: '',  
+
+    previousMealType: '',
+    previousFoodQuantity: '',
+    previousFoodId: '',
+
+    previousSelectedItems: [{
+      Id: '',
+      name: '',
+      calories: '',
+      quantity:''
+    }],
+    previousItems: [{}],
+    previousFoodItems: []
   }
 
     constructor(props){
@@ -38,6 +46,81 @@ class Dinner extends React.Component{
     }
 
 
+    componentDidMount() {
+      if (window.performance) {
+        if (performance.navigation.type === 1) {
+          this.retrievePreviousData()
+         // alert("This page is reloaded");
+        } else {
+          //alert("This page is not reloaded");
+        }
+      }
+    }
+
+    formatDate = () => {
+      var d = new Date(),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+  
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+  
+      return [year, month, day].join('-');
+    }
+    retrievePreviousData = () => {
+  
+      const todaysdate = this.formatDate()
+      console.log("Today's date ! ", todaysdate);
+  
+      var url1 = "http://10.10.200.25:9000/foodIntake/intake?startDate=";
+  
+      var url2 = "&endDate=";
+  
+      //const url = "http://10.10.200.25:9000/foodIntake/intake?startDate=2019-03-28&endDate=2019-03-28";
+  
+      const url = url1 + todaysdate + url2 + todaysdate;
+      console.log(url, "Is url corect?")
+      let headers = new Headers();
+  
+      let token = localStorage.getItem('AccessToken');
+      const AuthStr = 'Bearer '.concat(token);
+  
+      headers.append('Content-Type', 'application/json');
+      headers.append('Accept', 'application/json');
+      headers.append('Authorization', AuthStr);
+      headers.append('Access-Control-Allow-Origin', url);
+      headers.append('Access-Control-Allow-Credentials', 'true');
+  
+      headers.append('GET', 'PUT');
+  
+  
+      fetch(url, {
+        headers: headers,
+        method: 'GET',
+        previousStoredData: JSON.stringify(previousStoredData)
+      })
+  
+        .then(response => response.json())
+        .then(contents => {
+          console.log("Previous data contents", contents);
+          const dinnerData = contents.filter((item) => (item.mealType === 'DINNER'));
+          this.setState({
+            previousSelectedItems: dinnerData.map((item) => {
+              return {
+                ...item.food,
+                quantity: item.quantity
+              }
+            })
+          }, () => {
+            console.log(this.state.previousSelectedItems);
+          })
+        
+        })
+  
+        .catch(() => console.log("Can’t access dinner previous data" + this.state.errors + " response. "));
+    }
+  
     routeChange(){
         let path = `foodmenu`;
         this.props.history.push(path);
@@ -48,17 +131,19 @@ class Dinner extends React.Component{
     }
 
     onAddClick = (foodItem, value) => {
-      console.log('Quantity in dinner: ' + foodItem.quantity);
+      //console.log('Quantity in dinner: ' + foodItem.quantity);
       
       this.setState((state) => {
           const {selectedItems} = state;
-          const _items = [...selectedItems, {
+          const _items = [{
             ...foodItem,
             quantity: value,
             mealType: '2'
 
           }];
-          console.log({_items});
+          //console.log({_items});
+          console.log("Selected items in dinner",{selectedItems} );
+          console.log(" items in dinner",{_items} );
           return {selectedItems: _items, selectDialogOpen:false};
       })
     }
@@ -182,39 +267,11 @@ class Dinner extends React.Component{
                 <DialogTitle id="simple-dialog-title">Select food items:</DialogTitle>
                 <Foodmenu onAddClick={this.onAddClick} onChange={this.handleOnChange}/>
             </Dialog>
-            { 
-                
-                <Paper>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Fooditem (100g serving)</TableCell>
-                      <TableCell align="right">Calories</TableCell>
-                      <TableCell align="right">Quantity</TableCell>
-                      <TableCell align="right">Total Calories</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {this.state.selectedItems.map(row => (
-                      <TableRow key={row.id}>
-                        <TableCell component="th" scope="row">
-                          {row.name}
-                        </TableCell>
-                        <TableCell align="right">{row.calories}</TableCell>
-                        <TableCell align="right">{row.quantity}</TableCell>
-                        <TableCell align="right">{row.calories*row.quantity}</TableCell>
-                      </TableRow>
-                    
-                    ))}
-                      <TableRow>
-                      <TableCell colSpan={3}>Total</TableCell>
-                      <TableCell align="right">{this.state.Total_Calories}</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </Paper>
-                
-            }
+            {
+
+              <Foodtable Items={this.state.selectedItems.concat(this.state.previousSelectedItems)}/>
+
+           }
             <MuiThemeProvider theme={theme}>
             <Button variant="contained" color="primary" onClick={this.onSaveClick} >
             Save items
