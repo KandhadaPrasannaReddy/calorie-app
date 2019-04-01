@@ -56,238 +56,239 @@ h1, p {
   }
 
   div .no-padding {
-    padding:0;
+  padding:0;
+}
+
+button .full-width{
+  width:100%;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+body {
+	margin: 0px;
+}
+
+#circle-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: lightblue;
+	width: 100vw;
+	height: 100vh;
+	position:relative;
+}
+
+.circle {
+	width: 50vh;
+	height: 50vh;
+	position: absolute;
+	border-radius: 50%;
+}
+
+#one:before {
+	content: "Weigh-To-Go!";
+}
+
+#one {
+	background-color: rgba(0,0,225, 0.45);
+	font-size: 40px;
+	font-family: "Oswald", sans-serif;
+	letter-spacing: 1.5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-weight: bold;
+	transition: 1s;
+}
+
+#two {
+	background-color: green;
+	transition: 1s;
+	opacity: 0.5;
+}
+
+#three {
+	background-color: red;
+	transition: 1s;
+	opacity: 0.5;
+}
+
+#four {
+	background-color: orange;
+	transition: 1s;
+	opacity: 0.5;
+}
+#five {
+	background-color: green;
+	transition: 1s;
+	opacity: 0.5;
+}
+
+#cc {
+	position:relative;
+	width: 50vh;
+	height: 50vh;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+#cc:hover #two {
+	transform: translate(0px, 75px);
+}
+#cc:hover #three {
+	transform: translate(0px, -75px);
+}
+#cc:hover #four {
+	transform: translate(75px, 0px);
+}
+#cc:hover #five {
+	transform: translate(-75px, 0px);
+}
+
+#mb {
+	position: absolute;
+	font-family: "Oswald", sans-serif;
+	letter-spacing: 0.5px;
+	bottom: 0px;
+	display: flex;
+	justify-content: center;
+	width: 100vw;
+	background-color: #3B3A6D;
+	color: white;
+}
+
+#mb a {
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+	padding: 0px;
+}
+
+#mb p {
+	padding: 5px;
+	margin: 0px;
+}
+
+
+.knockout {
+  background: url(http://apod.nasa.gov/apod/image/0603/coma_misti.jpg) -80px -80px;
+  color: red;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* -webkit-background-clip: text; */
+  font-weight: bold;
+  font-size: 90px;
+  font-family: arial, helvetica;
+  width: 600px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.example_c {
+  color: #494949 !important;
+  text-transform: uppercase;
+  background: #ffffff;
+  padding: 20px;
+  border: 4px solid #494949 !important;
+  border-radius: 6px;
+  display: inline-block;
+  }
+
+  .example_c:hover {
+    color: #ffffff !important;
+    background: rgb(0, 0, 0);
+    border-color: rgb(19, 9, 112) !important;
+    transition: all 0.4s ease 0s;
+    }
+
+.myBackground {
+  background:  url(https://ak7.picdn.net/shutterstock/videos/19079617/thumb/1.jpg);
+  height: 100px;
+  width: 100px;
+}
+body{
+  background: #444;
+}
+
+
+h1, p {
+    font-family: Lato;
+    color: whitesmoke;
   }
   
-  button .full-width{
-    width:100%;
+  /* The animation code */
+  @keyframes example {
+    10% {background-color:	#8B008B}
+    50% {background-color: #800080}
+    100% {background-color:#4B0082}
+    /* 10% {background-color: #7f4145;}
+    50% {background-color:#A9754F}
+    100% {background-color:#944743} */
   }
   
-  @import url('https://fonts.googleapis.com/css?family=Oswald');
+  /* The animation code */
+  @keyframes exampleanother {
+    10% {height: 0; width: 0}
+    100% {height: 100%;}
+  }
+  
+  /* The element to apply the animation to */
+  .test {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    background-color: red;
+    animation-name: example;
+    animation-duration: 5s;
+    height: 100vh;
+    animation-iteration-count: infinite;
+  }
+  
+  .anothertest {
+      align-items: center;
+    animation-name: exampleanother;
+    animation-duration: 2s;
+  
+    animation-timing-function:cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
   
   body {
-      margin: 0px;
+    padding: 0;
+    margin: 0;
   }
   
-  #circle-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: lightblue;
-      width: 100vw;
-      height: 100vh;
-      position:relative;
+  .mainButtonGroup {
+    align-items: "center";
+    display: flex;
+    flex-direction: row;
   }
   
-  .circle {
-      width: 50vh;
-      height: 50vh;
-      position: absolute;
-      border-radius: 50%;
+  button {
+    margin: 10px;
+    padding: 8px;
+    border-radius: 20%;
   }
   
-  #one:before {
-      content: "Weigh-To-Go!";
-  }
-  
-  #one {
-      background-color: rgba(0,0,225, 0.45);
-      font-size: 40px;
-      font-family: "Oswald", sans-serif;
-      letter-spacing: 1.5px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-weight: bold;
-      transition: 1s;
-  }
-  
-  #two {
-      background-color: green;
-      transition: 1s;
-      opacity: 0.5;
-  }
-  
-  #three {
-      background-color: red;
-      transition: 1s;
-      opacity: 0.5;
-  }
-  
-  #four {
-      background-color: orange;
-      transition: 1s;
-      opacity: 0.5;
-  }
-  #five {
-      background-color: green;
-      transition: 1s;
-      opacity: 0.5;
-  }
-  
-  #cc {
-      position:relative;
-      width: 50vh;
-      height: 50vh;
-      border-radius: 50%;
-      overflow: hidden;
-  }
-  
-  #cc:hover #two {
-      transform: translate(0px, 75px);
-  }
-  #cc:hover #three {
-      transform: translate(0px, -75px);
-  }
-  #cc:hover #four {
-      transform: translate(75px, 0px);
-  }
-  #cc:hover #five {
-      transform: translate(-75px, 0px);
-  }
-  
-  #mb {
-      position: absolute;
-      font-family: "Oswald", sans-serif;
-      letter-spacing: 0.5px;
-      bottom: 0px;
-      display: flex;
-      justify-content: center;
-      width: 100vw;
-      background-color: #3B3A6D;
-      color: white;
-  }
-  
-  #mb a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 0px;
-  }
-  
-  #mb p {
-      padding: 5px;
-      margin: 0px;
-  }
-  
-  
-  .knockout {
-    background: url(http://apod.nasa.gov/apod/image/0603/coma_misti.jpg) -80px -80px;
-    color: red;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    font-weight: bold;
-    font-size: 90px;
-    font-family: arial, helvetica;
-    width: 600px;
-    margin: 50px auto;
-    text-align: center;
-  }
-  
-  .example_c {
-    color: #494949 !important;
-    text-transform: uppercase;
-    background: #ffffff;
+  .example_e {
+    border: none;
+    background: #404040;
+    color: #ffffff !important;
+    font-weight: 100;
     padding: 20px;
-    border: 4px solid #494949 !important;
+    text-transform: uppercase;
     border-radius: 6px;
     display: inline-block;
     }
-  
-    .example_c:hover {
-      color: #ffffff !important;
-      background: rgb(0, 0, 0);
-      border-color: rgb(19, 9, 112) !important;
-      transition: all 0.4s ease 0s;
-      }
-  
-  .myBackground {
-    background:  url(https://ak7.picdn.net/shutterstock/videos/19079617/thumb/1.jpg);
-    height: 100px;
-    width: 100px;
-  }
-  body{
-    background: #444;
-  }
-  
-  
-  h1, p {
-      font-family: Lato;
-      color: whitesmoke;
-    }
     
-    /* The animation code */
-    @keyframes example {
-      10% {background-color:	#8B008B}
-      50% {background-color: #800080}
-      100% {background-color:#4B0082}
-      /* 10% {background-color: #7f4145;}
-      50% {background-color:#A9754F}
-      100% {background-color:#944743} */
-    }
-    
-    /* The animation code */
-    @keyframes exampleanother {
-      10% {height: 0; width: 0}
-      100% {height: 100%;}
-    }
-    
-    /* The element to apply the animation to */
-    .test {
-      display: grid;
-      justify-items: center;
-      align-items: center;
-      background-color: red;
-      animation-name: example;
-      animation-duration: 5s;
-      height: 100vh;
-      animation-iteration-count: infinite;
-    }
-    
-    .anothertest {
-        align-items: center;
-      animation-name: exampleanother;
-      animation-duration: 2s;
-    
-      animation-timing-function:cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    
-    body {
-      padding: 0;
-      margin: 0;
-    }
-    
-    .mainButtonGroup {
-      align-items: "center";
-      display: flex;
-      flex-direction: row;
-    }
-    
-    button {
-      margin: 10px;
-      padding: 8px;
-      border-radius: 20%;
-    }
-    
-    .example_e {
-      border: none;
-      background: #404040;
-      color: #ffffff !important;
-      font-weight: 100;
-      padding: 20px;
-      text-transform: uppercase;
-      border-radius: 6px;
-      display: inline-block;
-      }
-      
-    .example_e:hover {
-      color: #404040 !important;
-      font-weight: 700 !important;
-      letter-spacing: 3px;
-      background: none;
-      -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-      -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-      transition: all 0.3s ease 0s;
-   }
-  
+  .example_e:hover {
+    color: #404040 !important;
+    font-weight: 700 !important;
+    letter-spacing: 3px;
+    background: none;
+    box-shadow:         3px 3px 5px 6px  rgba(0,0,0,0.57); 
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.3s ease 0s;
+ }

@@ -20,7 +20,13 @@ class Goal extends Component {
         hasAgreed: false,
         selectDialogOpen: false
       } ,
-      goalPlan: ''
+      goalPlan: '',
+
+      previousAge : '',
+      previousGender : '',
+      previousHeight : '',
+      previousWeight : ''
+
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -28,6 +34,41 @@ class Goal extends Component {
     this.calculateBmi = this.calculateBmi.bind(this);
     this.onSelect = this.onSelect.bind(this);
  }
+
+//  componentDidMount(){
+//   const url = "http://10.10.200.25:9000/profile/me"; 
+//   let headers = new Headers();
+ 
+//   let token =  localStorage.getItem('AccessToken');
+//   const AuthStr = 'Bearer '.concat(token);
+  
+//   headers.append('Content-Type', 'application/json');
+//   headers.append('Accept', 'application/json');
+//   headers.append('Authorization',AuthStr);
+//   headers.append('Access-Control-Allow-Origin', url);
+//   headers.append('Access-Control-Allow-Credentials', 'true');
+
+//   headers.append('GET','PUT');
+  
+ 
+//   fetch(url, {
+//       headers: headers,
+//       method: 'GET',
+     
+//   })
+//   .then(response => response.json())
+//   .then(contents => {console.log("profile data", contents);
+//                     this.setState({
+//                       previousAge : contents.age,
+//                       previousGender : contents.gender,
+//                       previousHeight : contents.height,
+//                       previousWeight : contents.weight
+//                     })
+// })
+
+//   .catch(() => console.log("Can’t access " +this.state.errors + " response. "))
+ 
+//  }
 
  onSelect = (event) => { 
     this.props.history.push({
@@ -202,7 +243,7 @@ handleSubmit(e) {
 
         <div className="FormField1">
           <label  htmlFor="weight"><span>Weight(kg):&nbsp;&nbsp;&nbsp;&nbsp;</span></label>
-          <input type="number" name="weight"  id="weight" step="1" min="10" max="150"  />
+          <input type="number" name="weight"  id="weight" step="1" min="10" max="150"   />
         </div>
            
         <div className="FormField1">
@@ -238,6 +279,7 @@ handleSubmit(e) {
                   <tr>
                     <th>Plan</th>
                     <th>Calories</th> 
+                    <th>Target Weight</th> 
                   </tr>
                 </thead>
                 <tbody> 
@@ -246,26 +288,27 @@ handleSubmit(e) {
             <tr >
                 <td>Maintain Weight</td>
                 <td   onClick={this.onSelect}>{this.state.form.goal * 100/100}</td>
-              
+                <td> {this.state.form.weight} </td>
             </tr> 
             <tr   >
                 <td>Mild Weight Loss</td>
                 <td   onClick={this.onSelect}>{this.state.form.goal * 90/100} </td>
-                
+              
+                <td> {((this.state.form.weight *  (this.state.form.goal*90/100))/ (this.state.form.goal )).toFixed(2)} </td>
             </tr>
 
             <tr>
-                <td> Weight Loss</td>
+                <td>Weight Loss</td>
                 <td   onClick={this.onSelect}>{this.state.form.goal * 80/100}</td>
-               
+                <td> {((this.state.form.weight *  (this.state.form.goal*80/100))/ (this.state.form.goal )).toFixed(2)}  </td>
             </tr>
 
             <tr> 
                 <td>Extreme Weight Loss</td>
                 <td  onClick={this.onSelect} >{this.state.form.goal * 61/100}</td>  
+                <td> {((this.state.form.weight *  (this.state.form.goal*61/100))/ (this.state.form.goal )).toFixed(2)}  </td>
             </tr>
 
-        
             </tbody>
                         </table>
                    

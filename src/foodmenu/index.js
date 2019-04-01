@@ -16,7 +16,7 @@ class Foodmenu extends React.Component {
   }
   componentDidMount(){
 
-    //const url = "http://10.10.200.26:9000/foods"; 
+   // const url = "http://10.10.200.26:9000/foods"; 
     const url = "http://10.10.200.25:9000/foods"; //sanjana
     //const url = "http://localhost:9000/foods"; 
     let headers = new Headers();
@@ -34,11 +34,11 @@ class Foodmenu extends React.Component {
         method: 'GET'
     })
     .then(response => response.json())
-    .then(contents => {console.log("in fetch: "+ contents);
+    .then(contents => {
                         this.setState ({
                         data : contents}) 
                       })
-    .catch(() => console.log("Can’t access " + url + " response. "))
+    .catch(() => console.log("Can’t access food menu" + url + " response. "))
    
   }
   
@@ -48,7 +48,7 @@ class Foodmenu extends React.Component {
         <Table striped bordered condensed hover>
         <thead>
           <tr>
-            <th> Food Image</th> 
+            <th>Food Image</th> 
             <th>Food Name</th>
             <th>Food Calorie</th>
             <th>Quantity</th>
@@ -60,7 +60,7 @@ class Foodmenu extends React.Component {
             {this.state.data.map((foodItem, index) => {
              return (
                 <tr key={index} >
-                        <td><img src = {foodItem.imageUrl} width="50px" height="50px"/></td>
+                        {/* <td><img src = {foodItem.ImageUrl} width="80px" height="80px"/></td> */}
                         <td>{foodItem.name}</td>
                         <td>{foodItem.calories}</td>                        
                         <td>  <input type="text" name="quantity" autoFocus defaultValue = '1' onChange={this.setSelectedItem}/></td>

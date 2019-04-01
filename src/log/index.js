@@ -3,27 +3,10 @@ import Navbar from "../navbar/index";
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
-var info;
 
 
+const getOptions = (data,calInfo) => {
 
-var daily_calories = [  
-						{ "date"  : "26-03-2019", "calorie_count":2000 },
-						{ "date"  : "27-03-2019", "calorie_count":2500 },
-						{ "date"  : "28-03-2019", "calorie_count":3000 },	
-					 ]
-
-console.log(daily_calories); 
-var calInfo = daily_calories.map( function(daily_calories) {
- if( daily_calories.calorie_count !== "0"){
-      info  =  daily_calories.calorie_count        
-     return info;
- }
-});
-console.log(calInfo);
-
-
-const getOptions = (data) => {
 	const options = {
 		title: {
 			text: 'My calorie progress'
@@ -59,11 +42,11 @@ const getOptions = (data) => {
 			data: calInfo,
 			color: 'blue',
 
-			//negativeColor: 'lightblue',
+			negativeColor: 'lightblue',
 			marker: {
 					enabled: false
 			},
-			name: "Progress"
+			name: "Daily Progress"
 		},
 		{
 			data: data,
@@ -93,20 +76,77 @@ export default class Log extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			daily_calorie_data: [],
+			daily_calories: [{ }],
 			user_goal: '',
+			backenddate:''
 		
 		}
 }
 
 	componentDidMount(){
 		this.getUserGoalFromDatabase()
-		//this.getCaloriesFromDatabase()
-		
+		this.getCaloriesFromDatabase()
+	
 	}
+	
+	formatDate = () => {
+		var d = new Date(),
+		  month = '' + (d.getMonth() + 1),
+		  day = '' + d.getDate(),
+		  year = d.getFullYear();
+	
+		if (month.length < 2) month = '0' + month;
+		if (day.length < 2) day = '0' + day;
+	
+		return [year, month, day].join('-');
+	  }
+ 
+	//   getSignUpDate = () =>{
+
+	// 	const url = "http://10.10.200.25:9000/users/me"; 
+	// 	let headers = new Headers();
+
+	// 	let token =  localStorage.getItem('AccessToken');
+	// 	const AuthStr = 'Bearer '.concat(token);
+		
+	// 	headers.append('Content-Type', 'application/json');
+	// 	headers.append('Accept', 'application/json');
+	// 	headers.append('Authorization',AuthStr);
+	// 	headers.append('Access-Control-Allow-Origin', url);
+	// 	headers.append('Access-Control-Allow-Credentials', 'true');
+	
+	// 	headers.append('GET','POST');
+
+	// 	fetch(url, {
+	// 			headers: headers,
+	// 			method: 'GET'
+	// 	})
+	// 	.then(response => response.json())
+	// 	.then(contents => {console.log("in fetch: "+ contents);
+	// 											this.setState ({
+	// 											backenddate: contents.date,
+	// 											})
+	// 										console.log("backend date"+backenddate);
+	// 										})
+	// 	.catch(() => console.log("Can’t access " + url + " response. "))
+
+	//   }
+
 
 	getCaloriesFromDatabase = () => {
-		const url = "http://10.10.200.25:9000/profile/me"; 
+
+		const todaysdate = this.formatDate()
+		//console.log("Today's date ! ", todaysdate);
+		
+		// const startdate = this.getSignUpDate()
+		// console.log("Sign Up date ! ", startdate);
+
+		var url1 = "http://10.10.200.25:9000/foodIntake/stats?startDate=2019-03-29";
+	    var url2 = "&endDate=";
+		//const url = url1 + todaysdate + url2 + todaysdate;
+	    const url = url1 + url2 + todaysdate;
+		  
+	
 		let headers = new Headers();
 
 		let token =  localStorage.getItem('AccessToken');
@@ -127,7 +167,8 @@ export default class Log extends React.Component {
 		.then(response => response.json())
 		.then(contents => {console.log("in fetch: "+ contents);
 												this.setState ({
-													daily_calorie_data: contents,
+													daily_calories: contents,
+													
 												})
 												
 											})
@@ -166,9 +207,15 @@ export default class Log extends React.Component {
 
 	render() {
 		const seriesData = [this.state.user_goal,this.state.user_goal,this.state.user_goal,this.state.user_goal,this.state.user_goal,this.state.user_goal,this.state.user_goal];
-	
 		
+		const calInfo = this.state.daily_calories.map( function(daily_calories) {
+			if( daily_calories.calories !== "0"){
+				var info  =  daily_calories.calories        
+				return info;
+			}
+		   });
 	
+	 
 	
 		return (
 			<div className="logcenter">
@@ -177,7 +224,7 @@ export default class Log extends React.Component {
 		 	<HighchartsReact
 			 
     		highcharts={Highcharts}
-			options={getOptions(seriesData)}
+			options={getOptions(seriesData,calInfo)}
 			
   			/>
 			<Navbar/>

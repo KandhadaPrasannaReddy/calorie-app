@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default class MyProgressBar extends React.Component{
 
+
     notify = () => toast.error("Uh oh! Your calorie intake is more than required!", {
         position: toast.POSITION.TOP_RIGHT
       });
@@ -18,8 +19,8 @@ export default class MyProgressBar extends React.Component{
             return(
                 <div>
                     <ProgressBar animated="true" striped variant="warning"  
-                        now={(this.props.meal_calories_percentage).toFixed(2)} 
-                        label={`${(this.props.meal_calories_percentage).toFixed(2)}%`} />
+                        now={((this.props.meal_calories_percentage)/100).toFixed(2)} 
+                        label={`${((this.props.meal_calories_percentage)/100).toFixed(2)}%`} />
                 </div>
             )}
         else {

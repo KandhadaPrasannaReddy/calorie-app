@@ -34,7 +34,9 @@ export default class Foodtable extends React.Component{
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell>Fooditem (100g serving)</TableCell>
+                      
+                      <TableCell>Image</TableCell>
+                      <TableCell  align="right">Fooditem (100g serving)</TableCell>
                       <TableCell align="right">Calories</TableCell>
                       <TableCell align="right">Quantity</TableCell>
                       <TableCell align="right">Total Calories</TableCell>
@@ -45,9 +47,8 @@ export default class Foodtable extends React.Component{
                     
 
                       <TableRow index={food.Id}>
-                        <TableCell component="th" scope="row">
-                          {food.name}
-                        </TableCell>
+                        <TableCell component="th" scope="row">{food.ImageUrl}</TableCell>
+                        <TableCell align="right">{food.name}</TableCell>
                         <TableCell align="right">{food.calories}</TableCell>
                         <TableCell align="right">{food.quantity}</TableCell>
                         <TableCell align="right">{food.calories * food.quantity}</TableCell>

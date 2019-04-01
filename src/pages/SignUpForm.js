@@ -44,6 +44,7 @@ class SignUpForm extends Component {
       }
       console.log(body)
       const url = "http://10.10.200.25:9000/users"; 
+    // const url = "http://10.10.200.25:9000/Weigh-To-Go"; 
       let headers = new Headers();
   
       headers.append('Content-Type', 'application/json');

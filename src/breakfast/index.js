@@ -2,54 +2,55 @@ import React from "react";
 import styled from "styled-components";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
 import Foodmenu from '../foodmenu/index';
 import { ToastContainer, toast } from 'react-toastify';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import green from '@material-ui/core/colors/green';
 import Foodtable from "../foodtable/index";
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
-import '../App.css';
-import { format } from "highcharts";
+import './index.css';
+
 
 var body = [], previousStoredData = [];
+
 
 class Breakfast extends React.Component {
 
   state = {
     selectedItems: [],
-    selectDialogOpen: false,
+   
     Total_Calories: '',
 
     mealType: '',
     food_quantity: '',
     food_ID: '',
 
-    previousMealType: '',
-    previousFoodQuantity: '',
-    previousFoodId: '',
-
     previousSelectedItems: [{
       Id: '',
       name: '',
       calories: '',
-      quantity:''
+      quantity: ''
     }],
     previousItems: [{}],
-    previousFoodItems: []
+    previousFoodItems: [],
+
+    open: false,
   }
 
   constructor(props) {
     super(props);
     this.routeChange = this.routeChange.bind(this);
-
   }
+
 
   componentDidMount() {
     if (window.performance) {
       if (performance.navigation.type === 1) {
         this.retrievePreviousData()
-        //alert("This page is reloaded");
       } else {
         //alert("This page is not reloaded");
       }
@@ -58,9 +59,9 @@ class Breakfast extends React.Component {
 
   formatDate = () => {
     var d = new Date(),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear();
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
 
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
@@ -79,7 +80,7 @@ class Breakfast extends React.Component {
     //const url = "http://10.10.200.25:9000/foodIntake/intake?startDate=2019-03-28&endDate=2019-03-28";
 
     const url = url1 + todaysdate + url2 + todaysdate;
-    //console.log(url, "Is url corect?")
+  
     let headers = new Headers();
 
     let token = localStorage.getItem('AccessToken');
@@ -114,50 +115,85 @@ class Breakfast extends React.Component {
         }, () => {
           console.log(this.state.previousSelectedItems);
         })
-      
+
       })
 
-      .catch(() => console.log("Can’t access previous breakfast data" + this.state.errors + " response. "));
+      .catch(() => console.log("Can’t access breakfast previous data" + this.state.errors + " response. "));
   }
-
 
   routeChange() {
     let path = `foodmenu`;
     this.props.history.push(path);
   }
 
-  handleDialogOpen = () => {
-    this.setState({ selectDialogOpen: true })
-  }
+
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
 
   onAddClick = (foodItem, value) => {
-    //console.log('Quantity in breaky: ' + foodItem.quantity);
-
     this.setState((state) => {
       const { selectedItems } = state;
-      const _items = [...selectedItems, {
+      const _items = [{
         ...foodItem,
         quantity: value,
         mealType: '0'
 
       }];
-      
-      //console.log("Selected itemssss", { _items });
+      //console.log({_items});
+      console.log("Selected items in breakfast", { selectedItems });
+      console.log(" items in breakfast", { _items });
       return { selectedItems: _items, selectDialogOpen: false };
     })
   }
 
 
   addToFoodIntakeTable = () => {
-
     this.state.selectedItems.map(function (item) {
       body = [...body, {
-        mealType: '0',
-        quantity: item.quantity,
-        food_Id: item.Id
+              mealType: '0',
+              quantity: item.quantity,
+              foodId: item.Id
       }]
       console.log("iterating over items id:", item.Id)
     })
+
+    console.log("body is", body)
+
+    //post to db
+    const url = "http://10.10.200.25:9000/foodIntake";
+    let headers = new Headers();
+
+    let token = localStorage.getItem('AccessToken');
+    const AuthStr = 'Bearer '.concat(token);
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Authorization', AuthStr);
+    headers.append('Access-Control-Allow-Origin', url);
+    headers.append('Access-Control-Allow-Credentials', 'true');
+
+    headers.append('POST', 'PUT');
+
+
+    fetch(url, {
+      headers: headers,
+      method: 'POST',
+      body: JSON.stringify(body)
+    })
+
+      .then(response => response.json())
+      .then(contents => {
+        console.log(contents);
+      })
+
+      .catch(() => console.log("Dinner - Can’t access " + this.state.errors + " response. "));
   }
 
 
@@ -212,64 +248,40 @@ class Breakfast extends React.Component {
     return ((this.props.Goal * 35) / 100).toFixed(2);
   }
 
+
   onSaveClick = () => {
     this.calculateMealCalories();
     this.addToFoodIntakeTable();
   }
 
   render() {
-    console.log(this.state.selectedItems)
+    console.log("in  render slected items", this.state.selectedItems)
 
-    const url = "http://10.10.200.25:9000/foodIntake";
-    let headers = new Headers();
-
-    let token = localStorage.getItem('AccessToken');
-    const AuthStr = 'Bearer '.concat(token);
-
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    headers.append('Authorization', AuthStr);
-    headers.append('Access-Control-Allow-Origin', url);
-    headers.append('Access-Control-Allow-Credentials', 'true');
-
-    headers.append('POST', 'PUT');
-
-
-    fetch(url, {
-      headers: headers,
-      method: 'POST',
-      body: JSON.stringify(body)
-    })
-
-      .then(response => response.json())
-      .then(contents => {
-        console.log(contents);
-
-      })
-
-      .catch(() => console.log("Can’t access " + this.state.errors + " response. "));
     return (
       <div>
 
         <Wrapper>
           <Title>
-            Breakfast         <button class="button5" onClick={this.handleDialogOpen}> + </button>
-            {/* <Fab size="medium" className="fab" style={style} color="secondary" aria-label="Add"  onClick={this.handleDialogOpen}>
-                        <AddIcon />
-                      </Fab> */}
-
+          Breakfast  <button class="button5" onClick={this.handleClickOpen}> + </button>   
+         
           </Title>
           (min:{this.calculateMinimumBreakfastCalorieLimit()} kcal, max: {this.calculateMaximumBreakfastCalorieLimit()} kcal)
             </Wrapper>
 
-
-        <Dialog open={this.state.selectDialogOpen} onClose={this.onAddClick} aria-labelledby="simple-dialog-title">
-          <DialogTitle id="simple-dialog-title">Select food items:</DialogTitle>
+        <Dialog   open={this.state.open}  onClose={this.handleClose} aria-labelledby="simple-dialog-title">
+          <DialogTitle id="simple-dialog-title">Select food items:  </DialogTitle>  
+          <DialogActions>
+              <IconButton  color="inherit" aria-label="Close"  onClick={this.handleClose}>
+                   <CloseIcon />
+               </IconButton>
+           </DialogActions>
+         
           <Foodmenu onAddClick={this.onAddClick} onChange={this.handleOnChange} />
         </Dialog>
+
         {
 
-          <Foodtable Items={this.state.selectedItems.concat(this.state.previousSelectedItems)}/>
+          <Foodtable Items={this.state.selectedItems.concat(this.state.previousSelectedItems)} />
 
         }
         <MuiThemeProvider theme={theme}>
@@ -277,11 +289,12 @@ class Breakfast extends React.Component {
             Save items
             </Button>
         </MuiThemeProvider>
-        < ToastContainer />
+        <ToastContainer />
       </div>
     );
   }
 }
+
 
 const theme = createMuiTheme({
   palette: {
@@ -293,7 +306,7 @@ const theme = createMuiTheme({
 });
 
 const Title = styled.h1`
-  font-size: 1.5em;
+  font-size: 2.5em;
   text-align: left;
   color: palevioletred;
 `;
@@ -305,3 +318,314 @@ const Wrapper = styled.section`
 
 
 export default Breakfast;
+
+
+
+
+
+
+// import React from "react";
+// import styled from "styled-components";
+// import Dialog from '@material-ui/core/Dialog';
+// import DialogTitle from '@material-ui/core/DialogTitle';
+// import Foodmenu from '../foodmenu/index';
+// import { ToastContainer, toast } from 'react-toastify';
+// import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+// import Button from '@material-ui/core/Button';
+// import green from '@material-ui/core/colors/green';
+// import Foodtable from "../foodtable/index";
+
+// import '../App.css';
+
+// var body = [], previousStoredData = [];
+
+// class Breakfast extends React.Component {
+
+//   state = {
+//     selectedItems: [],
+//     selectDialogOpen: false,
+//     Total_Calories: '',
+
+//     mealType: '',
+//     food_quantity: '',
+//     food_ID: '',
+
+//     previousMealType: '',
+//     previousFoodQuantity: '',
+//     previousFoodId: '',
+
+//     previousSelectedItems: [{
+//       Id: '',
+//       name: '',
+//       calories: '',
+//       quantity:''
+//     }],
+//     previousItems: [{}],
+//     previousFoodItems: []
+//   }
+
+//   constructor(props) {
+//     super(props);
+//     this.routeChange = this.routeChange.bind(this);
+
+//   }
+
+//   componentDidMount() {
+//     if (window.performance) {
+//       if (performance.navigation.type === 1) {
+//         this.retrievePreviousData()
+//         //alert("This page is reloaded");
+//       } else {
+//         //alert("This page is not reloaded");
+//       }
+//     }
+//   }
+
+//   formatDate = () => {
+//     var d = new Date(),
+//     month = '' + (d.getMonth() + 1),
+//     day = '' + d.getDate(),
+//     year = d.getFullYear();
+
+//     if (month.length < 2) month = '0' + month;
+//     if (day.length < 2) day = '0' + day;
+
+//     return [year, month, day].join('-');
+//   }
+//   retrievePreviousData = () => {
+
+//     const todaysdate = this.formatDate()
+//     console.log("Today's date ! ", todaysdate);
+
+//     var url1 = "http://10.10.200.25:9000/foodIntake/intake?startDate=";
+
+//     var url2 = "&endDate=";
+
+//     //const url = "http://10.10.200.25:9000/foodIntake/intake?startDate=2019-03-28&endDate=2019-03-28";
+
+//     const url = url1 + todaysdate + url2 + todaysdate;
+//     //console.log(url, "Is url corect?")
+//     let headers = new Headers();
+
+//     let token = localStorage.getItem('AccessToken');
+//     const AuthStr = 'Bearer '.concat(token);
+
+//     headers.append('Content-Type', 'application/json');
+//     headers.append('Accept', 'application/json');
+//     headers.append('Authorization', AuthStr);
+//     headers.append('Access-Control-Allow-Origin', url);
+//     headers.append('Access-Control-Allow-Credentials', 'true');
+
+//     headers.append('GET', 'PUT');
+
+
+//     fetch(url, {
+//       headers: headers,
+//       method: 'GET',
+//       previousStoredData: JSON.stringify(previousStoredData)
+//     })
+
+//       .then(response => response.json())
+//       .then(contents => {
+//         console.log("Previous data contents", contents);
+//         const breakfastData = contents.filter((item) => (item.mealType === 'BREAKFAST'));
+//         this.setState({
+//           previousSelectedItems: breakfastData.map((item) => {
+//             return {
+//               ...item.food,
+//               quantity: item.quantity
+//             }
+//           })
+//         }, () => {
+//           console.log(this.state.previousSelectedItems);
+//         })
+      
+//       })
+
+//       .catch(() => console.log("Can’t access previous breakfast data" + this.state.errors + " response. "));
+//   }
+
+
+//   routeChange() {
+//     let path = `foodmenu`;
+//     this.props.history.push(path);
+//   }
+
+//   handleDialogOpen = () => {
+//     this.setState({ selectDialogOpen: true })
+//   }
+
+//   onAddClick = (foodItem, value) => {
+//     //console.log('Quantity in breaky: ' + foodItem.quantity);
+
+//     this.setState((state) => {
+//       const { selectedItems } = state;
+//       const _items = [...selectedItems, {
+//         ...foodItem,
+//         quantity: value,
+//         mealType: '0'
+
+//       }];
+      
+//       //console.log("Selected itemssss", { _items });
+//       return { selectedItems: _items, selectDialogOpen: false };
+//     })
+//   }
+
+
+//   addToFoodIntakeTable = () => {
+
+//     this.state.selectedItems.map(function (item) {
+//       body = [...body, {
+//         mealType: '0',
+//         quantity: item.quantity,
+//         food_Id: item.Id
+//       }]
+//       console.log("iterating over items id:", item.Id)
+//     })
+//     const url = "http://10.10.200.25:9000/foodIntake";
+//     let headers = new Headers();
+
+//     let token = localStorage.getItem('AccessToken');
+//     const AuthStr = 'Bearer '.concat(token);
+
+//     headers.append('Content-Type', 'application/json');
+//     headers.append('Accept', 'application/json');
+//     headers.append('Authorization', AuthStr);
+//     headers.append('Access-Control-Allow-Origin', url);
+//     headers.append('Access-Control-Allow-Credentials', 'true');
+
+//     headers.append('POST', 'PUT');
+
+
+//     fetch(url, {
+//       headers: headers,
+//       method: 'POST',
+//       body: JSON.stringify(body)
+//     })
+
+//       .then(response => response.json())
+//       .then(contents => {
+//         console.log(contents);
+
+//       })
+
+//       .catch(() => console.log("Breakfast - Can’t access " + this.state.errors + " response. "));
+//   }
+
+
+//   handleOnChange = (value, index) => {
+//     this.setState({
+//       selectedItems: this.state.selectedItems.map((obj, i) => {
+//         return {
+//           ...obj,
+//           quantity: value,
+//         }
+//       })
+//     })
+//   }
+
+//   calculateMealCalories = () => {
+
+//     var total_calories_count = 0;
+//     this.state.selectedItems.map(item =>
+//       total_calories_count = total_calories_count + (item.calories * item.quantity)
+//     )
+//     //console.log(total_calories_count);
+//     //check limit
+
+//     if (total_calories_count < this.calculateMinimumBreakfastCalorieLimit()) {
+//       console.log('total breakfast cals', total_calories_count)
+//       console.log('min brekafast cals', this.calculateMinimumBreakfastCalorieLimit())
+//       toast.warn("Calorie limit is less than maximum breakfast calorie. Bon apetit! 🍳", {
+//         position: toast.POSITION.TOP_RIGHT,
+//         autoClose: 10000
+//       });
+//     }
+
+//     if (total_calories_count > this.calculateMaximumBreakfastCalorieLimit()) {
+//       //alert('Oops! Calorie limit is more than maximum breakfast calorie.🍳')
+//       toast.warn("Oops! Calorie limit is more than maximum breakfast calorie.🍳", {
+//         position: toast.POSITION.TOP_RIGHT,
+//         autoClose: 10000
+//       });
+//     }
+
+//     this.setState({
+//       Total_Calories: total_calories_count
+//     });
+//     this.props.ParentCallBack(total_calories_count)
+//   }
+
+//   calculateMinimumBreakfastCalorieLimit = () => {
+//     return ((this.props.Goal * 30) / 100).toFixed(2);
+//   }
+
+//   calculateMaximumBreakfastCalorieLimit = () => {
+//     return ((this.props.Goal * 35) / 100).toFixed(2);
+//   }
+
+//   onSaveClick = () => {
+//     this.calculateMealCalories();
+//     this.addToFoodIntakeTable();
+//   }
+
+//   render() {
+//     console.log(this.state.selectedItems)
+//     return (
+//       <div>
+
+//         <Wrapper>
+//           <Title>
+//             Breakfast         <button class="button5" onClick={this.handleDialogOpen}> + </button>
+//             {/* <Fab size="medium" className="fab" style={style} color="secondary" aria-label="Add"  onClick={this.handleDialogOpen}>
+//                         <AddIcon />
+//                       </Fab> */}
+
+//           </Title>
+//           (min:{this.calculateMinimumBreakfastCalorieLimit()} kcal, max: {this.calculateMaximumBreakfastCalorieLimit()} kcal)
+//             </Wrapper>
+
+
+//         <Dialog open={this.state.selectDialogOpen} onClose={this.onAddClick} aria-labelledby="simple-dialog-title">
+//           <DialogTitle id="simple-dialog-title">Select food items:</DialogTitle>
+//           <Foodmenu onAddClick={this.onAddClick} onChange={this.handleOnChange} />
+//         </Dialog>
+//         {
+
+//           <Foodtable Items={this.state.selectedItems.concat(this.state.previousSelectedItems)}/>
+
+//         }
+//         <MuiThemeProvider theme={theme}>
+//           <Button variant="contained" color="primary" onClick={this.onSaveClick} >
+//             Save items
+//             </Button>
+//         </MuiThemeProvider>
+//         < ToastContainer />
+//       </div>
+//     );
+//   }
+// }
+
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: green,
+//   },
+//   typography: {
+//     useNextVariants: true,
+//   },
+// });
+
+// const Title = styled.h1`
+//   font-size: 1.5em;
+//   text-align: left;
+//   color: palevioletred;
+// `;
+
+// const Wrapper = styled.section`
+//   padding: 1em;
+//   background: papayawhip;
+// `;
+
+
+// export default Breakfast;

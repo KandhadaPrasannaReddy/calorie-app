@@ -23,7 +23,7 @@ export default class Meal extends React.Component{
 
             const url = "http://10.10.200.25:9000/profile/me"; 
             //const url = "http://localhost:9000/profile"; 
-            let headers = new Headers();
+            let headers = new Headers(); 
  
             let token =  localStorage.getItem('AccessToken');
             const AuthStr = 'Bearer '.concat(token);
