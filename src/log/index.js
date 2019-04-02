@@ -3,7 +3,7 @@ import Navbar from "../navbar/index";
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
-
+var fdate;
 
 const getOptions = (data,calInfo) => {
 
@@ -78,14 +78,16 @@ export default class Log extends React.Component {
 		this.state = {
 			daily_calories: [{ }],
 			user_goal: '',
-			backenddate:''
+			registration_date:'',
+			startDate:''
 		
 		}
 }
 
 	componentDidMount(){
+		this.getSignUpDate();
 		this.getUserGoalFromDatabase()
-		this.getCaloriesFromDatabase()
+	
 	
 	}
 	
@@ -101,50 +103,60 @@ export default class Log extends React.Component {
 		return [year, month, day].join('-');
 	  }
  
-	//   getSignUpDate = () =>{
+	  getSignUpDate = () =>{
 
-	// 	const url = "http://10.10.200.25:9000/users/me"; 
-	// 	let headers = new Headers();
+		const url = "http://10.10.200.25:9000/users/me"; 
+		let headers = new Headers();
 
-	// 	let token =  localStorage.getItem('AccessToken');
-	// 	const AuthStr = 'Bearer '.concat(token);
+		let token =  localStorage.getItem('AccessToken');
+		const AuthStr = 'Bearer '.concat(token);
 		
-	// 	headers.append('Content-Type', 'application/json');
-	// 	headers.append('Accept', 'application/json');
-	// 	headers.append('Authorization',AuthStr);
-	// 	headers.append('Access-Control-Allow-Origin', url);
-	// 	headers.append('Access-Control-Allow-Credentials', 'true');
+		headers.append('Content-Type', 'application/json');
+		headers.append('Accept', 'application/json');
+		headers.append('Authorization',AuthStr);
+		headers.append('Access-Control-Allow-Origin', url);
+		headers.append('Access-Control-Allow-Credentials', 'true');
 	
-	// 	headers.append('GET','POST');
+		headers.append('GET','POST');
 
-	// 	fetch(url, {
-	// 			headers: headers,
-	// 			method: 'GET'
-	// 	})
-	// 	.then(response => response.json())
-	// 	.then(contents => {console.log("in fetch: "+ contents);
-	// 											this.setState ({
-	// 											backenddate: contents.date,
-	// 											})
-	// 										console.log("backend date"+backenddate);
-	// 										})
-	// 	.catch(() => console.log("Can’t access " + url + " response. "))
+		fetch(url, {
+				headers: headers,
+				method: 'GET'
+		})
+		.then(response => response.json())
+		.then(contents => {console.log("in fetch: "+ contents);
+							this.setState ({
+								registration_date: contents.registrationDate,
+							})
+							console.log("backend date"+this.state.registration_date);
+							var date = new Date(this.state.registration_date),
+							mnth = ("0" + (date.getMonth()+1)).slice(-2),
+							day  = ("0" + date.getDate()).slice(-2);
+							 console.log([ date.getFullYear(), mnth, day ].join("-"));
+							 fdate= [ date.getFullYear(), mnth, day ].join("-");
+							this.setState({
+								startDate:fdate 
+							})
+							console.log("date from func:"+ this.state.startDate)
+							this.getCaloriesFromDatabase(this.state.startDate)
+							
+						  })
+		.catch(() => console.log("Can’t access " + url + " response. "))
 
-	//   }
+	  }
 
-
-	getCaloriesFromDatabase = () => {
+	getCaloriesFromDatabase = (fdate) => {
 
 		const todaysdate = this.formatDate()
-		//console.log("Today's date ! ", todaysdate);
+		console.log("Today's date ! ", todaysdate);
 		
-		// const startdate = this.getSignUpDate()
-		// console.log("Sign Up date ! ", startdate);
+		const regdate = fdate;
+	    console.log("Sign Up date ! "+ regdate);
 
-		var url1 = "http://10.10.200.25:9000/foodIntake/stats?startDate=2019-03-29";
+		var url1 = "http://10.10.200.25:9000/foodIntake/stats?startDate=";
 	    var url2 = "&endDate=";
-		//const url = url1 + todaysdate + url2 + todaysdate;
-	    const url = url1 + url2 + todaysdate;
+		const url = url1 + regdate + url2 + todaysdate;
+	    //const url = url1 + url2 + todaysdate;
 		  
 	
 		let headers = new Headers();

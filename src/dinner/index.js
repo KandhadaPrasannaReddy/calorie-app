@@ -147,6 +147,7 @@ class Dinner extends React.Component {
       //console.log({_items});
       console.log("Selected items in dinner", { selectedItems });
       console.log(" items in dinner", { _items });
+      this.setState({ open: false });
       return { selectedItems: _items, selectDialogOpen: false };
     })
   }

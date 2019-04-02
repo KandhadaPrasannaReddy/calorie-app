@@ -47,7 +47,7 @@ export default class Foodtable extends React.Component{
                     
 
                       <TableRow index={food.Id}>
-                        <TableCell component="th" scope="row">{food.ImageUrl}</TableCell>
+                        <TableCell component="th" scope="row"><img src = {food.ImageUrl} width="80px" height="80px"/></TableCell>
                         <TableCell align="right">{food.name}</TableCell>
                         <TableCell align="right">{food.calories}</TableCell>
                         <TableCell align="right">{food.quantity}</TableCell>
@@ -57,7 +57,7 @@ export default class Foodtable extends React.Component{
 
                     ))}
                     <TableRow>
-                      <TableCell colSpan={3}>Total</TableCell>
+                      <TableCell colSpan={4}>Total</TableCell>
                       <TableCell align="right">{this.props.Items.reduce((result, item) => {
                         return result + item.quantity * item.calories;
                       }, 0)}</TableCell>

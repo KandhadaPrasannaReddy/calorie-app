@@ -17,10 +17,12 @@ class Goal extends Component {
         height: '',
         weight: '',
         goal:0,
+        dob:'',
         hasAgreed: false,
         selectDialogOpen: false
       } ,
       goalPlan: '',
+      data:[],
 
       previousAge : '',
       previousGender : '',
@@ -77,14 +79,14 @@ class Goal extends Component {
 
 
   body =
-    { age: this.state.form.age,
+    { dob: this.state.form.dob,
       height: this.state.form.height,
       weight: this.state.form.weight,
       goalPlan: event.currentTarget.innerText,
       gender: this.state.form.gender
     }
 
-  console.log(body)
+  console.log("Body sent to db", body)
   const url = "http://10.10.200.25:9000/profile"; 
   let headers = new Headers();
  
@@ -154,6 +156,31 @@ setGender = (e) => {
   gender1 = e.target.value;
 }
 
+getAgeFromDob = (birth) =>{
+       
+        var today = new Date();
+        var nowyear = today.getFullYear();
+        var nowmonth = today.getMonth();
+        var nowday = today.getDate();
+     
+        var birthdate = birth.split('-');
+
+        //console.log(birthdate, "Whole birthdate")
+        var birthyear = birthdate[0];
+        var birthmonth = birthdate[1];
+        var birthday = birthdate[2];
+     
+        var age = nowyear - birthyear;
+        var age_month = nowmonth - birthmonth;
+        var age_day = nowday - birthday;
+        
+        if(age_month < 0 || (age_month == 0 && age_day <0)) {
+                age = parseInt(age) -1;
+            }
+        return(age);
+}
+
+
 handleChange() {
    
   this.setState({selectDialogOpen: true})
@@ -162,7 +189,11 @@ handleChange() {
       return document.getElementById(id)
     }
 
-    var age1 = find("age").value
+    var dob1 = find("date").value
+    console.log("DOB format: ", dob1);
+
+    var age1 = this.getAgeFromDob(dob1);
+
     var height1 = find("height").value
     var weight1 = find("weight").value 
     var Calculated_Goal = 0;
@@ -173,14 +204,14 @@ handleChange() {
     }
 
    else  if (find("fbutton").checked) {
-      Calculated_Goal = (10 * weight1)+ (6.25 * height1) - (5 *age1 ) -161; 
+      Calculated_Goal = (10 * weight1)+ (6.25 * height1) - (5 * age1 ) -161; 
     }
    
     this.setState (
       {
         form:{
               goal: Calculated_Goal,
-              age: age1,
+              dob: dob1,
               height:height1,
               weight:weight1,
               gender:gender1,
@@ -224,8 +255,8 @@ handleSubmit(e) {
       <form  name = "bmiForm" onSubmit={this.handleSubmit} className="FormFields"> 
       <br/>
       <div className="FormField1">
-          <label  htmlFor="Age">   <span> Age: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </span></label> 
-          <label> <input id="age" type="number"   placeholder="Enter your  age" name="age"  /></label>
+          <label  htmlFor="Age">   <span> Date of Birth &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; </span></label> 
+          <label>  <input id="date" type="date"   placeholder="Enter your date of birth" name="dob" ></input></label>
         </div>
         
         <div className="FormField1" onChange={this.setGender}>

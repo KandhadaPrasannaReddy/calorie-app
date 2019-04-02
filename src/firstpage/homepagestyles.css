@@ -72,8 +72,11 @@ body {
 #circle-container {
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	background-color: lightblue;
+  justify-content: center;
+  background-image: url("https://stmed.net/sites/default/files/red-light-blue-wallpapers-25293-6077260.jpg");
+  background-repeat: no-repeat;
+  background-size: cover; 
+	/* background-color: rgb(89, 201, 238); */
 	width: 100vw;
 	height: 100vh;
 	position:relative;

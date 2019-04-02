@@ -5,8 +5,10 @@ import Alert from 'react-bootstrap/Alert'
 import { ToastContainer, toast } from 'react-toastify';
 import { Button} from 'reactstrap';
 import './app.css';
-export default class Goaltab extends React.Component{
 
+var fdate;
+export default class Goaltab extends React.Component{
+ 
 
     constructor(props){
         super(props);
@@ -14,15 +16,18 @@ export default class Goaltab extends React.Component{
             data: [],
             details:[],
             user:[], 
+            registration_date: '',
+            startDate:''
+
         }
     }
 
  
     componentDidMount(){
-
+         
+        this.getRegistrationDateOfUser();
          //check for 30 day notification 
-         this.getCurrentDateTime()
-
+       
         const url = "http://10.10.200.25:9000/profile/me"; 
         //const url = "http://localhost:9000/profile"; 
         let headers = new Headers();
@@ -55,13 +60,70 @@ export default class Goaltab extends React.Component{
     }
     
 
+    getRegistrationDateOfUser = () => {
+        const url = "http://10.10.200.25:9000/users/me"; 
+        let headers = new Headers();
+    
+        let token =  localStorage.getItem('AccessToken');
+        const AuthStr = 'Bearer '.concat(token);
+        
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Authorization',AuthStr);
+        headers.append('Access-Control-Allow-Origin', url);
+        headers.append('Access-Control-Allow-Credentials', 'true');
+      
+        headers.append('GET','POST');
+    
+        fetch(url, {
+            headers: headers,
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(contents => {console.log("in fetch: "+ contents);
+                            this.setState ({
+                                registration_date : contents.registrationDate,
+                            })
+							var date = new Date(this.state.registration_date),
+							mnth = ("0" + (date.getMonth()+1)).slice(-2),
+							day  = ("0" + date.getDate()).slice(-2);
+							 console.log([ date.getFullYear(), mnth, day ].join("-"));
+							 fdate= [ date.getFullYear(), mnth, day ].join("-");
+							this.setState({
+								startDate:fdate 
+                            })
+                            console.log("reguser",this.state.startDate)
+                             this.checkNotificationDuration(this.state.startDate);
+                          })
+        .catch(() => console.log("Can’t access sign up date" + url + " response. "))
+    }
 
-    getCurrentDateTime = () => {
-        var todayDate = new Date();
-        var signInDate =  new Date( "Dec 15, 2014 21:20:15" );
-        //var date = tempDate.getFullYear() + '-' + (tempDate.getMonth()+1) + '-' + tempDate.getDate() +' '+ tempDate.getHours()+':'+ tempDate.getMinutes()+':'+ tempDate.getSeconds();
-        console.log(todayDate, 'todays date')     
-        if(todayDate >  signInDate){
+    formatDate = () => {
+		var d = new Date(),
+		  month = '' + (d.getMonth() + 1),
+		  day = '' + d.getDate(),
+		  year = d.getFullYear();
+	
+		if (month.length < 2) month = '0' + month;
+		if (day.length < 2) day = '0' + day;
+	
+		return [year, month, day].join('-');
+	  }
+ 
+
+    checkNotificationDuration = (regdate) => {
+        var todayDate = this.formatDate();
+
+
+        var signUpDate = regdate; 
+        console.log("tday"+todayDate)
+        console.log("sday"+signUpDate)
+
+        var timeDiff = todayDate - signUpDate;
+        var daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+        console.log(daysDiff, "sign up dif");
+        if(daysDiff === 30 ){
             toast.info("Update your profile. It's time to see your progress!", {
                 position: toast.POSITION.TOP_CENTER,
                 autoClose: 3000 

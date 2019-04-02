@@ -52,6 +52,7 @@ class Breakfast extends React.Component {
       if (performance.navigation.type === 1) {
         this.retrievePreviousData()
       } else {
+        this.retrievePreviousData()
         //alert("This page is not reloaded");
       }
     }
@@ -149,6 +150,7 @@ class Breakfast extends React.Component {
       //console.log({_items});
       console.log("Selected items in breakfast", { selectedItems });
       console.log(" items in breakfast", { _items });
+      this.setState({ open: false });
       return { selectedItems: _items, selectDialogOpen: false };
     })
   }
@@ -193,7 +195,7 @@ class Breakfast extends React.Component {
         console.log(contents);
       })
 
-      .catch(() => console.log("Dinner - Can’t access " + this.state.errors + " response. "));
+      .catch(() => console.log("Breakfast - Can’t access " + this.state.errors + " response. "));
   }
 
 
@@ -255,7 +257,7 @@ class Breakfast extends React.Component {
   }
 
   render() {
-    console.log("in  render slected items", this.state.selectedItems)
+    console.log("in  render selected items", this.state.selectedItems)
 
     return (
       <div>
