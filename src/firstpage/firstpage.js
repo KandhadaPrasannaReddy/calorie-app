@@ -92,6 +92,7 @@ export default class Firstpage extends Component {
         render(){
             return(
                 <div>
+                    
                     <div id="circle-container">
                     <div id="cc">
                     <div class="circle" id="five"></div>
@@ -99,11 +100,13 @@ export default class Firstpage extends Component {
                     <div class="circle" id="three"></div>
                     <div class="circle" id="two"></div>
                     <div class="circle" id="one"></div>
-                    </div>
+                    </div> 
         
                 <div class="wrapper">
-                    <button class="button button1" align="left" onClick={this.onLoginChange}> Login</ button>  
-                    <button class="button button1" align="right"  onClick={this.onSignUpChange}> SignUp</ button>
+                 <br/><br/> <br/>  <br/> <br/><br/> <br/>  <br/> 
+                 {/* <br/> <br/><br/> <br/>  <br/> <br/><br/> <br/>  <br/> <br/><br/> <br/><br/> <br/><br/> <br/>  <br/> <br/><br/> <br/>  <br/> <br/><br/> <br/>  <br/> <br/><br/> <br/> <br/> <br/><br/> <br/>  <br/> <br/><br/> <br/>  <br/> <br/><br/> <br/>  <br/> <br/><br/> <br/> */}
+                    <button class="button button1" align="bottom-left" onClick={this.onLoginChange}> Login</ button>  <span>&nbsp;&nbsp;</span>
+                    <button class="button button1" align="right"  onClick={this.onSignUpChange}> Sign Up</ button>
                 </div>
                 
                 </div>

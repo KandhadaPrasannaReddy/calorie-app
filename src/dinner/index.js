@@ -12,7 +12,6 @@ import Foodtable from "../foodtable/index";
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-
 import './dinner.css';
 
 
@@ -23,7 +22,7 @@ class Dinner extends React.Component {
 
   state = {
     selectedItems: [],
-    open: false,
+   
     Total_Calories: '',
 
     mealType: '',
@@ -37,7 +36,9 @@ class Dinner extends React.Component {
       quantity: ''
     }],
     previousItems: [{}],
-    previousFoodItems: []
+    previousFoodItems: [],
+
+    open: false,
   }
 
   constructor(props) {
@@ -51,6 +52,7 @@ class Dinner extends React.Component {
       if (performance.navigation.type === 1) {
         this.retrievePreviousData()
       } else {
+        this.retrievePreviousData()
         //alert("This page is not reloaded");
       }
     }
@@ -117,7 +119,7 @@ class Dinner extends React.Component {
 
       })
 
-      .catch(() => console.log("Can’t access dinner previous data" + this.state.errors + " response. "));
+      .catch(() => console.log("Can’t access DINNER previous data" + this.state.errors + " response. "));
   }
 
   routeChange() {
@@ -125,7 +127,8 @@ class Dinner extends React.Component {
     this.props.history.push(path);
   }
 
-  
+
+
   handleClose = () => {
     this.setState({ open: false });
   };
@@ -192,7 +195,7 @@ class Dinner extends React.Component {
         console.log(contents);
       })
 
-      .catch(() => console.log("Dinner - Can’t access " + this.state.errors + " response. "));
+      .catch(() => console.log("dinner - Can’t access " + this.state.errors + " response. "));
   }
 
 
@@ -214,21 +217,24 @@ class Dinner extends React.Component {
       total_calories_count = total_calories_count + (item.calories * item.quantity)
     )
     //console.log(total_calories_count);
+    //check limit
 
     if (total_calories_count < this.calculateMinimumDinnerCalorieLimit()) {
-      toast.warn("Calorie limit is less than maximum dinner calorie. Bon apetit! 🥘", {
+      console.log('total dinner cals', total_calories_count)
+      console.log('min dinner cals', this.calculateMinimumDinnerCalorieLimit())
+      toast.warn("Calorie limit is less than maximum dinner calorie. Bon apetit! 🍳", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 10000
       });
     }
 
     if (total_calories_count > this.calculateMaximumDinnerCalorieLimit()) {
-      toast.warn("Oops! Calorie limit is more than maximum dinner calorie.🥘", {
+     
+      toast.warn("Oops! Calorie limit is more than maximum dinner calorie.🍳", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 10000
       });
     }
-
 
     this.setState({
       Total_Calories: total_calories_count
@@ -244,43 +250,44 @@ class Dinner extends React.Component {
     return ((this.props.Goal * 35) / 100).toFixed(2);
   }
 
+
   onSaveClick = () => {
     this.calculateMealCalories();
     this.addToFoodIntakeTable();
   }
 
   render() {
-    console.log("in  render slected items", this.state.selectedItems)
+    console.log("in  render selected items", this.state.selectedItems)
 
     return (
       <div>
 
         <Wrapper>
           <Title>
-            Dinner   <button class="button5" onClick={this.handleClickOpen}> + </button>   
-
+          Dinner  <button class="button5" onClick={this.handleClickOpen}> + </button>   
+         
           </Title>
           (min:{this.calculateMinimumDinnerCalorieLimit()} kcal, max: {this.calculateMaximumDinnerCalorieLimit()} kcal)
             </Wrapper>
 
-
-         <Dialog   open={this.state.open}  onClose={this.handleClose} aria-labelledby="simple-dialog-title">
-            <DialogTitle id="simple-dialog-title">Select food items:</DialogTitle>  
-            <DialogActions>
-            <IconButton  color="inherit" aria-label="Close"  onClick={this.handleClose}>
-              <CloseIcon />
-             </IconButton>
+        <Dialog   open={this.state.open}  onClose={this.onAddClick}  onClose={this.handleClose}  aria-labelledby="simple-dialog-title">
+          <DialogTitle id="simple-dialog-title">Select food items:  </DialogTitle>  
+          <DialogActions>
+              <IconButton  color="inherit" aria-label="Close"  onClick={this.handleClose}>
+                   <CloseIcon />
+               </IconButton>
            </DialogActions>
          
-            <Foodmenu onAddClick={this.onAddClick} onChange={this.handleOnChange} />
+          <Foodmenu onAddClick={this.onAddClick} onChange={this.handleOnChange} />
         </Dialog>
+
         {
 
           <Foodtable Items={this.state.selectedItems.concat(this.state.previousSelectedItems)} />
 
         }
         <MuiThemeProvider theme={theme}>
-          <Button variant="contained" color="primary" onClick={this.onSaveClick} >
+          <Button variant="contained" size="large" color="primary" onClick={this.onSaveClick} >
             Save items
             </Button>
         </MuiThemeProvider>
@@ -308,8 +315,8 @@ const Title = styled.h1`
 
 const Wrapper = styled.section`
   padding: 1em;
-  background: papayawhip;
+  background:#d2e7ff;
 `;
 
 
-export default Dinner;
+export default  Dinner;

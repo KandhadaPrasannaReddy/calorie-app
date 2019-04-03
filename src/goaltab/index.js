@@ -158,12 +158,13 @@ export default class Goaltab extends React.Component{
             
                 <Alert variant="success">
                 {/* update with user name */}
-                <Alert.Heading>Hey {this.state.user.name}, nice to see you again!👋</Alert.Heading>
+                <Alert.Heading><font size="7">Hey {this.state.user.name}, nice to see you again!👋</font></Alert.Heading>
                 <hr />
-                <p>
-                    <pre>Your goal: {this.props.Goal} kcal</pre>
+                <p><font size="5"><i>
+                    <pre>Your goal: {this.props.Goal}</pre>
                     <pre>Total meal calories : {this.props.Total_Meal_Calories} kcal</pre>
-                    <pre>Remaining calories left: {this.props.Remaining_Calories} kcal</pre>          
+                    <pre>Remaining calories left: {this.props.Remaining_Calories} kcal</pre> 
+                   </i> </font>         
                 </p> 
   
                <div class='_profile'  onClick={this.openNav}>

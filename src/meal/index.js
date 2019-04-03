@@ -88,7 +88,7 @@ export default class Meal extends React.Component{
     render(){
         return(
             <div>
-            <Navbar/>
+            
             <Goaltab  
                 breakfast_cals={this.state.breakfast_consumed_calories} 
                 lunch_cals={this.state.lunch_consumed_calories} 
@@ -97,12 +97,10 @@ export default class Meal extends React.Component{
                 Goal = {this.state.goal}
                 Remaining_Calories={this.state.goal - (this.state.breakfast_consumed_calories + this.state.lunch_consumed_calories + this.state.dinner_consumed_calories)}
               />
-       
-            <Breakfast ParentCallBack={this.handleBreakfastCallback} Goal={this.state.goal}/>  <br/> 
-            <Lunch ParentCallBack={this.handleLunchCallback} Goal={this.state.goal}/> <br/>
-            <Dinner ParentCallBack={this.handleDinnerCallback} Goal={this.state.goal}/><br/>
-          
-          
+            <Breakfast ParentCallBack={this.handleBreakfastCallback} Goal={this.state.goal}/>  
+            <Lunch ParentCallBack={this.handleLunchCallback} Goal={this.state.goal}/> 
+            <Dinner ParentCallBack={this.handleDinnerCallback} Goal={this.state.goal}/>
+            <Navbar/>
             </div>
         )
     }

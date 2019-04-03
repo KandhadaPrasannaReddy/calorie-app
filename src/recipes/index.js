@@ -29,8 +29,8 @@ class Recipes extends React.Component{
             <Card>
             <Card.Img variant="top" src={spaghetti_img} style={DIMENSIONS.dim_small}/>
             <Card.Body>
-            <Card.Title> Loaded Spaghetti </Card.Title>
-            <Card.Text>
+            <Card.Title><font size="6"> Loaded Spaghetti </font></Card.Title>
+            <Card.Text><font size="5">
             1 cup sliced bell pepper<br/>
             1/2 cup sliced red onion<br/>
             1 tsp olive oil<br/>
@@ -38,8 +38,8 @@ class Recipes extends React.Component{
             2/3 cup cooked edamame<br/>
             Sauté peppers and onions in oil until onions are translucent. Toss with pasta and edamame.<br/>
             <Card.Text>
-            <small className="text-muted"> Per serving: 420 cal</small>
-            </Card.Text>
+            <small className="text-muted"><font size="4"> Per serving: 420 cal</font></small>
+            </Card.Text></font>
             </Card.Text>
             </Card.Body>
 
@@ -55,8 +55,8 @@ class Recipes extends React.Component{
             <Card>
             <Card.Img variant="top" src={bowties_img} />
             <Card.Body>
-            <Card.Title>Bow Ties with Spring Vegetables</Card.Title>
-            <Card.Text>
+            <Card.Title><font size="6">Bow Ties with Spring Vegetables </font></Card.Title>
+            <Card.Text><font size="5">
             2 oz dry whole-grain farfalle pasta<br/>
             2 tsp olive oil<br/>
             1/2 cup artichoke hearts<br/>
@@ -65,8 +65,8 @@ class Recipes extends React.Component{
             1 Tbsp chopped fresh mint<br/>
             Cook pasta as directed and toss with oil, vegetables, and mint. Season with salt and pepper to taste.<br/>
             <Card.Text>
-            <small className="text-muted"> Per serving: 370 cal</small>
-            </Card.Text>
+            <small className="text-muted"><font size="4"> Per serving: 370 cal </font></small>
+            </Card.Text> </font>
             </Card.Text>
             </Card.Body>
             </Card>
@@ -82,16 +82,16 @@ class Recipes extends React.Component{
             <Card className="text-center">
             <Card.Img variant="top" src={bakedchicken_img} />
             <Card.Body>
-            <Card.Title>Baked Chicken with Mushrooms and Sweet Potato</Card.Title>
-            <Card.Text>
+            <Card.Title><font size="6">Baked Chicken with Mushrooms and Sweet Potato </font></Card.Title>
+            <Card.Text><font size="5">
             1/2 skinless chicken breast<br/>
             1 cup baby portobello mushrooms, sliced<br/>
             1 Tbsp chives<br/>
             1 Tbsp olive oil<br/>
             1 medium sweet potato<br/>
             In a 350°F oven, bake chicken, topped with mushrooms, chives, and oil, for 15 minutes. Microwave sweet potato for five to seven minutes.<br/>
-            <Card.Text>
-            <small className="text-muted"> Per serving: 382 cal</small>
+            </font> <Card.Text>
+            <font size="4"> <small className="text-muted"> Per serving: 382 cal</small> </font>
             </Card.Text>
             </Card.Text>
             </Card.Body>
@@ -108,8 +108,8 @@ class Recipes extends React.Component{
             <Card>
             <Card.Img variant="top" src={tofu_img} />
             <Card.Body>
-            <Card.Title>Zesty Tofu and Quinoa</Card.Title>
-            <Card.Text>
+            <Card.Title><font size="6">Zesty Tofu and Quinoa </font></Card.Title>
+            <Card.Text><font size="6">
             1 cup cooked quinoa<br/>
             2 oz extra-firm tofu, cubed<br/>
             3 Tbsp diced red pepper<br/>
@@ -118,10 +118,10 @@ class Recipes extends React.Component{
             2 Tbsp diced avocado<br/>
             2 tsp fresh lime juice<br/>
             Combine all ingredients.<br/>
-      
+            </font>
             </Card.Text>
-            <Card.Text>
-            <small className="text-muted"> Per serving: 320 cal</small>
+            <Card.Text><font size="6">
+            <small className="text-muted"> Per serving: 320 cal</small> </font>
             </Card.Text>
             </Card.Body>
             </Card>

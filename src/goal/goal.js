@@ -4,6 +4,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { createBrowserHistory as createHistory } from "history";
 import '../App.css';
+
+
  var body, gender1;
  
 class Goal extends Component {
@@ -244,12 +246,12 @@ handleSubmit(e) {
       <div className="cardapp">
       
       <div>
-      
+      <br/><br/><br/> <br/><br/><br/>
       <div class="card">
      
       <div className="text-center">
                 <h3 className="dark-grey-text mb-5">
-            <br/>   <font color= "black"> <b>  <strong>Enter your details</strong> </b></font>
+            <br/>   <font color= "black"> <b><strong><font size="10"> Enter your details</font></strong></b></font>
                 </h3>
        </div>
       <form  name = "bmiForm" onSubmit={this.handleSubmit} className="FormFields"> 
@@ -260,20 +262,20 @@ handleSubmit(e) {
         </div>
         
         <div className="FormField1" onChange={this.setGender}>
-          <label htmlFor="gender"> <span>Gender:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span></label>
+          <label htmlFor="gender"> <span>Gender: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span></label>
            
-              <input type="radio"    name="gender"  id="mbutton" value= "0"   /><font color="black">Male</font>
-              <input type="radio"  name="gender"   id="fbutton"  value= "1"   /><font color="black">Female</font> 
+              <input type="radio"  class="big"  name="gender"  id="mbutton" value= "0"   /><font color="black">Male</font> <span>&nbsp;</span>
+              <input type="radio"  class ="big" name="gender"   id="fbutton"  value= "1"   /><font color="black">Female</font> 
            <br/>
         </div>
 
         <div className="FormField1">
-          <label htmlFor="height"><span>Height(cm): &nbsp;&nbsp;</span></label>
+          <label htmlFor="height"><span>Height(cm): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span></label>
           <input type="number" name="height"  id="height" size="10"   />
         </div>
 
         <div className="FormField1">
-          <label  htmlFor="weight"><span>Weight(kg):&nbsp;&nbsp;&nbsp;&nbsp;</span></label>
+          <label  htmlFor="weight"><span>Weight(kg): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></label>
           <input type="number" name="weight"  id="weight" step="1" min="10" max="150"   />
         </div>
            
@@ -284,60 +286,65 @@ handleSubmit(e) {
 
         <div className="FormField1">
 
-           <span>Your BMI: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span><input type="text" name="bmi" size="10"/><br /><br />
-           <span> This Means: &nbsp;&nbsp;</span> <input type="text" name="meaning" size="25"/><br />
-          <input type="reset" value="Reset" />
+           <span>Your BMI: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span><input type="text" name="bmi" size="10"/><br /><br />
+           <span> This Means: &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <input type="text" name="meaning" size="25"/><br />
+          <input type="reset" value="Reset"  class="button button1"/>
         </div>
+        
 
         
         <div className="FormField1">
-            <button className="FormField__Button mr-20" onClick={this.handleChange}>Calculate Goal</button> 
+            <button  className="FormField__Button mr-20"  onClick={this.handleChange}>Calculate Goal</button> 
+           
         </div>
-
-
+       <br/>
+       
 
       </form>
     </div>
     </div>
      
  
-    <Dialog open={this.state.selectDialogOpen} onClose={this.handleClose} aria-labelledby="simple-dialog-title">
-                <DialogTitle id="simple-dialog-title">Choose Goal</DialogTitle>
+    <Dialog open={this.state.selectDialogOpen} onClose={this.handleClose} aria-labelledby="simple-dialog-title" >
+    <div style={{height: '500px',width:'600px'}}>
+                <DialogTitle id="simple-dialog-title"><font size ="10" ><center>Choose Your Plan</center> </font></DialogTitle>
                 
-     
-                <table id="goal_table"  >
+      <br/>
+                <table id="goal_table">
                  <thead>
-                  <tr>
-                    <th>Plan</th>
-                    <th>Calories</th> 
-                    <th>Target Weight</th> 
+                  <tr height ="80">
+              
+                    <th><font size = "6">Plan</font></th>
+                    <th><font size = "6">Calories</font></th> 
+                    <th><font size = "6">Target Weight</font></th> 
+                  
                   </tr>
                 </thead>
                 <tbody> 
             
                  
-            <tr >
-                <td>Maintain Weight</td>
-                <td   onClick={this.onSelect}>{this.state.form.goal * 100/100}</td>
-                <td> {this.state.form.weight} </td>
+            <tr height ="80" >
+                <td> <font size = "4">Maintain Weight</font></td>
+                <td   onClick={this.onSelect}> <font size = "4">{this.state.form.goal * 100/100}</font></td>
+                <td> <font size = "4"> {this.state.form.weight}</font> </td>
             </tr> 
-            <tr   >
-                <td>Mild Weight Loss</td>
-                <td   onClick={this.onSelect}>{this.state.form.goal * 90/100} </td>
+            <tr  height ="80" >
+                <td> <font size = "4">Mild Weight Loss</font></td>
+                <td   onClick={this.onSelect}> <font size = "4">{this.state.form.goal * 90/100} </font></td>
               
-                <td> {((this.state.form.weight *  (this.state.form.goal*90/100))/ (this.state.form.goal )).toFixed(2)} </td>
+                <td> <font size = "4"> {((this.state.form.weight *  (this.state.form.goal*90/100))/ (this.state.form.goal )).toFixed(2)}</font> </td>
             </tr>
 
-            <tr>
-                <td>Weight Loss</td>
-                <td   onClick={this.onSelect}>{this.state.form.goal * 80/100}</td>
-                <td> {((this.state.form.weight *  (this.state.form.goal*80/100))/ (this.state.form.goal )).toFixed(2)}  </td>
+            <tr height ="80">
+                <td><font size = "4">Weight Loss</font></td>
+                <td   onClick={this.onSelect}><font size = "4">{this.state.form.goal * 80/100}</font></td>
+                <td><font size = "4"> {((this.state.form.weight *  (this.state.form.goal*80/100))/ (this.state.form.goal )).toFixed(2)} </font> </td>
             </tr>
 
-            <tr> 
-                <td>Extreme Weight Loss</td>
-                <td  onClick={this.onSelect} >{this.state.form.goal * 61/100}</td>  
-                <td> {((this.state.form.weight *  (this.state.form.goal*61/100))/ (this.state.form.goal )).toFixed(2)}  </td>
+            <tr height ="80"> 
+                <td><font size = "4">Extreme Weight Loss</font></td>
+                <td  onClick={this.onSelect} ><font size = "4">{this.state.form.goal * 61/100}</font></td>  
+                <td><font size = "4"> {((this.state.form.weight *  (this.state.form.goal*61/100))/ (this.state.form.goal )).toFixed(2)}</font>  </td>
             </tr>
 
             </tbody>
@@ -345,7 +352,7 @@ handleSubmit(e) {
                    
 
             
-                
+                        </div> 
             </Dialog>
            
             </div>
@@ -357,6 +364,13 @@ handleSubmit(e) {
   
   export default Goal;
 
+  const customContentStyle = {
+    width: '100px',
+    maxWidth: 'xl',
+   
+    height: '600px' 
+  };
+  
 
 
 

@@ -52,13 +52,13 @@ class Navbar extends React.Component{
 
         return(
         <div>
-        <ul style={{color: '#fffa8b'}}>
+        <ul style={{color: '#D65076'}}>
        
-        <li><a href="/meal"><font size="8" font-family="Georgia" ><b>My Day</b></font></a></li> &nbsp;
-        <li><a href="/log"><font size="8"><b>Trends</b></font></a></li>&nbsp;
-        <li><a href="/recipes"><font size="8"><b>Recipes</b></font></a></li>&nbsp;
+        <li><a href="/meal"><font size="6" font-family="Georgia" ><b>My Day</b></font></a></li> &nbsp;
+        <li><a href="/log"><font size="6"><b>Trends</b></font></a></li>&nbsp;
+        <li><a href="/recipes"><font size="6"><b>Recipes</b></font></a></li>&nbsp;
      
-        <li className="li1" ><a href="signout"  onClick={this.Logout}><font size="8"><b>Logout</b></font></a></li>
+        <li className="li1" ><a href="signout"  onClick={this.Logout}><font size="6"><b>Logout</b></font></a></li>
        
         </ul>
         </div>
