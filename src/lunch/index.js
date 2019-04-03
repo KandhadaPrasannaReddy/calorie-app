@@ -115,6 +115,7 @@ class Lunch extends React.Component {
           })
         }, () => {
           console.log(this.state.previousSelectedItems);
+          this.getPreviousLunchCals();
         })
 
       })
@@ -127,7 +128,18 @@ class Lunch extends React.Component {
     this.props.history.push(path);
   }
 
-
+ 
+  getPreviousLunchCals= () => {
+    var info = 0;
+    console.log("CAL INFOoooo lunchhhh", this.state.previousSelectedItems);
+    this.state.previousSelectedItems.map( function(daily_calories) {
+			if( daily_calories.calories !== "0"){
+				 info  =  info + daily_calories.calories       
+			}
+       });
+       console.log("CAL INFO lunch", info);
+       this.props.ParentCallBack(info);            
+  }
 
   handleClose = () => {
     this.setState({ open: false });

@@ -55,7 +55,7 @@ export default class Meal extends React.Component{
 
     getUserGoal = () => {
         console.log("Inside",this.state.data.goalPlan)
-        this.setState({goal: this.state.data.goalPlan})
+        this.setState({goal: this.state.data.goalPlan * 100})
     } 
 
     getUserName = () => {
@@ -100,7 +100,7 @@ export default class Meal extends React.Component{
             <Breakfast ParentCallBack={this.handleBreakfastCallback} Goal={this.state.goal}/>  
             <Lunch ParentCallBack={this.handleLunchCallback} Goal={this.state.goal}/> 
             <Dinner ParentCallBack={this.handleDinnerCallback} Goal={this.state.goal}/>
-            <Navbar/>
+            <Navbar position="sticky"/>
             </div>
         )
     }

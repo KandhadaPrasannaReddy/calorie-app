@@ -115,11 +115,25 @@ class Dinner extends React.Component {
           })
         }, () => {
           console.log(this.state.previousSelectedItems);
+          this.getPreviousDinnerCals()
         })
 
       })
 
       .catch(() => console.log("Can’t access DINNER previous data" + this.state.errors + " response. "));
+  }
+
+
+  getPreviousDinnerCals= () => {
+    var info = 0;
+    console.log("CAL INFOoooo Dinner", this.state.previousSelectedItems);
+    this.state.previousSelectedItems.map( function(daily_calories) {
+			if( daily_calories.calories !== "0"){
+				 info  =  info + daily_calories.calories       
+			}
+       });
+       console.log("CAL INFO Dinner", info);
+       this.props.ParentCallBack(info);            
   }
 
   routeChange() {
@@ -287,7 +301,7 @@ class Dinner extends React.Component {
 
         }
         <MuiThemeProvider theme={theme}>
-          <Button variant="contained" size="large" color="primary" onClick={this.onSaveClick} >
+          <Button variant="contained"  size="large" color="primary" onClick={this.onSaveClick}  >
             Save items
             </Button>
         </MuiThemeProvider>

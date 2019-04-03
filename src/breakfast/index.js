@@ -38,6 +38,7 @@ class Breakfast extends React.Component {
     previousItems: [{}],
     previousFoodItems: [],
 
+    previousBreakfastCalories : '',
     open: false,
   }
 
@@ -50,7 +51,8 @@ class Breakfast extends React.Component {
   componentDidMount() {
     if (window.performance) {
       if (performance.navigation.type === 1) {
-        this.retrievePreviousData()
+        this.retrievePreviousData();
+      
       } else {
         this.retrievePreviousData()
         //alert("This page is not reloaded");
@@ -104,7 +106,7 @@ class Breakfast extends React.Component {
 
       .then(response => response.json())
       .then(contents => {
-        console.log("Previous data contents", contents);
+        //console.log("Previous data contents", contents);
         const breakfastData = contents.filter((item) => (item.mealType === 'BREAKFAST'));
         this.setState({
           previousSelectedItems: breakfastData.map((item) => {
@@ -114,7 +116,11 @@ class Breakfast extends React.Component {
             }
           })
         }, () => {
-          console.log(this.state.previousSelectedItems);
+
+          console.log("Previous breakfast items?",this.state.previousSelectedItems);
+          this.getPreviousBreakfastCals();
+
+      
         })
 
       })
@@ -256,6 +262,25 @@ class Breakfast extends React.Component {
     this.addToFoodIntakeTable();
   }
 
+
+
+  getPreviousBreakfastCals= () => {
+    var info = 0;
+    console.log("CAL INFOoooo", this.state.previousSelectedItems);
+    this.state.previousSelectedItems.map( function(daily_calories) {
+			if( daily_calories.calories !== "0"){
+				 info  =  info + daily_calories.calories       
+			}
+       });
+       console.log("CAL INFO", info);
+       this.props.ParentCallBack(info);            
+  }
+
+//   handlePreviousBreakfastCalories = () => {
+//     //get all previous calories
+//     this.props.ParentCallBack(this.getPreviousBreakfastCals());            
+// }
+
   render() {
     console.log("in  render selected items", this.state.selectedItems)
 
@@ -267,7 +292,7 @@ class Breakfast extends React.Component {
           Breakfast  <button class="button5" onClick={this.handleClickOpen}> + </button>   
          
           </Title>
-          (min:{this.calculateMinimumBreakfastCalorieLimit()} kcal, max: {this.calculateMaximumBreakfastCalorieLimit()} kcal)
+          (min:{this.calculateMinimumBreakfastCalorieLimit()} cal, max: {this.calculateMaximumBreakfastCalorieLimit()} cal)
             </Wrapper>
 
         <Dialog   open={this.state.open}  onClose={this.onAddClick}  onClose={this.handleClose}  aria-labelledby="simple-dialog-title">

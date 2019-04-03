@@ -325,26 +325,26 @@ handleSubmit(e) {
                  
             <tr height ="80" >
                 <td> <font size = "4">Maintain Weight</font></td>
-                <td   onClick={this.onSelect}> <font size = "4">{this.state.form.goal * 100/100}</font></td>
-                <td> <font size = "4"> {this.state.form.weight}</font> </td>
+                <td   onClick={this.onSelect}> <font size = "4">{this.state.form.goal * 100/100} KCal</font></td>
+                <td> <font size = "4"> {this.state.form.weight} kg</font> </td>
             </tr> 
             <tr  height ="80" >
                 <td> <font size = "4">Mild Weight Loss</font></td>
-                <td   onClick={this.onSelect}> <font size = "4">{this.state.form.goal * 90/100} </font></td>
+                <td   onClick={this.onSelect}> <font size = "4">{this.state.form.goal * 90/100} KCal </font></td>
               
-                <td> <font size = "4"> {((this.state.form.weight *  (this.state.form.goal*90/100))/ (this.state.form.goal )).toFixed(2)}</font> </td>
+                <td> <font size = "4"> {((this.state.form.weight *  (this.state.form.goal*90/100))/ (this.state.form.goal )).toFixed(2)} kg</font> </td>
             </tr>
 
             <tr height ="80">
                 <td><font size = "4">Weight Loss</font></td>
-                <td   onClick={this.onSelect}><font size = "4">{this.state.form.goal * 80/100}</font></td>
-                <td><font size = "4"> {((this.state.form.weight *  (this.state.form.goal*80/100))/ (this.state.form.goal )).toFixed(2)} </font> </td>
+                <td   onClick={this.onSelect}><font size = "4">{this.state.form.goal * 80/100} KCal</font></td>
+                <td><font size = "4"> {((this.state.form.weight *  (this.state.form.goal*80/100))/ (this.state.form.goal )).toFixed(2)} kg </font> </td>
             </tr>
 
             <tr height ="80"> 
                 <td><font size = "4">Extreme Weight Loss</font></td>
-                <td  onClick={this.onSelect} ><font size = "4">{this.state.form.goal * 61/100}</font></td>  
-                <td><font size = "4"> {((this.state.form.weight *  (this.state.form.goal*61/100))/ (this.state.form.goal )).toFixed(2)}</font>  </td>
+                <td  onClick={this.onSelect} ><font size = "4">{this.state.form.goal * 61/100} KCal</font></td>  
+                <td><font size = "4"> {((this.state.form.weight *  (this.state.form.goal*61/100))/ (this.state.form.goal )).toFixed(2)} kg</font>  </td>
             </tr>
 
             </tbody>

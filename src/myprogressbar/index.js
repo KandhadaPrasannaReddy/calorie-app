@@ -3,7 +3,6 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-//update snackbar style to warning
 
 export default class MyProgressBar extends React.Component{
 
@@ -13,14 +12,14 @@ export default class MyProgressBar extends React.Component{
       });
     
     render(){
-        console.log('meal cals', this.props.Total_Meal_Calories)
-        console.log('Goal cals', this.props.Goal)
+        console.log('meal cals in goal tab', this.props.Total_Meal_Calories)
+        console.log('Goal cals in goal tab ', this.props.Goal)
         if(this.props.Total_Meal_Calories  <= this.props.Goal){
             return(
-                <div>
-                    <ProgressBar animated="true" striped variant="warning"  
-                        now={((this.props.meal_calories_percentage)/100).toFixed(2)} 
-                        label={`${((this.props.meal_calories_percentage)/100).toFixed(2)}%`} />
+                <div font size= "xx-large">
+                    <ProgressBar style={{height: '45px'}} animated="true" striped variant="warning"  
+                        now={(this.props.meal_calories_percentage).toFixed(2)} 
+                        label={`${(this.props.meal_calories_percentage).toFixed(2)}%`} />
                 </div>
             )}
         else {

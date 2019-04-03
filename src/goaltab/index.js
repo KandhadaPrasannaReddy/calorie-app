@@ -161,9 +161,9 @@ export default class Goaltab extends React.Component{
                 <Alert.Heading><font size="7">Hey {this.state.user.name}, nice to see you again!👋</font></Alert.Heading>
                 <hr />
                 <p><font size="5"><i>
-                    <pre>Your goal: {this.props.Goal}</pre>
-                    <pre>Total meal calories : {this.props.Total_Meal_Calories} kcal</pre>
-                    <pre>Remaining calories left: {this.props.Remaining_Calories} kcal</pre> 
+                    <pre>Your goal: {this.props.Goal} </pre>
+                    <pre>Total meal calories : {this.props.Total_Meal_Calories} cal</pre>
+                    <pre>Remaining calories left: {this.props.Remaining_Calories} cal</pre> 
                    </i> </font>         
                 </p> 
   
