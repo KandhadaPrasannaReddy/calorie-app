@@ -17,7 +17,9 @@ export default class Goaltab extends React.Component{
             details:[],
             user:[], 
             registration_date: '',
-            startDate:''
+            startDate:'',
+            profileDOBDate:'',
+            profileAge: ''
 
         }
     }
@@ -53,12 +55,41 @@ export default class Goaltab extends React.Component{
                                 details: contents,
                                 user:contents.user,
                             })
+                            this.getDOBFromDB()
                           })
         .catch(() => console.log("Can’t access " + url + " response. "))
        
     
     }
     
+    getDOBFromDB = () => {
+        //local date
+        var dob = this.state.details.dob;
+       
+        var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+        d.setUTCSeconds(dob);
+        
+
+        //to year
+        var date = new Date( dob ),
+        mnth = ("0" + (date.getMonth()+1)).slice(-2),
+        day  = ("0" + date.getDate()).slice(-2);
+         console.log([ date.getFullYear(), mnth, day ].join("-"));
+         fdate= [ date.getFullYear(), mnth, day ].join("-");
+        this.setState({
+            profileDOBDate:fdate 
+        })
+        var age= this.getAgeFromDob(fdate);
+        
+    }
+
+
+    getAgeFromDob = (birth) =>{
+        var date_array = birth.split('-')
+        var years_elapsed = (new Date() - new Date(date_array[0],date_array[1],date_array[2]))/(1000*60*60*24*365);
+        console.log("AGE IN GOAL TAB",Math.floor(years_elapsed))
+        return Math.floor(years_elapsed);           
+}
 
     getRegistrationDateOfUser = () => {
         const url = "http://10.10.200.25:9000/users/me"; 
@@ -144,7 +175,8 @@ export default class Goaltab extends React.Component{
         
        
       }
-
+ 
+      
 
 
     render(){       
@@ -161,7 +193,7 @@ export default class Goaltab extends React.Component{
                 <Alert.Heading><font size="7">Hey {this.state.user.name}, nice to see you again!👋</font></Alert.Heading>
                 <hr />
                 <p><font size="5"><i>
-                    <pre>Your goal: {this.props.Goal} </pre>
+                    <pre>Your goal: {this.props.Goal} cal</pre>
                     <pre>Total meal calories : {this.props.Total_Meal_Calories} cal</pre>
                     <pre>Remaining calories left: {this.props.Remaining_Calories} cal</pre> 
                    </i> </font>         
@@ -172,15 +204,17 @@ export default class Goaltab extends React.Component{
                     <div class='_body'  onClick={this.openNav}></div>
                 </div>
 
-                <div id="mySidenav" class="sidenav">
+                <div id="mySidenav" class="sidenav" >
                         <a href="javascript:void(0)" class="closebtn" onClick={this.closeNav}>&times;</a><br></br><br></br>
-                        <span>Username: &nbsp;&nbsp;&nbsp;&nbsp;{this.state.user.name}</span><br></br><br></br>
-                        <span>Age: &nbsp;&nbsp;&nbsp;&nbsp;{this.state.details.age}</span><br></br><br></br>
-                        <span>Height: &nbsp;&nbsp;&nbsp;&nbsp;{this.state.details.height}</span><br></br><br></br>
-                        <span>Weight: &nbsp;&nbsp;&nbsp;&nbsp;{this.state.details.weight}</span><br></br><br></br>
-                        <span>Goal: &nbsp;&nbsp;&nbsp;&nbsp;{this.state.details.goalPlan}</span><br></br><br></br>
+                     <font size="4.5"> <strong> <span>Username: &nbsp;{this.state.user.name}</span><br></br><br></br>
+                        <span>Date of Birth: &nbsp;&nbsp;&nbsp;&nbsp;{this.state.profileDOBDate}</span><br></br><br></br>
+                      
+                        <span>Height: &nbsp;&nbsp;&nbsp;&nbsp;{this.state.details.height} cm</span><br></br><br></br>
+                        <span>Weight: &nbsp;&nbsp;&nbsp;&nbsp;{this.state.details.weight} kg </span><br></br><br></br>
+                        <span>Goal: &nbsp;&nbsp;&nbsp;&nbsp;{this.state.details.goalPlan} kcal </span><br></br><br></br></strong></font> 
                         <a href ="/goal"> <Button  type="button"> Update Profile </Button></a>
                 </div>
+
 
 
                 </Alert>

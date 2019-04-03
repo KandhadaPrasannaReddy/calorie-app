@@ -228,9 +228,10 @@ class Breakfast extends React.Component {
     if (total_calories_count < this.calculateMinimumBreakfastCalorieLimit()) {
       console.log('total breakfast cals', total_calories_count)
       console.log('min brekafast cals', this.calculateMinimumBreakfastCalorieLimit())
-      toast.warn("Calorie limit is less than maximum breakfast calorie. Bon apetit! 🍳", {
+      toast.warn("Calorie limit is less than minimum breakfast calorie. Bon apetit! 🍳", {
         position: toast.POSITION.TOP_RIGHT,
-        autoClose: 10000
+        autoClose: 10000,
+        height: 100,
       });
     }
 
@@ -269,17 +270,13 @@ class Breakfast extends React.Component {
     console.log("CAL INFOoooo", this.state.previousSelectedItems);
     this.state.previousSelectedItems.map( function(daily_calories) {
 			if( daily_calories.calories !== "0"){
-				 info  =  info + daily_calories.calories       
+				 info  =  info + (daily_calories.calories * daily_calories.quantity)      
 			}
        });
        console.log("CAL INFO", info);
        this.props.ParentCallBack(info);            
   }
 
-//   handlePreviousBreakfastCalories = () => {
-//     //get all previous calories
-//     this.props.ParentCallBack(this.getPreviousBreakfastCals());            
-// }
 
   render() {
     console.log("in  render selected items", this.state.selectedItems)

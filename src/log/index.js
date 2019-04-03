@@ -9,11 +9,17 @@ const getOptions = (data,calInfo) => {
 
 	const options = {
 		title: {
-			text: 'My calorie progress'
+			text: 'My calorie progress',
+			style:{ "font-size": "35px",
+	
+            fontWeight: 'bold'},
+				
+			margin:50
 		}, 
 		chart: {
 			//marginBottom: 40,
-			spacingRight: 100
+			spacingRight: 100,
+			height: "1200",
 		},
 
 	xAxis: {
@@ -31,11 +37,19 @@ const getOptions = (data,calInfo) => {
 },
 	yAxis: {
 		labels: {
-				format: '{value} cals'
+				format: '{value} Kcals'
 		},
 		title: {
 			text: 'Daily calorie consumption '
 	}
+},
+legend: {
+	align: 'right',
+	verticalAlign: 'top',
+	layout: 'vertical',
+	x: 0,
+	y: 100,
+	
 },
 	series: [
 		{
@@ -231,7 +245,7 @@ export default class Log extends React.Component {
 	
 		return (
 			<div className="logcenter">
-			<br/><br/><br/><br/><br/><br/>
+			
 				
 		 	<HighchartsReact
 			 

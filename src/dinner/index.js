@@ -129,7 +129,7 @@ class Dinner extends React.Component {
     console.log("CAL INFOoooo Dinner", this.state.previousSelectedItems);
     this.state.previousSelectedItems.map( function(daily_calories) {
 			if( daily_calories.calories !== "0"){
-				 info  =  info + daily_calories.calories       
+        info  =  info + (daily_calories.calories * daily_calories.quantity)    
 			}
        });
        console.log("CAL INFO Dinner", info);

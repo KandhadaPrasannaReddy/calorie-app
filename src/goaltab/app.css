@@ -40,7 +40,7 @@
     z-index: 1;
     top: 0;
     right: 0;
-    background-color:  #9ed8d8;
+    background-color:  rgba(236, 216, 151, 0.904);
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
